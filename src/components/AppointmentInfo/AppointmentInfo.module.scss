@@ -1,0 +1,108 @@
+.wrapper{
+    width: 350px;
+    height: 400px;
+    background-color: #1691E2;
+    margin-top: 20px ;
+    text-decoration: none;
+    flex-grow: 1; /* Cho phép các phần tử con mở rộng */
+    flex-shrink: 0; /* Không thu nhỏ */
+    flex-basis: auto; /* Duy trì chiều cao tự nhiên của phần tử */
+}
+
+.appointment-title-wrapper{
+    width: 100%;
+    background-color:#097ac6;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appointment-info-wrapper{
+    width: 100%;
+    background-color:#3FA3E4;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.appointment-field-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    margin-left: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.image-wrapper{
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+.speciality-image{
+    width: 100px;
+    height: 100px;
+}
+
+.speciality-name{
+    font-size: 1.8rem;
+    color: #3FA3E4;
+    font-weight: 500;
+    line-height: 2rem;
+    width: 140px;
+    height: 4rem;
+    margin-top: 2px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.appointment-field-title{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.appointment-field{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.cancel-button{
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    &:hover{
+        background-color: #075a92;
+    }
+}
+
+.cancel-button-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+}

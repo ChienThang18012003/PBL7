@@ -1,0 +1,42 @@
+.wrapper{
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    background-color: #1691E2;
+    text-decoration: none;
+}
+
+.image-wrapper{
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+.speciality-image{
+    width: 100px;
+    height: 100px;
+}
+
+.speciality-name{
+    font-size: 1.8rem;
+    color: #3FA3E4;
+    font-weight: 500;
+    line-height: 2rem;
+    width: 140px;
+    height: 4rem;
+    margin-top: 2px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 20px;
+    text-align: center;
+}

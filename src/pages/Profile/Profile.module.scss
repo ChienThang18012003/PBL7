@@ -1,0 +1,232 @@
+.wrapper {
+    width: 100%;
+    height: 1000px;
+    display: block;
+    overflow-y: hidden;
+    padding-bottom: 50px;
+    background-color: #f0f2f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-container{
+    margin-top: 10px;
+}
+
+.image-container {
+    width: 100%;
+    height: 240px;
+    overflow: visible;
+    position: relative;
+}
+
+.background-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+}
+
+.profile-image-container {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    position: absolute;
+    object-fit: contain;
+    background-color: aqua;
+    left: 10%;
+    top: 54%;
+}
+
+.user-info-container{
+    margin-top: 10px;
+    width: 80%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info-container{
+    width: 80%;
+    height: 110px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+}
+
+.contact-info{
+    display: flex;
+    display: block;
+    height: 100%;
+    width: 30%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-name{
+    margin-top: 10px;
+    font-size: 2.4rem;
+    line-height: 2.4rem;
+    font-weight: 500;
+    margin:0;
+}
+
+.phone-number{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin:0;
+}
+
+.email{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin:0;
+}
+
+.main-info-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 600px;
+}
+
+.personal-info-container{
+    width: 32%;
+    height: 600px;
+    margin-top: 20px;
+}
+
+.doctor-info-container{
+    width: 32%;
+    height: 500px;
+    margin-top: 20px;
+}
+
+.account-info-container{
+    width: 32%;
+    height: 500px;
+    margin-top: 20px;
+}
+
+.info-title{
+    color: #005A5C;
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.info-title-container{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.field-container{
+    width: 100%;
+    min-height: 80px;
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.field-name{
+    font-size: 1.4rem;
+    font-size: 500;
+    margin-left: 10px;
+    color: #005A5C;
+}
+
+.field-input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.field-textarea{
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.button-container{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-content-container{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.half-field-input{
+    width: 70%;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+/* Ẩn thẻ input file gốc */
+.file-input {
+    display: none;
+  }
+  
+  /* Nút button với icon */
+  .file-label {
+    display: inline-flex;
+    align-items: center;
+    background-color: #00D3D6; /* Màu nền button */
+    color: white;
+    padding: 20px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    left: 20%;
+    top: 124%;
+  }
+  
+  .file-label:hover {
+    background-color: #45a049;
+  }
+  
+  .file-label i {
+    margin-right: 8px; /* Khoảng cách giữa icon và văn bản */
+  }
+  
+  /* Tuỳ chỉnh icon nếu cần */
+  .fa-upload {
+    font-size: 18px;
+  }
+  
