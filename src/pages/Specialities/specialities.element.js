@@ -3,7 +3,7 @@ import {Container} from "../../globalStyles";
 
 export const SpecialitiesLayout = styled.div`
     background: #F0F2F1;
-    height: 1000px;
+    overflow: visible;
 
 `
 export const SpecialitiesContainer = styled(Container)`
@@ -11,6 +11,7 @@ export const SpecialitiesContainer = styled(Container)`
     margin-bottom: 30px;
     flex-direction: column;
     gap: 50px;
+    overflow: visible;
     ${Container}
 `
 export const SpecialitiesHeader = styled.p`
@@ -55,10 +56,10 @@ export const SearchBar = styled.div`
 export const SpecialitiesContent = styled.div`
     display: flex;
     flex-wrap: wrap;
-    height: 500px;
-    gap: 80px; 
-    justify-content: flex-start;
+    gap: 10px; 
+    justify-content: space-between;
     cursor: pointer;
+    overflow: visible;
 
     .card-spec{
         width: 170px;
@@ -82,12 +83,18 @@ export const SpecialitiesContent = styled.div`
         transform: translateY(-10px);
     }
     .speciality-img{
-        margin-top: 10px;
         width: 150px; 
         height: 150px; 
         border-radius: 50%; 
         object-fit: cover; 
 
+    }
+    .image-wrapper{
+        margin-top: 10px;
+        width: 150px; 
+        height: 150px; 
+        border-radius: 50%; 
+        background-color: #fff;
     }
     .name-style{
         text-transform: uppercase;
@@ -96,6 +103,10 @@ export const SpecialitiesContent = styled.div`
         margin-top: 20px;
         color: white;
         cursor: pointer;
+    }
+
+    @media (max-width: 740px) {
+        justify-content: center;
     }
     
 `
@@ -107,10 +118,7 @@ export const PaginationContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
     height: 50px; 
-    padding-top: 100px;
-   
 `;
 
 

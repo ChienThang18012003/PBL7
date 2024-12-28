@@ -13,7 +13,6 @@ export const FooterContainer = styled.div`
 
 export const FooterContentContainer = styled.div`
   width: 100%;
-  max-width: 2000px;
   display: flex;
   justify-content: center;
 
@@ -24,10 +23,9 @@ export const FooterContentContainer = styled.div`
 
 export const FooterContentWrapper = styled.div`
   display: flex;
-
-  @media screen and (max-width: 820px) {
-    flex-direction: column;
-  }
+  width: 80%;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 // export const FooterContentsWrapper = styled.div`
@@ -85,9 +83,11 @@ export const SocialMediaWrap = styled.div`
   width: 90%;
   max-width: 1000px;
   margin: 40px auto 0 auto;
+  gap: 40px;
 
   @media screen and (max-width: 820px) {
     flex-direction: column;
+    align-items: flex-end;
   }
 `;
 

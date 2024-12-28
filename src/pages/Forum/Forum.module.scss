@@ -12,11 +12,11 @@
 .search-section {
     background-color: #00d3d6;
     width: 100%;
-    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    overflow:visible;
 }
 
 .search-section-title-wrapper {
@@ -38,10 +38,11 @@
     height: 70%;
     display: flex;
     justify-content: space-between;
+    overflow: visible;
 }
 
 .search-section_faculty-wrapper {
-    width: 280px;
+    width: 20%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -58,7 +59,20 @@
 
 .faculty {
     width: 100%;
-    height: 50%;
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.question-faculty {
+    width: 100%;
+    height: 50px;
+    margin-top: 5px;
     border-radius: 10px;
     margin-bottom: 10px;
     border: 0px;
@@ -69,7 +83,7 @@
 }
 
 .search-section_sort-wrapper {
-    width: 280px;
+    width: 20%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -79,7 +93,7 @@
 
 .sort {
     width: 100%;
-    height: 50%;
+    height: 50px;
     border-radius: 10px;
     margin-bottom: 10px;
     border: 0px;
@@ -90,7 +104,7 @@
 }
 
 .search-section_bar-wrapper {
-    width: 580px;
+    width: 56%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -100,7 +114,7 @@
 
 .search-bar {
     width: 100%;
-    height: 50%;
+    height: 50px;
     border-radius: 10px;
     margin-bottom: 10px;
     border: 0px;
@@ -156,8 +170,8 @@
 }
 
 .forum-form {
-    width: 1180px;
-    height: 325px;
+    width: 80%;
+    overflow: visible;
     background-color: #00d3d6;
     border-radius: 10px;
     display: flex;
@@ -165,7 +179,7 @@
 }
 
 .question-info-section {
-    width: 1100px;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -173,11 +187,11 @@
 
 .question-info {
     height: 100%;
-    width: 280px;
+    width: 26%;
 }
 
 .question_faculty-wrapper {
-    width: 280px;
+    width: 100%;
     height: 80px;
     display: flex;
     flex-direction: column;
@@ -193,7 +207,7 @@
 }
 
 .question-topic {
-    width: 280px;
+    width: 100%;
     height: 150px;
     border-radius: 10px;
     font-size: 1.4rem;
@@ -207,11 +221,11 @@
 
 .question-content-wrapper {
     height: 100%;
-    width: 780px;
+    width: 71%;
 }
 
 .question {
-    width: 780px;
+    width: 100%;
     height: 230px;
     border-radius: 10px;
     font-size: 1.4rem;
@@ -230,4 +244,61 @@
     justify-content: flex-end;
     align-items: center;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pagination {
+    margin-top: 20px;
+    width: 80%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-wrapper {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+// tablet (width>=740px) and (width<1024px)
+@media only screen and (min-width: 740px) and (max-width: 1024px){
+    .blog-items{
+        width: 90%;
+        gap: 10px;
+    }
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+    .question-info-section{
+        flex-direction: column;
+    }
+    .question-info{
+        width: 98%;
+    }
+    .question-content-wrapper{
+        width: 98%;
+    }
+
+    .search-section-options-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .search-section_bar-wrapper {
+        width: 98%;
+        order: 1;
+    }
+
+    .search-section_sort-wrapper {
+        width: 45%;
+        order: 2;
+    }
+
+    .search-section_faculty-wrapper {
+        width: 45%;
+        order: 3;
+    }
 }

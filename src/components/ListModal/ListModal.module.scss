@@ -17,7 +17,7 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
-    z-index: 100;
+    z-index: 2000;
 }
 
 .overlay {
@@ -35,10 +35,12 @@ body.active-modal {
     max-width: 600px;
     min-width: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-image: linear-gradient(180deg, #00A6A9, #0c507c);
     border-radius: 20px;
-    z-index: 101;
+    z-index: 2001;
     overflow: hidden; /* Ngăn nội dung tràn ra ngoài */
 }
 
@@ -79,14 +81,43 @@ body.active-modal {
 
 .modal-field-container {
     width: 400px;
-    height: 500px; /* Đảm bảo chiều cao cố định cho thẻ cha */
+    height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Điều chỉnh nếu cần */
+    justify-content: flex-start;
     align-items: center;
-    overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
+    overflow-y: auto;
     border-radius: 20px;
     background-color: #fff;
-    z-index: 102;
+    z-index: 2002;
 }
 
+.button-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 50px;
+}
+
+.status-button{
+    border: none;
+    border-radius: 20px;
+    min-width: 40px;
+    background-color:#00D3D6;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #2197e3;
+    }
+
+    &.selected {
+        background-color: #0c507c;
+        font-weight: bold;
+      }
+}

@@ -11,10 +11,9 @@ const useRegion = () => {
         try {
             const allRegions = await Region_API.get_All_Region();
             const sortedRegion = allRegions.sort((a, b) => a.name.localeCompare(b.name));
-            console.log('region-list: ',sortedRegion);
             setRegionHook(sortedRegion);
         } catch (error) {
-            console.error('Failed to fetch specialities:', error);
+            console.error('Failed to fetch regions:', error);
         } finally {
             isRegionLoading(false);
         }

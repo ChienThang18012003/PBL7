@@ -1,6 +1,21 @@
 import styled from "styled-components";
 import {Container} from "../../globalStyles";
 
+export const ALoading = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+    //width: 70%;
+    //height: 1024px;
+    .loading-animation{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+`
 
 export const ALayout = styled.div`
     display: flex;
@@ -9,7 +24,7 @@ export const ALayout = styled.div`
     //height: 1024px;
 
 `
-export const AContainer = styled(Container)`
+export const AContainer = styled.div`
     display: flex;
     flex: 7;
     width: 90%;
@@ -17,7 +32,8 @@ export const AContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     background-color: #F0F2F1;
-    ${Container}
+    
+
 
 `
 export const ASpace = styled.div`
@@ -27,7 +43,8 @@ export const ASpace = styled.div`
 export const AHeader = styled.div`
     p {
         color: #2197E3;
-        font-size: 30px;
+        font-size: 2.6rem;
+        font-weight: 500;
         padding: 10px 10px 0 10px;
 
     }
@@ -41,7 +58,7 @@ export const AUnderline = styled.div`
 
 export const ALeftSide = styled.div`
     background-color: #00D3D6;
-    width: 300px;
+    width: 30%;
     height: 800px;
     position: relative;
     padding: 10px;
@@ -54,18 +71,36 @@ export const ALeftSide = styled.div`
         margin: 20px 0 20px 0;
         max-width: 300px;
         text-align: justify;
+        font-size: 1.4rem;
+    }
+
+    @media (min-width: 740px) and (max-width: 1024px) {
+        width: 40%;
+    }
+
+    @media (max-width: 740px) {
+        margin: 0px;
+        width: 100%;
     }
 `
 
 
 export const ARightSide = styled.div`
     background-color: #FFFFFF;
-    width: 450px;
+    width: 140%;
     height: 800px;
     top: 20px;
     position: absolute;
     left: 218px;
     border-radius: 0 8px 8px 0;
+
+    @media (max-width: 740px) {
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        border-radius: 0px;
+        background-color: #F0F1F2;
+    }
 `
 export const ARSItem = styled.div`
     margin-left: 10px;
@@ -74,6 +109,7 @@ export const ARSItem = styled.div`
     p{
         font-weight: bold;
         color: black;
+        font-size: 1.4rem;
         margin-bottom: 10px;
         display: inline-block;
     }
@@ -103,8 +139,17 @@ export const ARSItem = styled.div`
         color: white;
         font-size: 18px;
         margin-top: 10px;
+        cursor: pointer;
+
+        &:hover{
+           background-color: #2197E3;
+        }
 
     }
+    hidden {
+     display: none;
+    }
+
     
     
 `

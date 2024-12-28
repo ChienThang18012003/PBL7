@@ -1,23 +1,20 @@
-import {BlogDescription, BlogImage, BlogTitle, BlogWrapper} from "./blogitem.element";
+import classNames from 'classnames/bind';
+import styles from './BlogItem.module.scss';
+import Image from '../Image';
 
+const cx = classNames.bind(styles);
 
-function BlogItem() {
+function BlogItem({ data }) {
     return (
-        <BlogWrapper>
-            <BlogImage
-                src="https://tamanhhospital.vn/wp-content/uploads/2021/03/sanh-cho-rong-rai-f.jpg"
-                alt="Blog_image"
-            />
-            <BlogTitle>
-                <span>Khai trương phòng khám đa khoa tại quận 7</span>
-            </BlogTitle>
-            <BlogDescription>
-                <span>
-                    Ngày 23/8/2024, hệ thống bệnh viện Đa khoa chính thức đưa vào hoạt động phòng khám Đa khoa Quận 7
-                    chuyên sâu, hiện đại, góp phần khám chữa bệnh cho nhiều bệnh nhân hơn
-                </span>
-            </BlogDescription>
-        </BlogWrapper>
+        <a className={cx('blog-wrapper')} href={`/bloginfo/${data._id}`}>
+            <Image className={cx('blog-image')} src={data?.article_image} alt="Blog_image"></Image>
+            <h4 className={cx('blog-title')}>
+                <span>{data?.article_title}</span>
+            </h4>
+            <h4 className={cx('blog-description')}>
+                <span>{data?.article_content}</span>
+            </h4>
+        </a>
     );
 }
 

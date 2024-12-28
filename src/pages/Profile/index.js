@@ -8,7 +8,7 @@ import InsuranceModal from '../../components/InsuranceModal';
 import ProofModal from '../../components/ProofModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faQuestion, faMagnifyingGlass, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion, faMagnifyingGlass, faUpload, faFloppyDisk, faRightFromBracket, faPen, faTrash, faUserXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import useAccount from '../../hook/useAccount';
 import useRegion from '../../hook/useRegion';
@@ -17,6 +17,10 @@ import Account_API from '../../API/Account_API';
 import { useNavigate } from 'react-router-dom';
 import ListModal from '../../components/ListModal';
 import useAppointment from '../../hook/useAppointment';
+import LoadingAnimation from '../../components/LoadingAnimation';
+import Image from '../../components/Image';
+import ArticleListModal from '../../components/ArticleListModal';
+import useArticles from '../../hook/useArticles';
 
 
 const cx = classNames.bind(styles);
@@ -24,10 +28,46 @@ const cx = classNames.bind(styles);
 function Profile() {
     const [image, setImage] = useState();
 
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo] = useAccount();
+    const [
+        checkLogin, 
+        signUp, 
+        loadingAccount, 
+        doctorsHook, 
+        getAccountByID, 
+        filterDoctorList, 
+        getAccountByEmail, 
+        checkAccountType, 
+        uploadProof, 
+        changePassword, 
+        getDoctorActiveList, 
+        addDoctorActiveHour, 
+        changeAccountInfo, 
+        changeDoctorInfo, 
+        searchDoctor, 
+        forgotPassword, 
+        getDoctorList, 
+        deleteDoctorActiveHour, 
+        updateDoctorActiveHour,
+        softDeleteAccount,
+        ] = useAccount();
     const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality] = useSpeciality();
     const [regionLoading, regionHook] = useRegion();
-    const [appointmentLoading, appointmentHook, addAppointment, getAllAppointmentByUserID, cancelAppointment] = useAppointment();
+    const [appointmentLoading, appointmentHook, addAppointment, getAllAppointmentByUserID, cancelAppointment, getAllAppointmentByDoctor] = useAppointment();
+    const [
+        articlesHook,
+        firstArticle,
+        fourArticles,
+        loading,
+        getArticlesByDoctor,
+        getArticlesBySpecialty,
+        getArticlesByID,
+        addComment,
+        addArticle,
+        getFiveLatestArticles,
+        getFourLatestArticles,
+        searchArticle,
+        getAllArticleByDoctor,
+    ] = useArticles();
     const [userInfo, setUserInfo] = useState({});
     const [isDoctor, setIsDoctor] = useState(false);
     const [userName, setUserName] = useState('');
@@ -40,10 +80,23 @@ function Profile() {
     const [docRegion, setDocRegion] = useState('');
     const [docBio, setDocBio] = useState('');
     const [accountRole, setAccountRole] = useState('User');
-    const [doctorActiveList, setDoctorActiveList] = useState([]);
+    const [doctorActiveList, setDoctorActiveList] = useState({});
+    const [doctorActiveHours, setDoctorActiveHours] = useState([]);
     const [appointmentInfo, setAppointmentInfo] = useState([]);
+    const [articleList, setArticleList] = useState([]);
+    const [selectedHour, setSelectedHour] = useState("");
+    let intervalId;
 
     const navigate = useNavigate();
+
+    const isLoggedIn = JSON.parse(localStorage.getItem('isLoginSuccess'));
+
+    useEffect(() => {
+        
+        if (!isLoggedIn) {
+            navigate('/', { replace: true });
+        }
+    }, [isLoggedIn, navigate]);
 
     function toDateInputFormat(date) {
         const year = date.getFullYear();
@@ -63,108 +116,175 @@ function Profile() {
         const fetchAccount = async () => {
             let item = localStorage.getItem('isLoginSuccess');
             
-            // Nếu item tồn tại, chuyển đổi từ chuỗi JSON thành đối tượng
             if (item) {
                 let obj = JSON.parse(item);
+                if (obj?.adminAccess) {
+                    setAccountRole('Admin');
+                }
                 const AccountInfo = await getAccountByEmail(obj.email);
-                setUserInfo(AccountInfo);  // Set userInfo
-                const AppointmentInfo = await getAllAppointmentByUserID(AccountInfo._id);
-                console.log("AppointmentInfo: ", AppointmentInfo);
+                setUserInfo(AccountInfo);
+                let AppointmentInfo;
+                if (AccountInfo?.__t){
+                    AppointmentInfo = await getAllAppointmentByDoctor(AccountInfo?._id);
+                }
+                else {
+                    AppointmentInfo = await getAllAppointmentByUserID(AccountInfo?._id);
+                }
+                
                 setAppointmentInfo(AppointmentInfo);
-
-                
-                
-                // Cập nhật các state khác như username, address, phone, email sau khi nhận dữ liệu
                 if (AccountInfo) {
-                    setUserName(AccountInfo.username);
-                    setPhoneNum(AccountInfo.phone);
-                    setAddress(AccountInfo.address);
-                    setEmail(AccountInfo.email);
-                    setUnderlyingCondition(AccountInfo.underlying_condition);
+                    setUserName(AccountInfo?.username);
+                    setPhoneNum(AccountInfo?.phone);
+                    setAddress(AccountInfo?.address);
+                    setEmail(AccountInfo?.email);
+                    setUnderlyingCondition(AccountInfo?.underlying_condition);
                     
-                    // Kiểm tra và chuyển đổi date_of_birth
-                    if (AccountInfo.date_of_birth) {
-                        const birthDate = new Date(AccountInfo.date_of_birth);
+                    if (AccountInfo?.date_of_birth) {
+                        const birthDate = new Date(AccountInfo?.date_of_birth);
                         if (!isNaN(birthDate)) {
-                            setBirthday(toDateInputFormat(birthDate)); // Use `yyyy-MM-dd` for the date input
+                            setBirthday(toDateInputFormat(birthDate));
                         } else {
                             console.error("Invalid date format in AccountInfo.date_of_birth");
                         }
                     }
-
-                    // Gán profile_image cho state image
-                    if (AccountInfo.profile_image) {
-                        const imageFile = {
-                            preview: `data:image/jpeg;base64,${AccountInfo.profile_image}`,
-                        };
-                        setImage(imageFile); // Gọi hàm setImage với object chứa link preview
-                    }
-                    
                 }
-
-                const handleBirthdayChange = (e) => {
-                    const date = new Date(e.target.value);
-                    if (!isNaN(date)) {
-                        setBirthday(formatDate(date)); // Converts to MM/dd/yyyy
-                    }
-                };
                 
     
-                const AccountType = await checkAccountType(AccountInfo._id);
-                console.log("Account type: ", AccountType);
-                if (AccountType.role === "Doctor") {
+                if (AccountInfo?.__t) {
                     setIsDoctor(true);
                     setAccountRole("Doctor");
-                    setDocFaculty(AccountInfo.speciality_id.name);
-                    setDocRegion(AccountInfo.region_id.name);
-                    setDocBio(AccountInfo.bio);
-                    const DoctorActiveList = await getDoctorActiveList(AccountInfo._id);
+                    if (AccountInfo?.speciality_id) setDocFaculty(AccountInfo?.speciality_id?.name);
+                    if (AccountInfo?.region_id) setDocRegion(AccountInfo?.region_id?.name);
+                    if (AccountInfo?.bio) setDocBio(AccountInfo?.bio);
+                    const DoctorActiveList = await getDoctorActiveList(AccountInfo?._id);
                     setDoctorActiveList(DoctorActiveList);
+                    setDoctorActiveHours(DoctorActiveList?.active_hours);
+                    const ArticleList = await getAllArticleByDoctor(AccountInfo?.email);
+                    setArticleList(ArticleList);
                 }
             }
         };
         fetchAccount();
     }, []);
-    
+
+    useEffect(()=>{
+        const fetchActiveHoursPeriodically = async () => {
+            const activeHours = await getDoctorActiveList(userInfo?._id, false);
+            if (activeHours) setDoctorActiveHours(activeHours?.active_hours);
+        };
+
+        if (isDoctor) {
+            intervalId = setInterval(() => {
+                fetchActiveHoursPeriodically();
+            }, 5000);
+        }
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    },[isDoctor])
 
     const handlePreviewImage = (e) => {
         const file = e.target.files[0];
+        if (!file) return;
+
+        const validFileTypes = /image\/(jpeg|jpg|png|gif|bmp)/;
+        if (!validFileTypes.test(file.type)) {
+            alert("Chỉ chấp nhận các file định dạng .jpg, .jpeg, .png, .gif, hoặc .bmp!");
+            return;
+        }
+
         file.preview = URL.createObjectURL(file);
         setImage(file);
     };
+
+    const handleActiveHourUpdate = async(newActiveHour, oldActiveHour) => {
+        setDoctorActiveHours((prev) => {
+            const updated = prev.filter(
+              (hour) =>
+                hour.day !== oldActiveHour.day &&
+                hour.start_time !== oldActiveHour.start_time &&
+                hour.end_time !== oldActiveHour.end_time
+            );
+            return [...updated, newActiveHour];
+          });
+    
+        setSelectedHour(
+          `${newActiveHour?.day} ${newActiveHour?.start_time} ${newActiveHour?.end_time} Limit: ${newActiveHour?.appointment_limit}`
+        );
+
+        const allAppointment = await getAllAppointmentByDoctor(userInfo?._id);
+        setAppointmentInfo(allAppointment);
+      };
+
+    function parseSchedule(inputString) {
+        const parts = inputString.split(' ');
+    
+        const day = parts[0];
+        const start_time = parts[1];
+        const end_time = parts[2];
+        const appointment_limit = parts[4];
+        const hour_type = parts[5];
+    
+        return {
+            day,
+            start_time,
+            end_time,
+            appointment_limit,
+            hour_type
+        };
+    }
+
+    const handleDeleteActiveHour = async() => {
+        if (!selectedHour) {
+            alert("Vui lòng chọn giờ làm việc cần xóa!");
+            return;
+        }
+
+        const userConfirmed = window.confirm("Bạn có chắc chắn muốn xóa giờ làm việc này không?");
+        if (userConfirmed) {
+            const hourValue = parseSchedule(selectedHour);
+            const deletedActiveHour = await deleteDoctorActiveHour(userInfo?._id, hourValue?.day, hourValue?.start_time, hourValue?.end_time, hourValue?.hour_type);
+
+            if (deletedActiveHour && typeof deletedActiveHour === 'object') {
+                alert("Xóa giờ làm việc thành công!");
+                const hourValue = parseSchedule(selectedHour);
+                setDoctorActiveHours((prev) => {
+                    return prev.filter(hour =>
+                        hour?.day !== hourValue?.day &&
+                        hour?.start_time !== hourValue?.start_time &&
+                        hour?.end_time !== hourValue?.end_time
+                    );
+                });
+                setSelectedHour("");
+                const allAppointment = await getAllAppointmentByDoctor(userInfo?._id);
+                setAppointmentInfo(allAppointment);
+                return;
+            }
+            else if (deletedActiveHour && typeof deletedActiveHour === 'object') {
+                alert(deletedActiveHour);
+                return;
+            }
+            else {
+                alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+            }
+        }
+    }
+    
 
     function formatDate(date) {
         if (!(date instanceof Date)) {
             throw new Error('Invalid date object');
         }
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
-        const day = String(date.getDate()).padStart(2, '0'); // Ngày trong tháng
-        const year = date.getFullYear(); // Năm
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const year = date.getFullYear();
     
         return `${month}/${day}/${year}`;
     }
 
-    function base64ToFile(base64, fileName) {
-        const arr = base64.split(',');
-        const mime = arr[0].match(/:(.*?);/)[1];
-        const bstr = atob(arr[1]);
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-        
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new File([u8arr], fileName, { type: mime });
-    }
-    
-
     const handleSubmitAccountInfo = async () => {
-        console.log("Image before processing: ", image);
-    
-    
-        // Nếu không upload ảnh mới và `userInfo.profile_image` tồn tại dạng Base64
-        if (userInfo.profile_image) {
-            console.log("case 1");
+        if (!image) {
             await changeAccountInfo(
                 userInfo._id, 
                 userName, 
@@ -175,9 +295,10 @@ function Profile() {
                 null
             );
         }
-        else {
+        else if (image) {
+
             await changeAccountInfo(
-                userInfo._id, 
+                userInfo?._id, 
                 userName, 
                 phoneNum, 
                 underlyingCondition, 
@@ -189,26 +310,65 @@ function Profile() {
         
     
         if (isDoctor) {
-            console.log("Doc Faculty: ", docFaculty);
-            console.log("Doc Region: ", docRegion);
-            console.log("Doc Bio: ", docBio);
     
-            await changeDoctorInfo(userInfo._id, docFaculty, docRegion, docBio);
+            await changeDoctorInfo(userInfo?._id, docFaculty, docRegion, docBio);
         }
+        
+        alert("Đổi thông tin thành công!");
+        window.location.reload();
     };
     
     
-    
+    const handleAddActiveHour = (newActiveHour) => {
+        setDoctorActiveHours(newActiveHour);
+    };
+
+    const handleDeleteAccount = async() => {
+        const userConfirmed = window.confirm("Bạn có chắc chắn muốn xóa tài khoản này không?");
+        if (userConfirmed) {
+            const deletedAccount = await softDeleteAccount(userInfo?._id);
+            if (deletedAccount && typeof deletedAccount === 'object') {
+                alert("Xóa tài khoản thành công, bạn sẽ được chuyển đến trang đăng nhập!");
+                localStorage.removeItem('isLoginSuccess');
+                if (window.location.pathname === '/profile') {
+                    navigate('/login', { replace: true });
+                } else {
+                    navigate('/login');
+                }
+                window.location.reload();
+            } else if (deletedAccount && typeof deletedAccount !== 'object') {
+                alert(deletedAccount);
+                return;
+            }
+            else {
+                alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+                return;
+            }
+        }
+    }
     
     
     
     const handleBirthdayChange = (e) => {
         const date = new Date(e.target.value);
         if (!isNaN(date)) {
-            setBirthday(formatDate(date)); // Converts to MM/dd/yyyy
+            setBirthday(formatDate(date));
         }
     };
     
+    if (!isDoctor) {
+        if (loadingAccount || appointmentLoading) {
+            return (
+                <LoadingAnimation></LoadingAnimation>
+            )
+        } 
+    } else {
+        if (loadingAccount || specialityLoading || regionLoading || appointmentLoading || loading) {
+            return (
+                <LoadingAnimation></LoadingAnimation>
+            )
+        }
+    } 
 
     return (
         <div className={cx('wrapper')}>
@@ -216,27 +376,17 @@ function Profile() {
             <div className={cx('image-container')}>
                  <img className={cx('background-img')} src="https://media.gettyimages.com/id/1312706413/photo/modern-hospital-building.jpg?s=612x612&w=gi&k=20&c=1-EC4Mxf--5u4ItDIzrIOrduXlbKRnbx9xWWtiifrDo="></img>
                  <div className={cx('profile-image-container')}>
-                    {userInfo.profile_image ? (
-                        <img 
-                            src={`data:image/jpeg;base64,${userInfo.profile_image}`}
-                            alt="User Profile" 
-                            className={cx('profile-image')}
-                        />
-                    ) : (
-                        image && (
-                            <img 
-                                name="image" 
-                                src={image.preview} 
-                                alt="Uploaded Preview" 
-                                className={cx('profile-image')} 
-                            />
-                        )
-                    )}
+                 <Image 
+                    src={image?.preview || userInfo?.profile_image || 'default-placeholder.jpg'}
+                    alt="User Profile" 
+                    className={cx('profile-image')}
+                />
+
                  </div>
                  <div className={cx("file-upload")}>
                     <input type="file" id="file" className={cx("file-input")} onChange={handlePreviewImage} />
                     <label htmlFor="file" className={cx("file-label")}>
-                    <FontAwesomeIcon icon={faUpload} />
+                        <FontAwesomeIcon icon={faUpload} />
                     </label>
                  </div>
             </div>
@@ -244,19 +394,19 @@ function Profile() {
                 <div className={cx('contact-info-container')}>
                      <div className={cx('contact-info')}>
                         <div className={cx('user-name')}>
-                            <span>{userInfo.username}</span>
+                            <span>{userInfo?.username}</span>
                         </div>
                         <div className={cx('phone-number')}>
-                            <span>+ {userInfo.phone}</span>
+                            <span>+ {userInfo?.phone}</span>
                         </div>
                         <div className={cx('email')}>
-                            <span>{userInfo.email}</span>
+                            <span>{userInfo?.email}</span>
                         </div>
-                        <ListModal data={appointmentInfo}>+ Danh sách cuộc hẹn</ListModal>
+                        <ListModal data={{appointment_list: appointmentInfo, is_doc: userInfo?.__t ? true : false, _id: userInfo?._id}}>+ Danh sách cuộc hẹn</ListModal>
                      </div>
                      <div className={cx('buttons-container')}>
-                        <Button primary onClick={handleSubmitAccountInfo}>Lưu</Button>
-                        <Button primary onClick={()=>{navigate('/')}}>Thoát</Button>
+                        <Button primary onClick={handleSubmitAccountInfo} leftIcon={<FontAwesomeIcon icon={faFloppyDisk} />}>Lưu</Button>
+                        <Button primary onClick={handleDeleteAccount} leftIcon={<FontAwesomeIcon icon={faUserXmark} />}>Xóa</Button>
                      </div>
                 </div>
                 <div className={cx('main-info-container')}>
@@ -265,8 +415,8 @@ function Profile() {
                                 <div className={cx('info-title')}>
                                   <span>THÔNG TIN CÁ NHÂN</span>
                                 </div>
-                                <InsuranceModal>BHYT</InsuranceModal>
                             </div>
+                            <div className={cx('separator')}></div>
                             <div className={cx('field-container')}>
                                 <div className={cx('field-name')}>
                                      <span>Họ và tên</span>
@@ -316,8 +466,9 @@ function Profile() {
                                      <span>Cơ sở</span>
                                 </div>
                                 <select className={cx('field-input')} value={docRegion} onChange={(e)=>{setDocRegion(e.target.value)}} disabled={!isDoctor}>
+                                    <option value="">Chọn vùng</option>
                                     {regionHook.map((region) => (
-                                        <option value = {region.name}>{region.name}</option>
+                                        <option value = {region?.name}>{region?.name}</option>
                                     ))}
                                 </select>
                             </div>
@@ -326,8 +477,9 @@ function Profile() {
                                      <span>Chuyên khoa</span>
                                 </div>
                                 <select className={cx('field-input')} value={docFaculty} onChange={(e)=>{setDocFaculty(e.target.value)}} disabled={!isDoctor}>
+                                    <option value="">Chọn chuyên khoa</option>
                                     {specialityHook.map((speciality) => (
-                                        <option value = {speciality.name}>{speciality.name}</option>
+                                        <option value = {speciality?.name}>{speciality?.name}</option>
                                     ))}
                                 </select>
                             </div>
@@ -342,15 +494,29 @@ function Profile() {
                                      <span>Giờ làm việc</span>
                                 </div>
                                 <div className={cx('button-content-container')}>
-                                     <select className={cx('half-field-input')}>
-                                     {doctorActiveList.map((item) => (
-                                        <option key={item._id} value={`${item.day} ${item.start_time} ${item.end_time}`}>
-                                            {`${item.day} ${item.start_time} - ${item.end_time}`}
-                                        </option>
-                                     ))}
-                                     </select>
-                                     <DateModal disabled={!isDoctor} data={userInfo}>Thêm</DateModal>
+                                     <select className={cx('half-field-input')} disabled={!isDoctor} value={selectedHour} onChange={(e)=>{setSelectedHour(e.target.value)}}>
+                                     <option key="1" value="">Chọn giờ làm việc</option>
+                                     {(doctorActiveHours || []).map((item) => (
+                                            <option key={item?._id} value={`${item?.day} ${item?.start_time} ${item?.end_time} Limit: ${item?.appointment_limit} ${item?.hour_type}`}>
+                                            {`${item?.day} ${item?.start_time} - ${item?.end_time} Limit: ${item?.appointment_limit}`}
+                                            </option>
+                                        ))}
+                                    </select>
+                                     
                                 </div>
+                                
+                            </div>
+                            <div className={cx('manage-buttons-container')}>
+                                <div className={cx('edit-buttons')}>
+                                    <DateModal disabled={!isDoctor} data={userInfo} onAddActiveHour={handleAddActiveHour}>Thêm</DateModal>
+                                    <DateModal disabled={!isDoctor || !selectedHour} data={userInfo} type="update" hourData={selectedHour} onUpdateActiveHour={handleActiveHourUpdate}>Sửa</DateModal>
+                                    <Button type="button" disabled={!isDoctor || !selectedHour} primary onClick={handleDeleteActiveHour} leftIcon={<FontAwesomeIcon icon={faTrash} />}>Xóa</Button>
+                                </div>
+                                <div className={cx('field-name')}>
+                                     <span>Quản lý bài báo</span>
+                                </div>
+                                <div className={cx('separator')}></div>
+                                <ArticleListModal data={{article_list: articleList, email: userInfo?.email, is_doc: userInfo?.__t ? true : false}} disabled={!isDoctor} >+ Danh sách bài báo</ArticleListModal>
                             </div>
                      </div>
                      <div className={cx('account-info-container')}>
@@ -358,21 +524,14 @@ function Profile() {
                                 <div className={cx('info-title')}>
                                   <span>THÔNG TIN TÀI KHOẢN</span>
                                 </div>
+                                <Modal data={userInfo}>Đổi MK</Modal>
+
                             </div>
                             <div className={cx('field-container')}>
                                 <div className={cx('field-name')}>
                                      <span>Email</span>
                                 </div>
                                 <input className={cx('field-input')} value={email} onChange={(e) => {setEmail(e.target.value)}} readOnly></input>
-                            </div>
-                            <div className={cx('field-container')}>
-                                <div className={cx('field-name')}>
-                                     <span>Mật khẩu</span>
-                                </div>
-                                <div className={cx('button-content-container')}>
-                                     <input className={cx('half-field-input')}></input>
-                                     <Modal data={userInfo}>Đổi</Modal>
-                                </div>
                             </div>
                             <div className={cx('field-container')}>
                                 <div className={cx('field-name')}>

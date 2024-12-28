@@ -14,10 +14,6 @@ export const Wrapper = styled.button`
     background-color: var(--white);
     border: 1px solid transparent;
     user-select: none;
-    
-    & + & {
-        margin-left: 8px;
-    }
 
     &.disabled {
         pointer-events: none;
@@ -61,6 +57,10 @@ export const Submit = styled(Wrapper)`
     font-weight: 500;
     font-size: 1.6rem;
     border: 0;
+
+    &:hover {
+        background-color: #2197E3;
+    }
 `;
 
 export const SubmitTwo = styled(Wrapper)`
@@ -70,6 +70,10 @@ export const SubmitTwo = styled(Wrapper)`
     font-weight: 500;
     font-size: 1.6rem;
     border: 0;
+
+    &:hover {
+        background-color:rgb(15, 167, 172);
+    }
 `;
 
 export const SubmitThree = styled(Wrapper)`
@@ -91,6 +95,11 @@ export const Rounded = styled(Wrapper)`
 
     &:hover {
         background-color: #2197E3;
+    }
+
+    &:disabled {
+        cursor: default;
+        background-color:rgba(84, 205, 207, 0.74);
     }
 `;
 
@@ -115,6 +124,14 @@ export const Primary = styled(Wrapper)`
 
     &:hover {
         background-color: #2197E3;
+    }
+
+    &:disabled {
+        cursor: default;
+        background-color:rgba(84, 205, 207, 0.74);
+        &:hover {
+            background-color:rgba(84, 205, 207, 0.74);
+        }
     }
 `;
 

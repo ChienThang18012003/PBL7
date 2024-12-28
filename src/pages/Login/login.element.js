@@ -23,7 +23,16 @@ export const LoginItemAndHeader = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: 35%;
     align-items: center;
+
+    @media (max-width: 1024px){
+        width: 50%;
+    }
+
+    @media (max-width: 740px){
+        width: 80%;
+    }
 `
 
 export const LoginHeader = styled.p`
@@ -32,7 +41,7 @@ export const LoginHeader = styled.p`
     font-size: 40px;
 `
 export const LoginItemList = styled.div`
-    width: 500px;
+    width: 96%;
     height: 250px;
     flex: 3;
     padding: 10px 20px 0 20px;
@@ -72,14 +81,17 @@ export const LoginLink = styled.p`
     margin-top: 10px;
     font-size: 20px;
     font-style: italic;
-    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover{
+       text-decoration: underline;
+    }
     
 `
 
 export const LoginDeco = styled.div`
     flex: 2;
     position: relative;
-    width: 100%;
     height: 100%; 
     overflow: hidden;
     display: flex;
@@ -89,7 +101,7 @@ export const LoginDeco = styled.div`
 export const Deco2 = styled.div`
     position: absolute;
     bottom: -200px; 
-    left: -400px;
+    left: -80%;
     width: 700px; 
     height: 450px; 
     background-color: #3BA5A9; 
@@ -114,7 +126,6 @@ export const Deco2 = styled.div`
 export const LoginDeco2 = styled.div`
     flex: 2;
     position: relative;
-    width: 100%;
     height: 100%; 
     overflow: hidden;
     display: flex;

@@ -8,9 +8,14 @@ const checkLogin = async (email, password) => {
         });
         return res.data;
     } catch (error) {
-        if (error.response) console.log('Error response 1: ', error.response.data.error);
-        else console.log('Error not response: ', error.message);
-        return null;
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
     }
 };
 
@@ -25,18 +30,25 @@ const signUp = async (email, password, username, phone, is_doc) => {
         });
         return res.data;
     } catch (error) {
-        if (error.response) console.log('Error response 1: ', error.response.data.error);
-        else console.log('Error not response: ', error.message);
-        return null;
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
     }
 }
 
 const filter_Doctors_List = async (speciality, region) => {
     try {
-        const res = await client.post('/acc/filter-doctor-list', {
-            speciality: speciality,
-            region: region,
-        });
+        const requestBody = {};
+        if (speciality && speciality !== "all") requestBody.speciality = speciality;
+        if (region && region !== "all") requestBody.region = region;
+        requestBody.verified = true;
+
+        const res = await client.post('/doc/filter-doctor-list-main', requestBody);
         return res.data;
     } catch (error) {
         if (error.response) console.log('Error response: ', error.response.data.error);
@@ -45,12 +57,13 @@ const filter_Doctors_List = async (speciality, region) => {
     }
 };
 
+
 const get_Doctors_List = async () => {
     try {
         const res = await client.post('/acc/acc-list', {
             user: false,
             hidden_state: false,
-            verified: false,
+            verified: true,
         });
         return res.data;
     } catch (error) {
@@ -84,6 +97,22 @@ const get_Account_By_Email = async (email) => {
     }
 };
 
+const get_Account_Status = async (email) => {
+    try {
+        const res = await client.post('/acc/get-acc-status', { email: email});
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.error('Error response:', error.response.data.message || error.response.data.error || 'Unknown error from server');
+            return error.response.data.message || error.response.data.error || 'Unknown error from server';
+        } else {
+            console.error('Error:', error.message);
+            return error.message;
+        }
+    }
+};
+
+
 const check_Account_Type = async (id) => {
     try {
         const res = await client.post('/acc/check-account-type', {
@@ -102,7 +131,7 @@ const uploadProof = async (proof, id) => {
         const formData = new FormData();
         if (proof) formData.append('proof', proof);
 
-        const res = await client.post(`/acc/upload-proof/${id}`, formData, {
+        const res = await client.post(`/doc/upload-proof/${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -110,9 +139,14 @@ const uploadProof = async (proof, id) => {
 
         return res.data;
     } catch (error) {
-        if (error.response) console.log('Error response: ', error.response.data.error);
-        else console.log('Error not response: ', error.message);
-        return null;
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
     }
 };
 
@@ -143,7 +177,7 @@ const change_Account_Info = async (id ,username, phone, underlying_condition, da
 const change_Doctor_Info = async (id , speciality, region, bio) => {
     try {
 
-        const res = await client.post(`/acc/update-doc-info/${id}`, {
+        const res = await client.post(`/doc/update-doc-info/${id}`, {
             speciality: speciality,
             region: region,
             bio: bio,
@@ -165,6 +199,25 @@ const change_Password = async (email, password) => {
         });
         return res.data;
     } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
+const forgot_Password = async (email) => {
+    console.log(email);
+    try {
+        const res = await client.post('/acc/forgot-pass', {
+            email: email,
+        });
+        return res.data;
+    } catch (error) {
         if (error.response) console.log('Error response: ', error.response.data.error);
         else console.log('Error not response: ', error.message);
         return null;
@@ -173,7 +226,7 @@ const change_Password = async (email, password) => {
 
 const get_Doctor_Active_List = async (id) => {
     try {
-        const res = await client.get(`/acc/active-hour-list/${id}`);
+        const res = await client.get(`/doc/active-hour-list/${id}`);
         return res.data;
     } catch (error) {
         if (error.response) console.log('Error response: ', error.response.data.error);
@@ -182,19 +235,93 @@ const get_Doctor_Active_List = async (id) => {
     }
 };
 
-const add_Doctor_Active_Hour = async (id, day, start_time, end_time, hour_type) => {
+const add_Doctor_Active_Hour = async (id, day, start_time, end_time, hour_type, appointment_limit) => {
     try {
-        const res = await client.post(`/acc/add-active-hour/${id}`,{
+        const res = await client.post(`/doc/add-active-hour/${id}`,{
+            day: day,
+            start_time: start_time,
+            end_time: end_time,
+            hour_type: hour_type,
+            appointment_limit: Number(appointment_limit),
+        });
+        console.log(res.data);
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
+const delete_Doctor_Active_Hour = async (id, day, start_time, end_time, hour_type) => {
+    try {
+        const res = await client.post(`/doc/delete-active-hour/${id}`,{
             day: day,
             start_time: start_time,
             end_time: end_time,
             hour_type: hour_type,
         });
+        console.log(res.data);
         return res.data;
     } catch (error) {
-        if (error.response) console.log('Error response: ', error.response.data.error);
-        else console.log('Error not response: ', error.message);
-        return null;
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
+const update_Doctor_Active_Hour = async (id, day, start_time, end_time, hour_type, appointment_limit, old_day, old_start_time, old_end_time, old_hour_type) => {
+    try {
+        const res = await client.post(`/doc/update-active-hour/${id}`,{
+            day: day,
+            start_time: start_time,
+            end_time: end_time,
+            hour_type: hour_type,
+            appointment_limit: Number(appointment_limit),
+            old_day: old_day,
+            old_start_time: old_start_time,
+            old_end_time: old_end_time,
+            old_hour_type: old_hour_type,
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
+const soft_Delete_Account = async (id) => {
+    try {
+        const account_Ids = Array.isArray(id) ? id : [id];
+        const res = await client.post('/acc/soft-delete-acc',{
+            account_Ids
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
     }
 };
 
@@ -215,4 +342,9 @@ export default {
     add_Doctor_Active_Hour,
     change_Account_Info,
     change_Doctor_Info,
+    forgot_Password,
+    delete_Doctor_Active_Hour,
+    update_Doctor_Active_Hour,
+    soft_Delete_Account,
+    get_Account_Status,
 };

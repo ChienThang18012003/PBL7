@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Modal.module.scss';
 import Button from "../Button";
 import useAccount from "../../hook/useAccount";
+import bcrypt from "bcryptjs";
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +12,7 @@ export default function Modal({children , data}) {
   const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour] = useAccount();
   const [newPass, setNewPass] = useState('');
   const [rewriteNewPass, setRewriteNewPass] = useState('');
+  const [currentPass, setCurrentPass] = useState('');
 
   const toggleModal = () => {
     setModal(!modal);
@@ -23,24 +25,43 @@ export default function Modal({children , data}) {
   }
 
   const handleChangePassword = async() => {
+    if (currentPass === '') {
+      alert('Vui lòng nhập mật khẩu hiện tại');
+      return;
+    }
     if (newPass === ''){
-      console.log('Vui lòng nhập mật khẩu mới');
+      alert('Vui lòng nhập mật khẩu mới');
       return;
     }
     else if (rewriteNewPass === ''){
-      console.log('Vui lòng nhập lại mật khẩu mới');
+      alert('Vui lòng nhập lại mật khẩu mới');
       return;
     }
     else if (newPass !== rewriteNewPass){
-      console.log('Mật khẩu nhập lại không chính xác');
+      alert('Mật khẩu nhập lại không chính xác');
       return;
     }
-    else{
-      console.log("email: ",data.email);
-      console.log("newPass: ", newPass);
-      await changePassword(data.email, newPass);
-      console.log('Đổi mật khẩu thành công!');
-      setModal(!modal);
+    const isMatch = await bcrypt.compare(currentPass, data.password);
+    if (!isMatch) {
+      alert('Mật khẩu hiện tại không đúng');
+      return;
+    }
+
+    try {
+      const changePass = await changePassword(data.email, newPass);
+      if (changePass && typeof changePass === 'object') {
+        alert('Đổi mật khẩu thành công!');
+        setModal(false);
+      }
+      else if (changePass && typeof changePass !== 'object') {
+        alert(changePass);
+      }
+      else {
+        alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+      }
+      
+    } catch (error) {
+      alert("Đổi mật khẩu thất bại:", error);
     }
   }
 
@@ -55,6 +76,12 @@ export default function Modal({children , data}) {
           <div onClick={toggleModal} className={cx('overlay')}></div>
           <div className={cx('modal-content')}>
             <div className={cx('modal-field-container')}>
+                <div className={cx('field-container')}>
+                    <div className={cx('field-name')}>
+                        <span>Nhập mật khẩu hiện tại</span>
+                    </div>
+                    <input className={cx('field-input')} value={currentPass} onChange={(e)=>{setCurrentPass(e.target.value)}}></input>
+                </div>
                 <div className={cx('field-container')}>
                     <div className={cx('field-name')}>
                         <span>Nhập mật khẩu mới</span>

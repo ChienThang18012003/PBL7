@@ -4,6 +4,7 @@ import Pic3 from "../../assets/assets_fe/3.png"
 import Pic4 from "../../assets/assets_fe/4.png"
 import NewsPic1 from "../../assets/assets_fe/item1.jpg"
 import MedicalLogo from '../../assets/assets_fe/MedicalLogo.svg';
+import LoadingAnimation from '../../assets/assets_fe/LoadingAnimation.svg';
 import doc1 from './doc1.png'
 import verified_icon from '../../assets/assets_fe/verified.png'
 import search_icon from './search.png'
@@ -14,6 +15,8 @@ import Gynecologist from './Gynecologist.svg'
 import Neurologist from './Neurologist.svg'
 import Pediatricians from './Pediatricians.svg'
 import Dermatologist from './Dermatologist.svg'
+import PageLoader from '../../assets/assets_fe/PageLoader.gif';
+import NoImage from '../../assets/assets_fe/NoImage.png';
 
 
 export const assets = {
@@ -24,7 +27,10 @@ export const assets = {
     NewsPic1,
     MedicalLogo,
     verified_icon,
-    search_icon
+    search_icon,
+    LoadingAnimation,
+    PageLoader,
+    NoImage
 }
 export const specialityData = [
     {

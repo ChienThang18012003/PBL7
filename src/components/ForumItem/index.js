@@ -1,136 +1,81 @@
-// ForumItem.js
-import { useState } from 'react';
-import {
-    Container,
-    Wrapper,
-    UserAvatarSection,
-    UserAvatar,
-    QuestionSection,
-    QuestionTitleWrapper,
-    QuestionTitle,
-    CommentIcon,
-    QuestionCount,
-    QuestionInfoWrapper,
-    PostBy,
-    QuestionAsker,
-    When,
-    AskedTime,
-    QuestionWrapper,
-    Question,
-    QuestionLinkWrapper,
-    Link,
-    AnswerWrapper,
-    DoctorInfoWrapper,
-    DoctorImageWrapper,
-    DoctorImage,
-    DoctorInfo,
-    DoctorName,
-    DoctorIntroduction,
-    AnswerSection,
-    DoctorAnswer,
-    ViewMoreSection,
-    ViewMore,
-} from './forumitem.element';
+import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
+import { useState } from 'react'; // Thêm useState để quản lý trạng thái hiển thị
+import styles from './ForumItem.module.scss';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHashtag } from '@fortawesome/free-solid-svg-icons';
+import Image from '../Image';
 
-function ForumItem({ children }) {
-    const [isAnswerVisible, setAnswerVisible] = useState(false);
+const cx = classNames.bind(styles);
 
-    const toggleAnswerVisibility = () => {
-        setAnswerVisible(!isAnswerVisible);
+function ForumItem({ data, onHashtagClick }) {
+    const removeAllSpaces = (str) => {
+        return str.replace(/\s+/g, '');
+    }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
     };
 
+    const handleHashtagClick = () => {
+        onHashtagClick(data?.speciality_id?.name);
+    }
+
     return (
-        <Container>
-            <Wrapper>
-                <UserAvatarSection>
-                    <UserAvatar
-                        src="https://cdn.pixabay.com/photo/2021/03/20/11/57/woman-6109643_1280.jpg"
-                        alt="User Avatar"
-                    />
-                </UserAvatarSection>
+        <div className={cx('container')}>
+            <div className={cx('wrapper')}>
+                <div className={cx('user-avatar-section')}>
+                    <Image className={cx('user-avatar')} src={data?.user_id?.profile_image} alt="User Avatar" />
+                </div>
 
-                <QuestionSection>
-                    <QuestionTitleWrapper>
-                        <QuestionTitle>
-                            <span>Vàng da sinh lý có cần chiếu đèn không? Một số lưu ý quan trọng</span>
-                        </QuestionTitle>
-                        <CommentIcon>
-                            <FontAwesomeIcon icon={faComment} />
-                        </CommentIcon>
-                        <QuestionCount>
-                            <span>0</span>
-                        </QuestionCount>
-                    </QuestionTitleWrapper>
-                    <QuestionInfoWrapper>
-                        <PostBy>
+                <div className={cx('question-section')}>
+                    <div className={cx('question-title-wrapper')}>
+                        <h4 className={cx('question-title')}>
+                            <span>{data?.post_title}</span>
+                        </h4>
+                        <FontAwesomeIcon className={cx('comment-icon')} icon={faComment} />
+                        <h4 className={cx('question-count')}>
+                            <span>{data?.post_comments.length}</span>
+                        </h4>
+                    </div>
+                    <div className={cx('question-info-wrapper')}>
+                        <h4 className={cx('post-by')}>
                             <span>Đăng bởi</span>
-                        </PostBy>
-                        <QuestionAsker>
-                            <span>Thắng Hoàng</span>
-                        </QuestionAsker>
-                        <When>
-                            <span>vào lúc</span>
-                        </When>
-                        <AskedTime>
-                            <span>2/8/2024</span>
-                        </AskedTime>
-                    </QuestionInfoWrapper>
-                    <QuestionWrapper>
-                        <Question>
-                            <span>
-                                Thưa bác sĩ, vàng da sinh lý có cần chiếu đèn không ạ? Con em được 3 ngày tuổi, có biểu
-                                hiện vàng da ở vùng mặt và cổ...
-                            </span>
-                        </Question>
-                    </QuestionWrapper>
-                    <QuestionLinkWrapper>
-                        <Link onClick={toggleAnswerVisibility}>
+                        </h4>
+                        <h4 className={cx('question-asker')}>
+                            <span>{data?.user_id?.username}</span>
+                        </h4>
+                        <h4 className={cx('when')}>
+                            <span>vào ngày</span>
+                        </h4>
+                        <h4 className={cx('asked-time')}>
+                            <span>{formatDate(data?.createdAt)}</span>
+                        </h4>
+                    </div>
+                    <div className={cx('question-info-wrapper')}>
+                        <button className={cx('hashtag-button')} onClick={handleHashtagClick}>
+                            <FontAwesomeIcon icon={faHashtag} className={cx('hashtag-icon')}></FontAwesomeIcon>
+                            {removeAllSpaces(data?.speciality_id?.name)}
+                        </button>
+                    </div>
+                    <div className={cx('question-wrapper')}>
+                        <h4 className={cx('question')}>
+                            <span>{data?.post_content}</span>
+                        </h4>
+                    </div>
+                    <div className={cx('question-link-wrapper')}>
+                        <a className={cx('link')} href={`/forum/${data._id}`}>
                             Xem câu trả lời
-                        </Link>
-                    </QuestionLinkWrapper>
-                </QuestionSection>
-            </Wrapper>
-
-            {isAnswerVisible && (
-                <AnswerWrapper>
-                    <DoctorInfoWrapper>
-                        <DoctorImageWrapper>
-                            <DoctorImage
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSslrJK5VdKIfZ0W5FXwoEqzBQ6XiGPsTEdPQ&s"
-                                alt="Doctor"
-                            />
-                        </DoctorImageWrapper>
-                        <DoctorInfo>
-                            <DoctorName>
-                                <span>BS. VÕ MINH TUẤN</span>
-                            </DoctorName>
-                            <DoctorIntroduction>
-                                <span>Bác sĩ ngoại cột sống</span>
-                            </DoctorIntroduction>
-                            <DoctorIntroduction>
-                                <span>Trung tâm chấn thương chỉnh hình</span>
-                            </DoctorIntroduction>
-                            <DoctorIntroduction>
-                                <span>Chi nhánh TP.Hồ Chí Minh</span>
-                            </DoctorIntroduction>
-                        </DoctorInfo>
-                    </DoctorInfoWrapper>
-                    <AnswerSection>
-                        <DoctorAnswer>
-                            <span>
-                                Chào chị! Trượt đốt sống L4-L5 độ 2, đây là tình trạng nghiêm trọng có thể gây ra nhiều
-                                triệu chứng...
-                            </span>
-                        </DoctorAnswer>
-                    </AnswerSection>
-                    <ViewMoreSection>
-                        <ViewMore>Xem thêm</ViewMore>
-                    </ViewMoreSection>
-                </AnswerWrapper>
-            )}
-        </Container>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

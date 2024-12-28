@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Deco2, Deco3, Deco4,
     LoginButton,
@@ -13,33 +13,40 @@ import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingAnimation from '../../components/LoadingAnimation';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [checkLogin] = useAccount();
+    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo, searchDoctor, forgotPassword] = useAccount();
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         if (email === "") {
-            toast.error("Vui lòng nhập email!");
+            toast.warning("Vui lòng nhập email!");
         }
         else if (password === "") {
-            toast.error("Vui lòng nhập password!");
+            toast.warning("Vui lòng nhập password!");
         }
         else {
             const isLoginSuccess = await checkLogin(email, password);
-            if (isLoginSuccess === null) {
-                toast.error("Tài khoản hoặc mật khẩu không tồn tại!");
+            if (isLoginSuccess && typeof isLoginSuccess === 'object') {
+                localStorage.setItem('isLoginSuccess', JSON.stringify(isLoginSuccess));
+                 navigate('/');
+            }
+            else if (isLoginSuccess && typeof isLoginSuccess !== 'object') {
+                toast.error(isLoginSuccess);
             }
             else {
-                 localStorage.setItem('isLoginSuccess', JSON.stringify(isLoginSuccess));
-                 console.log("Login success");
-                 navigate('/');
-             }
+                toast.error("Có lỗi xảy ra, vui lòng thử lại sau!");
+            }
         }
     };
+
+    const handleForgotPassword = async () => {
+        navigate("/forgot-password");
+    }
 
     return (
         <form onSubmit={(e) => e.preventDefault()}>
@@ -64,7 +71,7 @@ const Login = () => {
                             <LoginButton onClick={handleLogin}>
                                 Đăng Nhập
                             </LoginButton>
-                            <LoginLink>Quên mật khẩu</LoginLink>
+                            <LoginLink onClick={handleForgotPassword}>Quên mật khẩu</LoginLink>
                         </LoginItemList>
                     </LoginItemAndHeader>
 

@@ -1,65 +1,138 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import classNames from 'classnames/bind';
 import styles from './InsuranceModal.module.scss';
 import Button from "../Button";
+import useAppointment from "../../hook/useAppointment";
 
 const cx = classNames.bind(styles);
 
-export default function InsuranceModal({children}) {
+const InsuranceModal = forwardRef(({ children, data }, ref) => {
   const [modal, setModal] = useState(false);
+  const [insuranceName, setInsuranceName] = useState('');
+  const [insuranceID, setInsuranceID] = useState('');
+  const [location, setLocation] = useState('');
+  const [expiredDate, setExpiredDate] = useState(null);
+  const [appointmentLoading, , , , , , addInsurance] = useAppointment();
 
   const toggleModal = () => {
     setModal(!modal);
   };
 
-  if(modal) {
-    document.body.classList.add('active-modal')
-  } else {
-    document.body.classList.remove('active-modal')
-  }
+  useImperativeHandle(ref, () => ({
+    openModal: () => setModal(true),
+    closeModal: () => setModal(false),
+    toggleModal,
+  }));
+
+  const toDateInputFormat = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleExpiredDateChange = (e) => {
+    const date = new Date(e.target.value);
+    if (!isNaN(date)) {
+      setExpiredDate(toDateInputFormat(date));
+    }
+  };
+
+  const handleAddInsurance = async () => {
+    if (!insuranceName || !insuranceID || !location || !expiredDate) {
+      alert("Bạn chưa nhập đủ trường");
+    } else {
+      console.log(data._id, insuranceName, insuranceID, location, expiredDate);
+      await addInsurance(data._id, insuranceName, insuranceID, location, expiredDate);
+      setInsuranceName('');
+      setInsuranceID('');
+      setLocation('');
+      setExpiredDate(null);
+      alert("Thêm bảo hiểm thành công!");
+      window.location.reload();
+    }
+  };
 
   return (
     <>
-      <Button primary onClick={toggleModal} >
+      <div className={cx('buttonModal')}>{children}</div>
+      {/* <Button primary onClick={toggleModal} className={cx('buttonModal')}>
         {children}
-      </Button>
+      </Button> */}
 
       {modal && (
         <div className={cx('modal')}>
-          <div onClick={toggleModal} className={cx('overlay')}></div>
+          <div
+            className={cx('overlay')}
+            // Ngăn overlay đóng modal
+            onClick={(e) => e.stopPropagation()}
+          ></div>
           <div className={cx('modal-content')}>
             <div className={cx('modal-field-container')}>
-                <div className={cx('field-container')}>
-                    <div className={cx('field-name')}>
-                        <span>Tên bảo hiểm</span>
-                    </div>
-                    <input className={cx('field-input')}></input>
+              <div className={cx('field-container')}>
+                <div className={cx('field-name')}>
+                  <span>Tên bảo hiểm</span>
                 </div>
-                <div className={cx('field-container')}>
-                    <div className={cx('field-name')}>
-                        <span>Mã số</span>
-                    </div>
-                    <input className={cx('field-input')}></input>
+                <input
+                  className={cx('field-input')}
+                  value={insuranceName}
+                  onChange={(e) => setInsuranceName(e.target.value)}
+                />
+              </div>
+              <div className={cx('field-container')}>
+                <div className={cx('field-name')}>
+                  <span>Mã số</span>
                 </div>
-                <div className={cx('field-container')}>
-                    <div className={cx('field-name')}>
-                        <span>Nơi cấp</span>
-                    </div>
-                    <input className={cx('field-input')}></input>
+                <input
+                  className={cx('field-input')}
+                  value={insuranceID}
+                  onChange={(e) => setInsuranceID(e.target.value)}
+                />
+              </div>
+              <div className={cx('field-container')}>
+                <div className={cx('field-name')}>
+                  <span>Nơi cấp</span>
                 </div>
-                <div className={cx('field-container')}>
-                    <div className={cx('field-name')}>
-                        <span>Ngày hết hạn</span>
-                    </div>
-                    <input type='date' className={cx('field-input')}></input>
+                <input
+                  className={cx('field-input')}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </div>
+              <div className={cx('field-container')}>
+                <div className={cx('field-name')}>
+                  <span>Ngày hết hạn</span>
                 </div>
-                <Button submitTwo onClick={toggleModal}>
-                  Đổi thông tin
+                <input
+                  type="date"
+                  className={cx('field-input')}
+                  value={expiredDate || ''}
+                  onChange={handleExpiredDateChange}
+                />
+              </div>
+              <div className={cx('action-buttons')}>
+                <Button submitTwo onClick={handleAddInsurance} type="button">
+                  Thêm
                 </Button>
+                <Button
+                  submitTwo
+                  type="button"
+                  onClick={() => {
+                    setModal(false); // Đóng modal khi nhấn Hủy
+                    alert("Thêm cuộc hẹn thành công!");
+                    window.location.reload();
+                  }}
+                >
+                  Hủy
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       )}
+
     </>
   );
-}
+});
+
+export default InsuranceModal;

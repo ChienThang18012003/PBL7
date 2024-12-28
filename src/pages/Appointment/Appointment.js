@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {AContainer, AHeader, ALayout, ALeftSide, ARightSide, ARSItem, ASpace, AUnderline} from "./appointment.element";
+import React, {useEffect, useState, useRef} from 'react';
+import {AContainer, AHeader, ALayout, ALeftSide, ARightSide, ARSItem, ASpace, AUnderline, ALoading} from "./appointment.element";
 import {IoIosArrowRoundForward} from "react-icons/io";
 import * as provincesService from "../../services/Provinces"
 import useRegion from '../../hook/useRegion';
@@ -8,18 +8,46 @@ import useAccount from '../../hook/useAccount';
 import AppointmentModal from '../../components/AppointmentModal';
 import DateModal from '../../components/DateModal';
 import useAppointment from '../../hook/useAppointment';
+import InsuranceModal from '../../components/InsuranceModal';
+import { useAppContext } from '../../context/AppContext';
+import {assets} from "../../assets/assets_fe/assets";
+import LoadingAnimation from '../../components/LoadingAnimation';
 
 const Appointment = () => {
     const [provinces, setProvinces] = useState([]);
     const [regionLoading, regionHook] = useRegion();
+    const insuranceModalRef = useRef(null);
     const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality] = useSpeciality();
     const [selectedRegion, setSelectedRegion] = useState('');
     const [selectedSpeciality, setSelectedSpeciality] = useState('');
     const [filteredDoctor, setFilterDoctor] = useState([]);
-    const [selectedDoctor, setSelectedDoctor] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState('');
     const [healthIssues, setHealthIssues] = useState('');
-    const [typeService, setTypeService] = useState('');
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo] = useAccount();
+    const [typeService, setTypeService] = useState('appointment');
+    const [
+        checkLogin, 
+        signUp, 
+        loadingAccount, 
+        doctorsHook, 
+        getAccountByID, 
+        filterDoctorList, 
+        getAccountByEmail, 
+        checkAccountType, 
+        uploadProof, 
+        changePassword, 
+        getDoctorActiveList, 
+        addDoctorActiveHour, 
+        changeAccountInfo, 
+        changeDoctorInfo, 
+        searchDoctor, 
+        forgotPassword, 
+        getDoctorList, 
+        deleteDoctorActiveHour, 
+        updateDoctorActiveHour,
+        softDeleteAccount,
+        getFilterDoctorList,
+        getAccountStatus
+        ] = useAccount();
     const [appointmentLoading, appointmentHook, addAppointment] = useAppointment();
     const [doctorActiveHour, setDoctorActiveHour] = useState([]);
     const [appointmentDate, setAppointmentDate] = useState('');
@@ -28,6 +56,10 @@ const Appointment = () => {
     const [appointmentTimeEnd, setAppointmentTimeEnd] = useState('');
     const [selectedDoctorID, setSelectedDoctorID] = useState('');
     const [userID, setUserID] = useState('');
+    const [appointmentInfo, setAppointmentInfo] = useState({});
+    const {sharedData, setSharedData} = useAppContext();
+    const [userInfo, setUserInfo] = useState({});
+    let intervalId;
 
     const getAllProvinces = async () => {
         const result = await provincesService.apiGetPublicProvinces();
@@ -44,21 +76,32 @@ const Appointment = () => {
             if (item) {
                 let obj = JSON.parse(item);
                 const AccountInfo = await getAccountByEmail(obj.email);
-                setUserID(AccountInfo._id);  // Set userInfo
-                
+                setUserID(AccountInfo?._id);  // Set userInfo
+                setUserInfo(AccountInfo);
             }
         };
+        const fetchSharedData = () => {
+            if (sharedData) {
+                setSelectedRegion(sharedData?.region_id?.name);
+                setSelectedSpeciality(sharedData?.speciality_id?.name);
+                setSelectedDoctor(sharedData?.username);
+                setSelectedDoctorID(sharedData?._id);
+                setDoctorActiveHour(sharedData?.active_hours);
+            }
+        }
         fetchAccount();
+        fetchSharedData();
     }, []);
 
     useEffect(() => {
        const fetchFilterDoctor = async() => {
             const FilteredDoctors = await filterDoctorList(selectedSpeciality, selectedRegion);
-            console.log("Filter Doctors: ", FilteredDoctors);
             setFilterDoctor(FilteredDoctors);
        }
-
-       fetchFilterDoctor();
+       if (selectedSpeciality !== '') {
+            fetchFilterDoctor();
+       }
+       
     }, [selectedRegion, selectedSpeciality]);
 
     useEffect(() => {
@@ -68,22 +111,49 @@ const Appointment = () => {
     }, [filteredDoctor]);
 
     useEffect(() => {
+        const doctor = filteredDoctor.find(item => item.username === selectedDoctor);
         const fetchActiveHour = async() => {
-            const doctor = filteredDoctor.find(item => item.username === selectedDoctor);
-            
-            // Check if the doctor object exists before accessing 'active_hours'
             if (doctor) {
-                setDoctorActiveHour(doctor.active_hours);
-                setSelectedDoctorID(doctor._id);
+                const activeHourList = await getDoctorActiveList(doctor?._id);
+                setDoctorActiveHour(activeHourList?.active_hours);
+                setSelectedDoctorID(doctor?._id);
             } else {
-                // If doctor is not found, handle it gracefully, maybe clear active hours or show a message
+                
                 setDoctorActiveHour([]);
                 setSelectedDoctorID('');
             }
         }
-    
-        fetchActiveHour();
-    }, [selectedDoctor]);  // Make sure 'filteredDoctor' is also a dependency
+        if (!sharedData) {
+            fetchActiveHour();
+        }
+
+        const checkDoctorExistancePeriodically = async () => {
+            const status = await getAccountStatus(doctor?.email || "");
+            if (status && typeof status === 'object') {
+                if (status?.is_deleted) {
+                    alert("Tài khoản bác sĩ đã bị vô hiệu hóa, vui lòng thử lại sau!");
+                    window.location.reload();
+                }
+            }
+            else if (status && typeof status !== 'object') {
+                if (status === "No user found") {
+                    alert("Không tìm thấy tài khoản bác sĩ, vui lòng thử lại sau!");
+                    window.location.reload();
+                }
+            }
+        };
+        
+        if (selectedDoctor !== "") {
+            intervalId = setInterval(() => {
+                checkDoctorExistancePeriodically();
+            }, 5000);
+        }
+
+        return () => {
+            clearInterval(intervalId);
+        };
+        
+    }, [selectedDoctor]);  
     
      const handleSubmitActiveHour = (data) => {
          const [startTime, endTime] = data.selectedTime.split(' - ');
@@ -95,10 +165,46 @@ const Appointment = () => {
       };
 
      const handleSubmitAppointment = async() => {
-        console.log(userID, selectedDoctorID, appointmentDay, appointmentTimeStart, appointmentTimeEnd, healthIssues, typeService);
-        await addAppointment(userID, selectedDoctorID, appointmentDay, appointmentTimeStart, appointmentTimeEnd, healthIssues, typeService);
-        console.log("Thêm thành công");
+        if (!healthIssues || !selectedDoctor || !appointmentDate)
+        {
+            alert("Bạn chưa chọn đủ trường!");
+            return;
+        }
+        let item = localStorage.getItem('isLoginSuccess');
+            
+        if (userInfo?.__t){
+            alert("Bác sĩ không thể đặt lịch khám!");
+            return;
+        }
+        else{
+            if (item) {
+                const appointment = await addAppointment(userID, selectedDoctorID, appointmentDay, appointmentTimeStart, appointmentTimeEnd, healthIssues, typeService);
+                if (appointment && typeof appointment === 'object') {
+                    setAppointmentInfo(appointment);
+                    if (sharedData) setSharedData(null);
+                    if (insuranceModalRef.current) {
+                    insuranceModalRef.current.openModal(); 
+                  }
+                }
+                else if (appointment && typeof appointment !== 'object'){
+                    alert(appointment);
+                }
+                else {
+                    alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+                }
+                
+            }
+            else {
+                alert("Bạn cần đăng nhập để đặt lịch khám!");
+            }
+        }
+
      }
+
+      if (loadingAccount || specialityLoading || regionLoading || appointmentLoading)
+         return (
+             <LoadingAnimation></LoadingAnimation>
+         )
 
     return (
         <form>
@@ -124,70 +230,92 @@ const Appointment = () => {
                         </p>
 
                         <ARightSide>
-                            <ARSItem>
-                                <p>Chọn địa điểm khám</p>
-                                <select value = {selectedRegion} onChange={(e)=>{setSelectedRegion(e.target.value)}}>
-                                    {
-                                        regionHook.map((item, index) => (
-                                            <option key={index} value={item.name}>
-                                                {item.name}
-                                            </option>
-                                        ))
-                                    }
-                                </select>
+                        <ARSItem>
+                            <p>Chọn địa điểm khám</p>
+                            <select 
+                                value={selectedRegion} 
+                                onChange={(e) => setSelectedRegion(e.target.value)}
+                            >
+                                <option value="">Chọn địa điểm</option>
+                                {regionHook.map((item, index) => (
+                                    <option key={index} value={item?.name}>
+                                        {item?.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </ARSItem>
 
-                            </ARSItem>
+                        <ARSItem>
+                            <p>Chọn chuyên khoa</p>
+                            <select 
+                                value={selectedSpeciality} 
+                                onChange={(e) => setSelectedSpeciality(e.target.value)}
+                                disabled={!selectedRegion}
+                            >
+                                <option value="">Chọn chuyên khoa</option>
+                                {specialityHook.map((item, index) => (
+                                    <option key={index} value={item?.name}>
+                                        {item?.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </ARSItem>
 
-                            <ARSItem>
-                                <p>Chọn loại dịch vụ khám</p>
-                                <select value = {typeService} onChange={(e)=>{setTypeService(e.target.value)}}>
-                                    <option value="Trong giờ">Trong giờ</option>
-                                    <option value="Ngoài giờ">Ngoài giờ</option>
-                                    <option value="Online">Online</option>
-                                </select>
-                            </ARSItem>
+                        <ARSItem>
+                            <p>Chọn bác sĩ</p>
+                            <select 
+                                value={selectedDoctor} 
+                                onChange={(e) => setSelectedDoctor(e.target.value)}
+                                disabled={!selectedSpeciality}
+                            >
+                                <option value="">Chọn bác sĩ</option>
+                                {(filteredDoctor || []).map((item) => (
+                                    <option key={item._id} value={item.username}>
+                                        {item.username}
+                                    </option>
+                                ))}
+                            </select>
+                        </ARSItem>
 
-                            <ARSItem>
-                                <p>Chọn chuyên khoa</p>
-                                <select value = {selectedSpeciality} onChange={(e)=>{setSelectedSpeciality(e.target.value)}}>
-                                    {
-                                        specialityHook.map((item, index) => (
-                                            <option key={index} value={item.name}>
-                                                {item.name}
-                                            </option>
-                                        ))
-                                    }
-                                </select>
-                            </ARSItem>
+                        <ARSItem>
+                            <p>Chọn ngày - khung giờ muốn khám</p>
+                            <input type='text' value={appointmentDate} readOnly />
+                            <AppointmentModal 
+                                data={doctorActiveHour} 
+                                onSubmit={handleSubmitActiveHour} 
+                                disabled={!selectedDoctor}
+                            >
+                                Chọn
+                            </AppointmentModal>
+                        </ARSItem>
 
-                            <ARSItem>
-                                <p>Chọn bác sĩ</p>
-                                <select value = {selectedDoctor} onChange={(e)=>{setSelectedDoctor(e.target.value)}}>
-                                    {
-                                        filteredDoctor.map((item) => (
-                                            <option key={item._id} value={item.username}>
-                                                {item.username}
-                                            </option>
-                                        ))
-                                    }
-                                </select>
-                            </ARSItem>
+                        <ARSItem>
+                            <p>Nhập vấn đề về sức khoẻ</p>
+                            <textarea 
+                                rows="10" 
+                                cols="50" 
+                                value={healthIssues} 
+                                onChange={(e) => setHealthIssues(e.target.value)} 
+                                disabled={!appointmentDate}
+                            ></textarea>
+                        </ARSItem>
 
-                            <ARSItem>
-                                <p>Chọn ngày - khung giờ muốn khám</p>
-                                <input type='text' value={appointmentDate} readOnly/>
-                                <AppointmentModal data={doctorActiveHour} onSubmit={handleSubmitActiveHour}>Chọn</AppointmentModal>
+                        <ARSItem>
+                            <button 
+                                type = "button"
+                                onClick={handleSubmitAppointment} 
+                            >
+                                TIẾP THEO
+                            </button>
+                        </ARSItem>
+                        {appointmentInfo && (
+                            <ARSItem className="hidden">
+                            <InsuranceModal ref={insuranceModalRef} data={appointmentInfo}>BHYT</InsuranceModal>
                             </ARSItem>
+                        )}
+                        
+                    </ARightSide>
 
-                            <ARSItem>
-                                <p>Nhập vấn đề về sức khoẻ </p>
-                                <textarea rows="10" cols="50" value={healthIssues} onChange={(e)=>{setHealthIssues(e.target.value)}}></textarea>
-                            </ARSItem>
-                            <ARSItem>
-                                <button onClick={handleSubmitAppointment}>TIẾP THEO</button>
-                            </ARSItem>
-
-                        </ARightSide>
 
 
                     </ALeftSide>

@@ -49,8 +49,6 @@ function Footer() {
                       </FooterContentWraperLower>
 
                     </FooterContentItems>
-                </FooterContentWrapper>
-                <FooterContentWrapper>
                     <FooterContentItems>
                         <FooterContentTitle>Đường dẫn nhanh</FooterContentTitle>
                         <FooterContent >Chuyên khoa</FooterContent>

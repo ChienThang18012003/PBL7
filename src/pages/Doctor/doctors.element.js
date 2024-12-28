@@ -41,6 +41,10 @@ export const DoctorsLeft = styled.div`
         display: flex;
     }
 `
+export const ImageContainer = styled.div` 
+    width: 100%;
+    height: 70%;
+`
 export const DoctorsRight = styled.div`
     width: 100%;
     display: grid;
@@ -63,7 +67,7 @@ export const DoctorsRight = styled.div`
     .image-background {
         background-color: #EFF6FF;
         width: 100%;
-        height: auto;
+        height: 100%;
         display: block;
         object-fit: cover;
     }

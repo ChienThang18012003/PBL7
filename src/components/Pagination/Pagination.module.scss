@@ -1,0 +1,36 @@
+.pagination {
+    height: 70px;
+    display: flex;
+    flex-shrink: 0; /* Chỉnh lại từ 'none' thành '0' */
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-radius: 2px;
+    justify-content: center; /* Thay đổi thành center để căn giữa các items */
+    align-items: center; /* Đảm bảo căn giữa các item theo chiều dọc */
+    gap: 20px;
+}
+
+.pagination button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    color: #005a5c;
+    background-color: transparent;
+    border-radius: 2px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    &:hover {
+        background-color: #eee;
+    }
+}
+
+.pagination button.active {
+    width: 30px;
+    height: 30px;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    background-color: #005a5c;
+    border-radius: 2px;
+}

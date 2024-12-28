@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {
     DocBookButton,
     DocHeader,
@@ -15,43 +15,43 @@ import {
     HeaderUnderline, RelatedDoctorItem,
     Underline
 } from "./docinfo.element";
-import {AppContext} from "../../context/AppContext";
+import {AppContext, useAppContext} from "../../context/AppContext";
 import {assets} from "../../assets/assets_fe/assets";
 import RelatedDoctors from "../../components/RelatedDoctors/RelatedDoctors";
 import useAccount from '../../hook/useAccount';
+import LoadingAnimation from '../../components/LoadingAnimation';
+import Image from '../../components/Image';
+import PageTitle from '../../components/PageTitle';
 
 const DocInfo = () => {
     const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID] = useAccount();
     const {docId} = useParams();
     const [docInfo, setDocInfo] = useState(null);
-    const {doctors} = useContext(AppContext);
+    const { setSharedData } = useAppContext();
     const [doctorBio, setDoctorBio] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchDoctor = async () => {
             const doctor = await getAccountByID(docId);
-            console.log("Doctor info: ",doctor);
             setDocInfo(doctor);
-            // Kiểm tra nếu doctor.bio tồn tại thì mới gọi splitText
             if (doctor && doctor.bio) {
             setDoctorBio(splitText(doctor.bio));
             }
         };
 
         fetchDoctor();
-    }, [docId, getAccountByID]);
+    }, [docId]);
 
     function splitText(text) {
-        // Tách văn bản theo tiêu đề của từng đoạn
-        const sections = text.split(/(?=GIỚI THIỆU|QUÁ TRÌNH CÔNG TÁC|QUÁ TRÌNH HỌC TẬP)/g);
+        const validText = text || '';
+        const sections = validText.split(/(?=GIỚI THIỆU|QUÁ TRÌNH CÔNG TÁC|QUÁ TRÌNH HỌC TẬP)/g);
         
-        // Khởi tạo đối tượng chứa các đoạn văn tách ra
         const result = {
             introduction: '',
             workExperience: '',
             education: ''
         };
     
-        // Lặp qua các đoạn và gán nội dung vào các phần tương ứng
         sections.forEach(section => {
             if (section.startsWith('GIỚI THIỆU')) {
                 result.introduction = section.replace('GIỚI THIỆU', '').trim();
@@ -64,10 +64,11 @@ const DocInfo = () => {
     
         return result;
     }
+    
 
     const renderBio = (content) => {
-        // Tách văn bản theo dấu "–"
-        const displayedContent = content.split('\n').map((exp, index) => {
+        // Ensure content is a string
+        const displayedContent = (content || '').split('\n').map((exp, index) => {
             return (
                 <p key={index} style={{ marginLeft: '20px' }}>
                     + {exp}
@@ -78,23 +79,36 @@ const DocInfo = () => {
         return displayedContent;
     };
     
+    
+    const handleBooking = () => {
+        setSharedData(docInfo);
+        navigate('/appointment');
+    }
+
+    if (loadingAccount || !docInfo) return (
+        <LoadingAnimation></LoadingAnimation>
+    )
 
 
     return docInfo && (
         <div>
+            <PageTitle>THÔNG TIN BÁC SĨ</PageTitle>
             <DocInfoLayout>
                 <DocInfoLeft>
-                    <img className='image-background' src={`data:image/jpeg;base64,${docInfo.profile_image}`} alt='pic'/>
+                    <Image className='image-background' src={docInfo?.profile_image} alt='pic'/>
                 </DocInfoLeft>
                 <DocInfoRight>
                     <DocName>
-                        {docInfo.username}
-                        <img className='w-5' src={assets.verified_icon} alt='icon'/>
+                        {docInfo?.username}
                     </DocName>
                     <DocSD>
-                        <p> {docInfo.speciality_id.name} </p>
+                    {docInfo?.speciality_id ? (
+                        <p>{docInfo?.speciality_id?.name || 'Chưa xác định'}</p>
+                    ) : (
+                        <p>Chưa xác định</p>
+                    )}
                     </DocSD>
-                    <DocBookButton>
+                    <DocBookButton onClick={handleBooking}>
                         Đặt lịch khám
                     </DocBookButton>
 
@@ -107,19 +121,21 @@ const DocInfo = () => {
                 <DoctorInformationItem>
                     <DocHeader>GIỚI THIỆU</DocHeader>
                     <Underline/>
-                    <p>{doctorBio.introduction}</p>
-
+                    <p>{doctorBio.introduction || 'Chưa có thông tin'}</p>
                 </DoctorInformationItem>
+
                 <DoctorInformationItem>
                     <DocHeader>QUÁ TRÌNH CÔNG TÁC</DocHeader>
                     <Underline/>
-                    <p>{renderBio(doctorBio.workExperience)}</p>
+                    <p>{renderBio(doctorBio.workExperience || '')}</p>
                 </DoctorInformationItem>
+
                 <DoctorInformationItem>
                     <DocHeader>QUÁ TRÌNH HỌC TẬP</DocHeader>
                     <Underline/>
-                    <p>{renderBio(doctorBio.education)}</p>
+                    <p>{renderBio(doctorBio.education || '')}</p>
                 </DoctorInformationItem>
+
 
             </DoctorInformation>
 
@@ -130,7 +146,7 @@ const DocInfo = () => {
 
                 {/*{-----------LISTING RELATED DOCTORS-------------}*/}
                 <RelatedDoctorItem>
-                    <RelatedDoctors docId={docId} speciality={docInfo.speciality_id.name}/>
+                    <RelatedDoctors docId={docId} speciality={docInfo?.speciality_id?.name}/>
                 </RelatedDoctorItem>
 
             </DoctorRelate>

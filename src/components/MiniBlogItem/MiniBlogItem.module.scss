@@ -1,38 +1,44 @@
-import styled from 'styled-components';
-
-export const BlogWrapper = styled.div`
+.blog-wrapper {
     height: 120px;
     width: 100%;
+    display: block;
     background-color: #fff;
     margin-top: 20px;
     display: flex;
     cursor: pointer;
-    justify-content: space-between;
-`;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.5s ease; 
+    &:hover {
+        transform: translateY(-10px); 
+    }
+}
 
-export const BlogContent = styled.div`
-    width: 290px;
+.blog-content {
+    margin-left: 10px;
+    width: calc(100% - 190px);
     height: 100%;
-`;
+}
 
-export const BlogImage = styled.img`
+.blog-image {
     height: 100%;
     width: 180px;
-`;
+}
 
-export const BlogTitle = styled.h3`
+.blog-title {
     font-weight: 500;
     font-size: 1.6rem;
     margin: 10px;
     line-height: 2rem;
     height: 4rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-`;
+}
 
-export const BlogDescription = styled.p`
+.blog-description {
     font-weight: 500;
     font-size: 1.4rem;
     color: #b4b4b4;
@@ -40,7 +46,8 @@ export const BlogDescription = styled.p`
     line-height: 1.8rem;
     height: 5.4rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-`;
+}

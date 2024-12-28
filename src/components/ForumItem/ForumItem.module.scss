@@ -1,17 +1,15 @@
-import styled from 'styled-components';
-
-export const Container = styled.div`
-    width: 1180px;
+.container {
+    width: 100%;
     display: block;
     overflow: auto;
     position: relative;
+}
 
-    & + & {
-        margin-top: 10px;
-    }
-`;
+.container + .container {
+    margin-top: 10px;
+}
 
-export const AnswerWrapper = styled.div`
+.answer-wrapper {
     width: 100%;
     height: 270px;
     background-color: #e3e5e4;
@@ -20,11 +18,11 @@ export const AnswerWrapper = styled.div`
     overflow: auto;
     top: -10px;
     z-index: 2;
-`;
+}
 
-export const Wrapper = styled.div`
+.wrapper {
     width: 100%;
-    height: 130px;
+    height: 170px;
     background-color: #fff;
     position: relative;
     border-radius: 10px;
@@ -32,194 +30,201 @@ export const Wrapper = styled.div`
     display: flex;
     overflow: hidden;
     z-index: 10;
-`;
+    gap: 10px;
+}
 
-export const Link = styled.span`
+.link {
     font-size: 1.4rem;
     font-weight: 500;
     color: #2197e3;
-    margin-right: 20px;
+    padding-right: 20px;
     text-decoration: underline;
     cursor: pointer;
-`;
+}
 
-export const UserAvatarSection = styled.div`
+.user-avatar-section {
     height: 100%;
     width: 80px;
     display: flex;
     justify-content: center;
-`;
+}
 
-export const UserAvatar = styled.img`
+.user-avatar {
     margin-top: 10px;
     height: 60px;
     width: 60px;
     border-radius: 50%;
-`;
+}
 
-export const QuestionSection = styled.div`
-    width: 1100px;
+.question-section {
+    width: 95%;
     height: 100%;
     flex-direction: column;
     display: flex;
-`;
+}
 
-export const QuestionTitleWrapper = styled.div`
+.question-title-wrapper {
     margin-top: 10px;
+    margin-right: 10px;
     width: 100%;
     height: 15%;
     display: flex;
     align-items: center;
-`;
+}
 
-export const QuestionTitle = styled.h4`
+.question-title {
     margin: 0;
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 2rem;
     height: 2rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     flex: 1;
-`;
+}
 
-export const CommentIcon = styled.span`
+.comment-icon {
     font-size: 1.6rem;
     font-weight: 500;
     color: #757575;
     margin: 10px;
-`;
+}
 
-export const QuestionCount = styled.span`
-    margin-right: 20px;
+.question-count {
+    padding-right: 20px;
     font-size: 1.6rem;
     font-weight: 500;
     color: #757575;
-`;
+}
 
-export const QuestionInfoWrapper = styled.div`
+.question-info-wrapper {
     width: 100%;
-    height: 15%;
+    overflow: visible;
     display: flex;
     align-items: center;
-`;
+}
 
-export const PostBy = styled.span`
+.post-by {
     font-size: 1.4rem;
     font-weight: 500;
     color: #757575;
-`;
+}
 
-export const When = styled.span`
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #757575;
-    margin-left: 5px;
-`;
-
-export const AskedTime = styled.span`
+.when {
     font-size: 1.4rem;
     font-weight: 500;
     color: #757575;
     margin-left: 5px;
-`;
+}
 
-export const QuestionAsker = styled.span`
+.asked-time {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #757575;
+    margin-left: 5px;
+}
+
+.question-asker {
     font-size: 1.4rem;
     font-weight: 700;
     color: #2197e3;
     margin-left: 5px;
-`;
+}
 
-export const QuestionWrapper = styled.div`
+.question-wrapper {
     width: 100%;
     height: 30%;
-    display: flex;
-`;
 
-export const Question = styled.p`
+    display: flex;
+}
+
+.question {
     font-weight: 500;
     font-size: 1.4rem;
-    width: 1080px;
+    width: 100%;
     color: #b4b4b4;
     margin: 10px 0px;
     line-height: 1.8rem;
     height: 3.6rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-`;
+}
 
-export const QuestionLinkWrapper = styled.div`
+.question-link-wrapper {
     width: 100%;
     height: 20%;
     display: flex;
     margin-top: 10px;
     align-items: center;
     justify-content: flex-end;
-`;
+    margin-bottom: 5px;
+}
 
-export const DoctorInfoWrapper = styled.div`
+.doctor-info-wrapper {
     height: 180px;
     width: 100%;
     display: flex;
-`;
+}
 
-export const DoctorImageWrapper = styled.div`
+.doctor-image-wrapper {
     width: 200px;
     height: 180px;
-`;
+}
 
-export const DoctorImage = styled.img`
+.doctor-image {
     width: 140px;
     height: 140px;
     margin-top: 30px;
     margin-left: 20px;
     border-radius: 50%;
-`;
+}
 
-export const DoctorInfo = styled.div`
+.doctor-info {
     width: 100%;
     height: 140px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     margin-top: 40px;
-`;
+}
 
-export const DoctorName = styled.h4`
+.doctor-name {
     margin: 0;
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 2rem;
     height: 2rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     flex: 1;
-`;
+}
 
-export const DoctorIntroduction = styled.p`
+.doctor-introduction {
     font-weight: 500;
     font-size: 1.4rem;
     width: 100%;
     color: #b4b4b4;
     margin: 10px 0px;
     line-height: 1.8rem;
-`;
+}
 
-export const AnswerSection = styled.div`
+.answer-section {
     width: 100%;
     height: 60px;
     display: flex;
     justify-content: center;
-`;
+}
 
-export const DoctorAnswer = styled.p`
+.doctor-answer {
     font-weight: 500;
     font-size: 1.4rem;
     width: 98%;
@@ -228,23 +233,67 @@ export const DoctorAnswer = styled.p`
     line-height: 1.8rem;
     height: 5.4rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-`;
+}
 
-export const ViewMoreSection = styled.div`
+.view-more-section {
     width: 100%;
     height: 30px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-`;
+}
 
-export const ViewMore = styled.span`
+.view-more {
     text-decoration: underline;
     cursor: pointer;
     font-size: 1.4rem;
     font-weight: 500;
     margin-right: 20px;
-`;
+}
+
+.hashtag-button{
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 2px 5px;
+    border: none;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.hashtag-icon{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-right: 2px;
+}
+
+// tablet (width>=740px) and (width<1024px)
+@media only screen and (min-width: 740px) and (max-width: 1300px){
+    .user-avatar{
+        margin-left: 10px;
+    }
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+
+    .user-avatar{
+        margin-left: 10px;
+    }
+
+    .when{
+        display: none;
+    }
+
+    .asked-time{
+        display: none;
+    }
+
+    .question-link-wrapper{
+        justify-content: flex-start;
+    }
+}

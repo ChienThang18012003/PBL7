@@ -10,9 +10,11 @@ export const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  //position: fixed;
+  position: fixed;
+  width: 100%;
   top: 0;
-  z-index: 999;
+  left: 0;
+  z-index: 1002;
 `;
 
 export const NavbarContainer = styled(Container)`
@@ -38,16 +40,18 @@ export const MobileIcon = styled.div`
 `;
 
 export const NavLogo = styled.div`
+
     justify-self: flex-start;
     cursor: pointer;
     display: flex;
     align-items: center;
-    width: 20%;
-    height: 60%;
+    width: 200px;
+    height: 50px;
+    margin-top: 20px;
 
     .logo-image {
-        width: 100%;
-        height: 100%;
+        width: 200px;
+        height: 50px;
       object-fit: cover;
     }
 `;
@@ -59,9 +63,10 @@ export const NavMenu = styled.ul`
   text-align: center;
   justify-content: space-between;
   position: relative;
+  z-index: 5000;
 
   .Button-container {
-  background-color: #000;
+  background-color: #f0f1f2;
   position: absolute;
   top: 110%;
   right: 0;
@@ -71,8 +76,8 @@ export const NavMenu = styled.ul`
   justify-content: space-around;
   align-content: space-between;
   align-items: center;
-  height: 150px;
-  z-index: 50;
+  height: 120px;
+  z-index: 9999;
 
   &::after{
     content: '';
@@ -98,6 +103,7 @@ export const NavMenu = styled.ul`
    color: #fff;
    margin-right: 10px;
    margin-top: 20px;
+   z-index: 9999;
 }
 
 .profile_image {
@@ -106,23 +112,26 @@ export const NavMenu = styled.ul`
   margin-top: 20px;
   object-fit: cover;
   border-radius: 50%;
-  cursor: pointer; /* Thêm để hiển thị biểu tượng bàn tay */
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .profile-buttons {
   width: 100%;
-  height: 50px;
+  height: 40px;
   border: none;
-  background-color: #fff;
+  background-color: azure;
   text-align: left;
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
   padding-left: 10px;
-  z-index: 51;
+  z-index: 9999;
+  cursor: pointer;
 
   &:hover {
     background-color: #b4b4b4;
+    color: #fff;
   }
 }
 
@@ -134,6 +143,7 @@ export const NavMenu = styled.ul`
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  z-index: 1001;
 }
 
 .profile-options button:hover {
@@ -146,13 +156,14 @@ export const NavMenu = styled.ul`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 120px;
-    left: ${({ click }) => (click ? 0 : '-100%')};
+    height: calc(100vh - 130px);
+    position: fixed;
+    top: 130px;
+    left: ${({ click }) => (click ? '-10%' : '-100%')};
     opacity: 1;
     transition: all 0.5s ease;
-    background: #00A6A9;
+    background: azure;
+    justify-content: space-evenly;
   }
 `;
 
@@ -236,6 +247,7 @@ export const NavBtnLink2 = styled.div`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  margin-top: 10px;
   padding: 8px 16px;
   height: 100%;
   width: 100%;
@@ -257,6 +269,13 @@ export const NavLinks2 = styled(Link)`
     padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 1.5rem;
+    z-index: 1002;
+
+    .active {
+    background-color: #00A6A9;
+    color: white;
+    transition: all 0.3s ease;
+    }
 
     &:hover {
         color: #fff;
@@ -266,7 +285,7 @@ export const NavLinks2 = styled(Link)`
 
     @media screen and (max-width: 960px) {
         text-align: center;
-        padding: 2rem;
+        padding: 1rem;
         width: 100%;
         display: table;
 
@@ -293,7 +312,11 @@ export const Nav2 = styled.nav`
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: sticky;
+  position: fixed;
+  width: 100%;
+  top: 130px;
+  left: 0;
+  z-index: 1000;
 `;
 
 export const NavItem2 = styled.li`
@@ -302,9 +325,14 @@ export const NavItem2 = styled.li`
   display: inline-block;
   position: relative;
   margin: 0 20px;
+  z-index: 1001;
   
 
-
+  .active {
+    background-color: #00A6A9;
+    color: white;
+    transition: all 0.3s ease;
+  }
 
   .button {
     display: inline-block;

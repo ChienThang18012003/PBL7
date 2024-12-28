@@ -16,12 +16,14 @@ import {
 } from "@tanstack/react-table";
 import useSpeciality from '../../hook/useSpeciality';
 import useDebounce from '../../hook/useDebounce';
+import LoadingAnimation from '../../components/LoadingAnimation';
+import Image from '../../components/Image';
 
 const Specialities = () => {
     const navigate = useNavigate();
     const {speciality} = useParams();
     const {specialityData} = useContext(AppContext);
-    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality] = useSpeciality();
     const [filterSpec, setFilterSpec] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -56,6 +58,18 @@ const Specialities = () => {
 
     useEffect(() => {
         applyFilter();
+        const fetchSpecialitiesPeriodically = async () => {
+            const specialities = await getAllSpeciality();
+            if (specialities) setFilterSpec(specialities);
+        };
+
+        const intervalId = setInterval(() => {
+            fetchSpecialitiesPeriodically();
+        }, 5000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
     }, [specialityHook, speciality]);
 
     const table = useReactTable({
@@ -82,6 +96,11 @@ const Specialities = () => {
         return window.btoa(binary);
     }
 
+
+    if (specialityLoading) return (
+        <LoadingAnimation></LoadingAnimation>
+    )
+
     return (
         <SpecialitiesLayout>
             <SpecialitiesContainer>
@@ -96,10 +115,10 @@ const Specialities = () => {
                 <SpecialitiesContent >
                     {
                         paginatedData.map((item, index) => (
-                            <div onClick={() => navigate(`/speciality-info/${item._id}`)} className='card-spec' key={index}>
+                            <div onClick={() => navigate(`/speciality-info/${item?._id}`)} className='card-spec' key={index}>
                                 <div className='content'>
-                                    <img className='speciality-img' src={`data:image/jpeg;base64,${arrayBufferToBase64(item.speciality_image.data)}`} alt={item.speciality}/>
-                                    <p className='name-style'>{item.name}</p>
+                                    <div className='image-wrapper'><Image className='speciality-img' src={item?.speciality_image} alt={item?.speciality}/></div>
+                                    <p className='name-style'>{item?.name}</p>
                                 </div>
                             </div>
                         ))

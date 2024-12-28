@@ -1,0 +1,174 @@
+.search-section {
+    background-color: #00d3d6;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow:visible;
+}
+
+.search-section-title-wrapper {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-section-title {
+    color: var(--white);
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.search-section-options-wrapper {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    overflow: visible;
+}
+
+.search-section_faculty-wrapper {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.search-section_option-title {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.faculty {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.search-section_sort-wrapper {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.sort {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.search-section_bar-wrapper {
+    width: 56%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.search-bar {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.search-bar-textbox {
+    height: 100%;
+    border: 0px;
+    flex: 1;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}
+
+.search-bar-button {
+    border: 0px;
+    height: 100%;
+    width: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+        background-color: #eee;
+    }
+}
+
+.pagination {
+    width: 80%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-wrapper {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.no-doctor{
+    margin-left: 150px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+// tablet (width>=740px) and (width<1024px)
+@media only screen and (min-width: 740px) and (max-width: 1024px){
+    .blog-items{
+        width: 90%;
+        gap: 10px;
+    }
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+    .search-section-options-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .search-section_bar-wrapper {
+        width: 100%;
+        order: 1;
+    }
+
+    .search-section_sort-wrapper {
+        width: 45%;
+        order: 2;
+    }
+
+    .search-section_faculty-wrapper {
+        width: 45%;
+        order: 3;
+    }
+}

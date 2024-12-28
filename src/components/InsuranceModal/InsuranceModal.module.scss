@@ -17,6 +17,7 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
+    z-index: 2000;
 }
 
 .overlay {
@@ -36,6 +37,7 @@ body.active-modal {
     justify-content: center;
     background-image: linear-gradient(180deg, #00A6A9, #0c507c);
     border-radius: 20px;
+    z-index: 2001;
 }
 
 .close-modal {
@@ -58,9 +60,11 @@ body.active-modal {
     font-size: 1.4rem;
     font-weight: 500;
     color: #fff;
+    margin-left: 15px;
 }
 
 .field-input{
+    margin: 15px;
     width: 100%;
     height: 36px;
     border-radius: 10px;
@@ -78,6 +82,20 @@ body.active-modal {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-content: space-between;
+}
+
+.buttonModal{
+    display: none;
+}
+
+.action-buttons{
+    width: 90%;
+    height: 50px;
+    display:flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    align-items: center;
 }

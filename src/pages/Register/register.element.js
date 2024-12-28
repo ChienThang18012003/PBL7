@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const RLayout = styled.div`
     width: 100vw;
-    height: 100vh;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -10,7 +10,7 @@ export const RLayout = styled.div`
 `
 
 export const RHeader = styled.div`
-    flex: 1;
+    height: 200px;
     position: relative;
 `
 export const Deco = styled.div`
@@ -35,20 +35,22 @@ export const RSpace = styled.div`
     display: flex;
 `
 export const RBody = styled.div`
-    flex: 3;
     display: flex;
     flex-direction: column;
-    margin-top: 6rem;
 `
 
 export const RContent = styled.div`
     display: flex;
-    flex: 3;
+    width: 100%;
+    @media (max-width: 1024px) {
+       flex-direction: column;
+       align-items: center;
+    }
+    
 `
 export const RButton = styled.div`
     margin-top: 3rem;
     display: flex;
-    flex: 3;
     justify-content: center;
     button{
         background-color: #00D3D6;
@@ -64,7 +66,7 @@ export const RButton = styled.div`
 `
 
 export const RBodyL = styled.div`
-    flex: 3;
+    width: 40%;
     padding: 20px;
 
     input {
@@ -73,16 +75,26 @@ export const RBodyL = styled.div`
         border: 1px solid gainsboro;
         border-radius: 5px;
     }
+
+    @media (max-width: 1024px) {
+       padding-bottom: 0px;
+       width: 70%;
+    }
+
+    @media (max-width: 740px) {
+       padding-bottom: 0px;
+       width: 90%;
+    }
 `
 export const RBodyLItem = styled.div`
-    margin: 30px 50px 0 100px;
+    margin: 30px;
     font-size: 20px;
     //margin-left: 200px;
 
 
 `
 export const RBodyR = styled.div`
-    flex: 3;
+    width: 40%;
     padding: 20px;
 
     input, select {
@@ -92,10 +104,24 @@ export const RBodyR = styled.div`
         border-radius: 5px;
     }
 
+    @media (max-width: 1024px) {
+       padding-top: 0px;
+       width: 70%;
+    }
+
+    @media (max-width: 740px) {
+       padding-top: 0px;
+       width: 90%;
+    }
+
 `
 export const RBodyRItem = styled.div`
-    margin: 30px 100px 0 50px;
+    margin: 30px;
     font-size: 20px;
+
+    @media (max-width: 1024px) {
+       margin-top: 0px;
+    }
 
 `
 

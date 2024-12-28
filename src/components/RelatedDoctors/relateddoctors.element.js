@@ -76,8 +76,8 @@ export const RelatedCard = styled.div`
     }
 
     .name-doc {
-        color: #111827; /
-        font-size: 3rem; 
+        color: #111827; 
+        font-size: 1.8rem; /* Small text size */
     }
         
     .speciality-doc {
@@ -97,4 +97,5 @@ export const ImageContainer = styled.div`
         width: 100%;
         height: auto;
     }
+        
 `

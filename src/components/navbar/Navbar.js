@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button as Button2} from '../../globalStyles';
+import { useLocation } from 'react-router-dom';
 import {
     MobileIcon,
     Nav, Nav2,
@@ -20,14 +21,17 @@ import {useNavigate} from "react-router-dom";
 import {assets} from "../../assets/assets_fe/assets";
 import Button from "../Button";
 import useAccount from "../../hook/useAccount";
+import Image from "../Image";
 
 
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
+    const location = useLocation();
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [isClickedOn, setIsClickedOn] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
     const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType] = useAccount();
 
@@ -45,47 +49,50 @@ const Navbar = () => {
         }
     };
 
+    useEffect(()=>{
+        if (window.innerWidth <= 960) {
+            setIsMobile(true);
+        } else {
+            setIsMobile(false);
+        }
+    },[window.innerWidth])
     useEffect(() => {
         const fetchAccount = async() => {
             let item = localStorage.getItem('isLoginSuccess');
 
-            // Nếu item tồn tại, chuyển đổi từ chuỗi JSON thành đối tượng
             if (item) {
                 let obj = JSON.parse(item);
                 setCurrentUser(obj);
-                console.log(obj.email);
-                const AccountInfo = await getAccountByEmail(obj.email);
-                console.log("AccountInfo: " ,AccountInfo);
-                setUserInfo(AccountInfo);
+                if (obj?.email){
+                    const AccountInfo = await getAccountByEmail(obj?.email);
+                    setUserInfo(AccountInfo);
+                }
+                else {
+                    navigate('/login');
+                    return;
+                }
+                
             }
         }
         showButton();
         setIsLoggedin(isObjectInLocalStorage('isLoginSuccess'));
-        console.log(isObjectInLocalStorage('isLoginSuccess'));
         fetchAccount();
     }, []);
-
-    useEffect(() => {
-        console.log('Updated userInfo:', userInfo);
-    }, [userInfo]);
 
     window.addEventListener('resize', showButton);
 
     const isObjectInLocalStorage = (key) => {
-        // Lấy dữ liệu từ localStorage
         const storedData = localStorage.getItem(key);
     
-        // Kiểm tra nếu dữ liệu không tồn tại
         if (storedData === null) {
             return false;
         }
     
-        // Nếu có dữ liệu, cố gắng parse thành object (nếu có thể)
         try {
             const parsedData = JSON.parse(storedData);
-            return parsedData !== null; // Kiểm tra nếu dữ liệu là object hợp lệ
+            return parsedData !== null;
         } catch (error) {
-            return false; // Nếu không parse được, dữ liệu không phải object hợp lệ
+            return false;
         }
     };
 
@@ -95,7 +102,7 @@ const Navbar = () => {
                 <Nav>
                     <NavbarContainer>
                         <NavLogo>
-                            <img src={assets.MedicalLogo} alt="Medical Logo" className="logo-image"/>
+                            <img src={assets.MedicalLogo} alt="Medical Logo" className="logo-image" onClick={()=>{navigate('/')}}/>
                         </NavLogo>
                         <MobileIcon onClick={handleClick}>
                             {click ? <FaTimes/> : <FaBars/>}
@@ -104,7 +111,7 @@ const Navbar = () => {
                         <GroupButtonLink>
                             <div>
                                 <NavMenu>
-                                    {/* Hiển thị nếu đã đăng nhập */}
+                                    
                                     {!isLoggedin ? (
                                         <>
                                             <NavItemBtn>
@@ -138,15 +145,28 @@ const Navbar = () => {
                                     ) : (
                                         <>
                                               <div className="user-email">
-                                                <span>{userInfo.email}</span>
+                                                <span>{userInfo?.email}</span>
                                               </div>
-                                              <img className="profile_image" src={`data:image/jpeg;base64,${userInfo.profile_image}`} alt="Login status" onClick={()=>{setIsClickedOn(!isClickedOn)}}/>
+                                              <Image className="profile_image" src={userInfo?.profile_image} alt="Login status" onClick={()=>{setIsClickedOn(!isClickedOn)}}/>
                                               
                                               
                                               <div className="Button-container">
-                                                  <button className="profile-buttons" to='/login' onClick={()=>{localStorage.removeItem('isLoginSuccess'); navigate('/login');}}>Đăng xuất</button>
-                                                  <button className="profile-buttons">Quản lý</button>
                                                   <button className="profile-buttons" to='/profile' onClick={()=>{navigate('/profile')}}>Trang cá nhân</button>
+                                                  <button className="profile-buttons" onClick={() => window.location.href = "https://admin-xb5z.onrender.com/"}>Quản lý</button>
+                                                  <button
+                                                        className="profile-buttons"
+                                                        onClick={() => {
+                                                            localStorage.removeItem('isLoginSuccess');
+                                                            if (window.location.pathname === '/profile') {
+                                                                navigate('/login', { replace: true });
+                                                            } else {
+                                                                navigate('/login');
+                                                            }
+                                                            window.location.reload();
+                                                        }}
+                                                    >
+                                                        Đăng xuất
+                                                    </button>
                                               </div>
                                         </>  
                                         
@@ -162,52 +182,94 @@ const Navbar = () => {
 
                 <Nav2>
                     <NavbarContainer2>
-                        <NavMenu ocClick={handleClick} click={click}>
+                        <NavMenu onClick={handleClick} click={click}>
+                            {
+                                isMobile && !isLoggedin && (
+                                    <>
+                                        <NavItem2>
+                                            <NavLinks2 to={'/sign-up'} className={window.location.pathname === '/sign-up' ? 'active' : ''}>
+                                                ĐĂNG KÝ
+                                            </NavLinks2>
+                                        </NavItem2>
+                                        <NavItem2>
+                                            <NavLinks2 to={'/login'} className={window.location.pathname === '/login' ? 'active' : ''}>
+                                                ĐĂNG NHẬP
+                                            </NavLinks2>
+                                        </NavItem2>
+                                    </>
+                                )
+                            }
+
+                            {
+                                isMobile && isLoggedin && (
+                                    <>
+                                        <NavItem2>
+                                            <NavLinks2 to={'/profile'} className={window.location.pathname === '/profile' ? 'active' : ''}>
+                                                TRANG CÁ NHÂN
+                                            </NavLinks2>
+                                        </NavItem2>
+                                        <NavItem2>
+                                            <NavLinks2 onClick={() => window.location.href = "https://admin-xb5z.onrender.com/"}>
+                                                QUẢN LÝ
+                                            </NavLinks2>
+                                        </NavItem2>
+                                        <NavItem2>
+                                            <NavLinks2 onClick={() => {
+                                                            localStorage.removeItem('isLoginSuccess');
+                                                            if (window.location.pathname === '/profile') {
+                                                                navigate('/login', { replace: true });
+                                                            } else {
+                                                                navigate('/login');
+                                                            }
+                                                            window.location.reload();
+                                                        }}>
+                                                ĐĂNG XUẤT
+                                            </NavLinks2>
+                                        </NavItem2>
+                                    </>
+                                )
+                            }
+
                             <NavItem2>
-                                <NavLinks2 to={'/'}>
+                                <NavLinks2 to={'/'} className={window.location.pathname === '/' ? 'active' : ''}>
                                     GIỚI THIỆU
                                 </NavLinks2>
                             </NavItem2>
 
-                            <NavItem2>
-                                <NavLinks2 to={'/specialities'}>
+                            <NavItem2 >
+                                <NavLinks2 to={'/specialities'} className={window.location.pathname === '/specialities' ? 'active' : ''}>
                                     CHUYÊN KHOA
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to={'/doctors'}>
+                                <NavLinks2 to={'/doctors'} className={window.location.pathname === '/doctors' ? 'active' : ''}>
                                     CHUYÊN GIA - BÁC SĨ
                                 </NavLinks2>
                             </NavItem2>
 
-                            <NavItem2>
-                                <NavLinks2 to='/appointment' >
+                            <NavItem2 >
+                                <NavLinks2 to='/appointment' className={window.location.pathname === '/appointment' ? 'active' : ''}>
                                     ĐẶT LỊCH KHÁM
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to='/blog'>
+                                <NavLinks2 to='/blog' className={window.location.pathname === '/blog' ? 'active' : ''}>
                                     TIN TỨC
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to='/forum' >
+                                <NavLinks2 to='/forum' className={window.location.pathname === '/forum' ? 'active' : ''}>
                                     HỎI ĐÁP
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <div className="search-container">
-                                    <form action="/search" method="get">
-                                        <input className="search" id="searchleft" type="search" name="q"
-                                               placeholder="Search"/>
-                                        <label className="button searchbutton" htmlFor="searchleft"><span
-                                            className="mglass">&#9906;</span></label>
-                                    </form>
-                                </div>
+                                <NavLinks2 to='/create-blog' className={window.location.pathname === '/create-blog' ? 'active' : ''}>
+                                    TẠO BLOG
+                                </NavLinks2>
                             </NavItem2>
                         </NavMenu>
                     </NavbarContainer2>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageTitleContainer, PageTitleContent } from './pagetitle.element'; // Adjust the path accordingly
+import { PageTitleContainer, PageTitleContent } from './pagetitle.element';
 
 function PageTitle({ children }) {
     return (

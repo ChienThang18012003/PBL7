@@ -1,14 +1,17 @@
-import {createContext} from "react";
+import {createContext, useState, useContext} from "react";
 import {doctors, specialityData} from '../assets/assets_fe/assets.js'
 
 export const AppContext = createContext()
 
 const AppContextProvider = (props) => {
     const currencySymbol = '$';
+    const [sharedData, setSharedData] = useState(null);
     const value = {
         doctors,
         currencySymbol,
-        specialityData
+        specialityData,
+        sharedData, 
+        setSharedData,
     }
     return (
         <AppContext.Provider value={value}>
@@ -18,3 +21,5 @@ const AppContextProvider = (props) => {
 }
 
 export default AppContextProvider;
+
+export const useAppContext = () => useContext(AppContext);

@@ -3,7 +3,7 @@ import {Container} from "../../globalStyles";
 
 
 export const BodyPic = styled.div`
-    width: 100vw; 
+    width: 100%; 
     height: 50vh; 
    .pic{
        width: 100%;
@@ -13,32 +13,40 @@ export const BodyPic = styled.div`
 `;
 
 export const Info = styled.div`
+    width: 100%;
     background: #F0F2F1;
-    height: 400px;
+    min-height: 400px;
     display: flex;
-    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
     align-items: center;
+    overflow: visible;
+    border: 20px;
 `
 
-export const InfoContainer = styled(Container)`
+export const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
-  height: 80px;
+  align-items: center;
+  overflow: visible;
+  width: 90%;
 
-  ${Container}
 `;
 
 export const InfoSection = styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: center;
+    overflow: visible;
+    flex-wrap: wrap;
+    gap: 10px;
 `;
 
 export const InfoItem = styled.div`
   color: black;
   font-size: 22px;
-  margin: 10px; /* Adds space around each item */
   //padding: 10px; /* Adds space inside each item */
   width: 300px;
   height: 300px;
@@ -68,39 +76,55 @@ export const InfoPic = styled.div`
 `;
 
 export const News = styled.div`
-  background: #F0F2F1;
-  height: 700px;
+  background: #F0F1F2;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  overflow: visible;
   display: flex;
-  
+  width: 100%;
   flex-direction: column;
+  align-items: center;
 `;
 export const NewsHeader = styled.p`
   color: #008285;
-  margin-left: 130px;
+  font-size: 1.8rem;
   
   .lower-header{
     color: #B4B4B4;
-    font-size: 12px;
+    font-size: 1.6rem;
     margin-top: 10px;
   }
+`;
+
+export const NewsHeaderWrapper = styled.div`
+  background-color: #F0F1F2;
+  width: 80%;
 `;
 
 export const NewsSection = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 130px;
+    width: 80%;
+    flex-wrap: wrap;
 
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
 `;
 
 export const NewItem1 = styled.div`
   color: black;
   font-size: 22px;
-  width: 600px;
+  width: 49%;
   margin-top: 15px;
   height: 550px;
   background: #fff;
-  flex: 2;
+  cursor: pointer;
+  transition: all 0.5s ease; 
+    &:hover {
+        transform: translateY(-10px); 
+    }
   p{
     color: #B4B4B4;
     font-size: 15px;
@@ -109,16 +133,33 @@ export const NewItem1 = styled.div`
     color: black;
     font-size: 20px;
     margin-bottom: 5px;
+    margin-left: 10px;
+  }
+  .content1{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #b4b4b4;
+    margin: 10px;
+    line-height: 1.8rem;
+    height: 3.6rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
   }
 `;
 
 export const NewPicItem1 = styled.div`
-  width: 600px;
+  width: 100%;
   height: 400px;
   .pic{
     width: 100%;
     height: 100%;
-    object-fit: cover;
   }
 `;
 
@@ -126,11 +167,13 @@ export const NewPicItem1 = styled.div`
 export const NewItem2 = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 3;
-  width: 200px;
-  margin: 16px;
+  width: 49%;
+  margin-top: 16px;
+  margin-bottom: 16px;
   justify-content: space-between;
- 
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const NewPicAndContent = styled.div`
@@ -156,11 +199,21 @@ export const NewsTitleAndContent = styled.div`
  
   .title{
     color: #2197E3;
+    font-size: 1.6rem;
   }
   .content{
-    color: #C7C7C7;
-    font-size: 15px;
-    margin-top: 5px;
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #b4b4b4;
+    margin: 10px;
+    line-height: 1.8rem;
+    height: 5.4rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow-wrap: break-word;
   }
 `;
 export const NewsButtonContainer = styled.div`

@@ -1,31 +1,36 @@
-import styled from 'styled-components';
-
-export const BlogWrapper = styled.a`
+.blog-wrapper {
     height: 420px;
     width: 49%;
     display: block;
     background-color: #fff;
     cursor: pointer;
-`;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.5s ease; 
+    &:hover {
+        transform: translateY(-10px); 
+    }
+}
 
-export const BlogImage = styled.img`
-    height: 278px;
+.blog-image {
+    height: 70%;
     width: 100%;
-`;
+}
 
-export const BlogTitle = styled.h4`
+.blog-title {
     font-weight: 500;
     font-size: 1.6rem;
     margin: 10px;
     line-height: 2rem;
     height: 4rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-`;
+}
 
-export const BlogDescription = styled.h4`
+.blog-description {
     font-weight: 500;
     font-size: 1.4rem;
     color: #b4b4b4;
@@ -33,7 +38,16 @@ export const BlogDescription = styled.h4`
     line-height: 1.8rem;
     height: 3.6rem;
     overflow: hidden;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-`;
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+    .blog-wrapper{
+        width: 100%;
+        height: 480px;
+    }
+}

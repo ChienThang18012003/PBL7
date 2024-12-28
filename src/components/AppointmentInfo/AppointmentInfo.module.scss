@@ -1,12 +1,10 @@
 .wrapper{
     width: 350px;
-    height: 400px;
+    overflow: visible;
     background-color: #1691E2;
     margin-top: 20px ;
     text-decoration: none;
-    flex-grow: 1; /* Cho phép các phần tử con mở rộng */
-    flex-shrink: 0; /* Không thu nhỏ */
-    flex-basis: auto; /* Duy trì chiều cao tự nhiên của phần tử */
+
 }
 
 .appointment-title-wrapper{
@@ -91,7 +89,7 @@
 }
 
 .cancel-button{
-    width: 80px;
+    width: 60px;
     height: 40px;
     border: none;
     background-color: transparent;
@@ -105,4 +103,10 @@
     font-size: 1.4rem;
     font-weight: 500;
     color: #fff;
+}
+
+.buttons-container {
+    display: flex;
+    height: 40px;
+    overflow: visible;
 }

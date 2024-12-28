@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomePic from "../../assets/assets_fe/home.webp"
 import {
     BodyPic,
@@ -8,11 +8,57 @@ import {
     InfoPic,
     InfoSection, NewButton, NewItem1, NewItem2, NewPicAndContent, NewPicItem1, NewPicItem2,
     News, NewsButtonContainer,
-    NewsHeader, NewsSection, NewsTitleAndContent
+    NewsHeader, NewsSection, NewsTitleAndContent, NewsHeaderWrapper
 } from "./home.element";
 import {assets} from "../../assets/assets_fe/assets";
+import {useNavigate} from "react-router-dom";
+import useArticles from "../../hook/useArticles";
+import MiniBlogItem from "../../components/MiniBlogItem";
+import LoadingAnimation from "../../components/LoadingAnimation";
+import Image from "../../components/Image";
+
 
 const Home = () => {
+    const [
+        articlesHook,
+        firstArticle,
+        fourArticles,
+        loading,
+        getArticlesByDoctor,
+        getArticlesBySpecialty,
+        getArticlesByID,
+        addComment,
+        addArticle,
+        getFiveLatestArticles,
+        getFourLatestArticles,
+        searchArticle,
+        getAllArticleByDoctor,
+        softDeleteArticle,
+        permaDeleteArticle,
+        restoreArticle,
+        updateArticle,
+        getAllArticles
+    ] = useArticles();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchArticlesPeriodically = async () => {
+            const articles = await getAllArticles();
+        };
+
+        const intervalId = setInterval(() => {
+            fetchArticlesPeriodically();
+        }, 5000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
+
+    if (loading) return (
+        <LoadingAnimation></LoadingAnimation>
+    )
+
     return (
         <>
             <BodyPic>
@@ -58,67 +104,42 @@ const Home = () => {
             </Info>
 
             <News>
-                <NewsHeader>
-                    TIN TỨC
-                    <div className="lower-header">
-                        Theo dõi các tin tức cập nhật mới nhất !!
-                    </div>
-                </NewsHeader>
-
+                <NewsHeaderWrapper>
+                    <NewsHeader>
+                        TIN TỨC
+                        <div className="lower-header">
+                            Theo dõi các tin tức cập nhật mới nhất !!
+                        </div>
+                    </NewsHeader>
+    
+                </NewsHeaderWrapper>
                 <NewsSection>
-                    <NewItem1>
-                        <NewPicItem1>
-                            <img src={assets.NewsPic1} alt="pic1" className="pic"/>
-                        </NewPicItem1>
-                        <p className="title">Khai trương phòng khám Đa khoa tại quận 7</p>
-                        <p className="content1"> Ngày 23/8/2024, hệ thống bệnh viện Đa khoa chính thức đưa vào hoạt động phòng khám Đa khoa
-                            Quận 7 chuyên sâu, hiện đại, góp phân khám...</p>
-                    </NewItem1>
-
-                    <NewItem2>
-                        <NewPicAndContent>
-                            <NewPicItem2>
-                                <img src={assets.NewsPic1} alt="pic" className="pic2"/>
-                            </NewPicItem2>
-                            <NewsTitleAndContent>
-                                <p className="title">Suy tim tâm trương là gì? Nguyên nhân, dấu hiệu, chần đoán, điều
-                                    trị </p>
-                                <p className="content"> Suy tim tâm trương là tình trạng bị suy giảm khả năng giãn nở.
-                                    Tỷ lệ bệnh nhân bị suy tim....</p>
-
-                            </NewsTitleAndContent>
-                        </NewPicAndContent>
-
-                        <NewPicAndContent>
-                            <NewPicItem2>
-                                <img src={assets.NewsPic1} alt="pic" className="pic2"/>
-                            </NewPicItem2>
-                            <NewsTitleAndContent>
-                                <p className="title">
-                                    Sốt xuất huyết làm gì cho nhanh khỏi? Những sai lầm thường gặp
-                                </p>
-                                <p className="content">
-                                    Sốt xuất huyết làm gì cho nhanh khỏi là vấn đề người bệnh cần quan
-                                    tam. Luu y quan trong can tuan...
-                                </p>
-                            </NewsTitleAndContent>
-                        </NewPicAndContent>
-
-                        <NewPicAndContent>
-                            <NewPicItem2>
-                                <img src={assets.NewsPic1} alt="pic" className="pic2"/>
-                            </NewPicItem2>
-                            <NewsTitleAndContent>
-                                <p className="title">Công nghệ IPL là gì? Có công dụng ra sao? Ưu và nhược điểm.</p>
-                                <p className="content">Hiện nay, với nhu cầu làm đẹp ngày càng cao, công nghệ kỹ thuật
-                                    như công nghệ laser và các liệu....</p>
-                            </NewsTitleAndContent>
-                        </NewPicAndContent>
-                    </NewItem2>
+                    {
+                        firstArticle && (
+                            <NewItem1 onClick={()=>{navigate(`/bloginfo/${firstArticle._id}`)}}>
+                                <NewPicItem1>
+                                    <Image src={firstArticle?.article_image} alt="pic1" className="pic"/>
+                                </NewPicItem1>
+                                <p className="title">{firstArticle?.article_title}</p>
+                                <p className="content1">{firstArticle?.article_content}</p>
+                            </NewItem1>
+                        )
+                    }
+                    
+                    {
+                        fourArticles && (
+                            <NewItem2>
+                                {fourArticles.map((article) => (
+                                    <MiniBlogItem data={article}></MiniBlogItem>
+                                ))}
+                            </NewItem2>
+                        )
+                    }
+                    
                 </NewsSection>
 
                 <NewsButtonContainer>
-                    <NewButton>
+                    <NewButton onClick={()=>{navigate('/blog')}}>
                         XEM TẤT CẢ TIN TỨC
                     </NewButton>
                 </NewsButtonContainer>

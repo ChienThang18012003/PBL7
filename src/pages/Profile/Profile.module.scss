@@ -1,8 +1,7 @@
 .wrapper {
     width: 100%;
-    height: 1000px;
     display: block;
-    overflow-y: hidden;
+    overflow: visible;
     padding-bottom: 50px;
     background-color: #f0f2f1;
     display: flex;
@@ -11,7 +10,11 @@
 }
 
 .buttons-container{
-    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow: visible;
 }
 
 .image-container {
@@ -28,8 +31,8 @@
 }
 
 .profile-image {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -47,24 +50,23 @@
 .user-info-container{
     margin-top: 10px;
     width: 80%;
-    height: 500px;
     display: flex;
     flex-direction: column;
 }
 
 .contact-info-container{
-    width: 80%;
-    height: 110px;
+    width: calc(100% - 237px);
     display: flex;
     justify-content: space-between;
-    margin-left: auto;
+    margin-left: 237px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .contact-info{
     display: flex;
     display: block;
-    height: 100%;
-    width: 30%;
+    overflow: visible;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -93,18 +95,20 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 600px;
+    overflow: visible;
+    gap: 10px;
 }
 
 .personal-info-container{
     width: 32%;
     height: 600px;
     margin-top: 20px;
+    flex-shrink: none;
 }
 
 .doctor-info-container{
     width: 32%;
-    height: 500px;
+    height: 650px;
     margin-top: 20px;
 }
 
@@ -122,15 +126,24 @@
 
 .info-title-container{
     width: 100%;
-    height: 40px;
+    overflow: visible;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .field-container{
     width: 100%;
     min-height: 80px;
     max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.manage-buttons-container {
+    width: 100%;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -170,7 +183,7 @@
 
 .button-container{
     width: 100%;
-    height: 100px;
+    overflow: visible;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,11 +194,12 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     margin-bottom: 10px;
 }
 
 .half-field-input{
-    width: 70%;
+    width: 100%;
     height: 40px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -196,6 +210,21 @@
     }
 }
 
+.edit-buttons{
+    width: 100%;
+    overflow: visible;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.separator{
+    width: 100%;
+    height: 5px;
+}
 /* Ẩn thẻ input file gốc */
 .file-input {
     display: none;
@@ -213,8 +242,9 @@
     font-size: 16px;
     transition: background-color 0.3s ease;
     position: absolute;
-    left: 20%;
-    top: 124%;
+    left: calc(10% + 180px); /* Tọa độ trái của .profile-image-container + nửa width */
+    top: calc(54% + 160px); /* Tọa độ trên của .profile-image-container + chiều cao */
+    transform: translate(-50%, 10%); /* Tinh chỉnh */
   }
   
   .file-label:hover {
@@ -225,8 +255,79 @@
     margin-right: 8px; /* Khoảng cách giữa icon và văn bản */
   }
   
-  /* Tuỳ chỉnh icon nếu cần */
   .fa-upload {
     font-size: 18px;
   }
+
+@media only screen and (max-width: 1024px){
+    .main-info-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .personal-info-container{
+        width: 50%;
+    }
+
+    .doctor-info-container{
+        width: 50%;
+    }
+
+    .account-info-container{
+        width: 50%;
+    }
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+    .profile-image-container{
+        width: 110px;
+        height: 110px;
+        top: 62%;
+    }
+
+    .buttons-container{
+        justify-content: center;
+    }
+
+    .image-container{
+        height: 160px;
+    }
+
+    .file-label{
+        padding: 10px;
+        left: calc(10% + 100px); /* Tọa độ trái của .profile-image-container + nửa width */
+        top: calc(62% + 70px); /* Tọa độ trên của .profile-image-container + chiều cao */
+    }
+
+    .contact-info-container{
+        margin-left: 130px;
+        width: calc(100% - 130px);
+    }
+
+    .user-name{
+        display: none;
+        
+    }
+    .phone-number{
+        display: none;
+
+    }
+    .email{
+        display: none;
+        
+    }
+
+    .personal-info-container{
+        width: 100%;
+    }
+
+    .doctor-info-container{
+        width: 100%;
+    }
+
+    .account-info-container{
+        width: 100%;
+    }
+}
   

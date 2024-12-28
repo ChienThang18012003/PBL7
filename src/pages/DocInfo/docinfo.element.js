@@ -6,6 +6,7 @@ export const DocInfoLayout = styled(Container)`
     justify-content: center;
     gap: 1rem;
     margin-bottom: 20px;
+    margin-top: 40px;
 
     ${Container}
     
@@ -21,9 +22,12 @@ export const DocInfoHeader = styled.p`
 `
 
 export const DocInfoLeft = styled.div`
+
     .image-background {
         background-color: #00D3D6;
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         max-width: 18rem;
         border-radius: 0.5rem;
     }
@@ -38,7 +42,7 @@ export const DocInfoRight = styled.div`
     border-radius: 0.5rem;
     padding: 2rem 2rem; 
     margin: -80px 0.5rem 0;
-    @media (min-width: 640px) {
+    @media (min-width: 0px) {
         margin-left: 0;
         margin-right: 0;
         margin-top: 0;
@@ -84,13 +88,18 @@ export const DocBookButton = styled.button`
 
 `
 
-export const DoctorInformation = styled(Container)`
+export const DoctorInformation = styled.div`
     display: flex;
     margin-bottom: 10px;
+    width: 80%;
+    margin-left: 10%;
     gap: 16px;
 
     justify-content: space-around;
-    ${Container}
+
+    @media (max-width: 740px) {
+       flex-direction: column;
+    }
     
 `
 export const DoctorInformationItem = styled.div`

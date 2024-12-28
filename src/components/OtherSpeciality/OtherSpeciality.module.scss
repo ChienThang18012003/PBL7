@@ -4,6 +4,10 @@
     border-radius: 20px;
     background-color: #1691E2;
     text-decoration: none;
+    transition: all 0.5s ease;
+    &:hover {
+        transform: translateY(-10px); 
+    }
 }
 
 .image-wrapper{
