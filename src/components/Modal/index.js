@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 export default function Modal({children , data}) {
   const [modal, setModal] = useState(false);
-  const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour] = useAccount();
+  const [, , , , , , , , , changePassword] = useAccount();
   const [newPass, setNewPass] = useState('');
   const [rewriteNewPass, setRewriteNewPass] = useState('');
   const [currentPass, setCurrentPass] = useState('');
@@ -41,14 +41,14 @@ export default function Modal({children , data}) {
       alert('Mật khẩu nhập lại không chính xác');
       return;
     }
-    const isMatch = await bcrypt.compare(currentPass, data.password);
+    const isMatch = await bcrypt.compare(currentPass, data?.password);
     if (!isMatch) {
       alert('Mật khẩu hiện tại không đúng');
       return;
     }
 
     try {
-      const changePass = await changePassword(data.email, newPass);
+      const changePass = await changePassword(data?.email, newPass);
       if (changePass && typeof changePass === 'object') {
         alert('Đổi mật khẩu thành công!');
         setModal(false);

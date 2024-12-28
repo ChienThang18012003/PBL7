@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendar, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import CommentItem from '../../components/CommentItem';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from '../../components/Pagination';
 import usePost from '../../hook/usePost';
 import useAccount from '../../hook/useAccount';
@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 function Question() {
     const { id } = useParams();
     const [userInfo, setUserInfo] = useState({});
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo, searchDoctor] = useAccount();
+    const [, , loadingAccount, , , , getAccountByEmail] = useAccount();
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
@@ -31,7 +31,7 @@ function Question() {
     const [currentPage, setCurrentPage] = useState(1);
     const [commentsPerPage, setCommentsPerPage] = useState(5);
 
-    const [postLoading, postHook, getAllPostsBySpecialty, sortAllPosts, addPost, searchPost, getPost, addComment, updateComment, deleteComment, getComments] =
+    const [postLoading, , , , , , getPost, addComment, , , getComments] =
         usePost();
 
     useEffect(() => {
@@ -63,7 +63,7 @@ function Question() {
             
             if (item) {
                 let obj = JSON.parse(item);
-                const AccountInfo = await getAccountByEmail(obj.email);
+                const AccountInfo = await getAccountByEmail(obj?.email);
                 setUserInfo(AccountInfo); 
             }
         };
@@ -76,7 +76,7 @@ function Question() {
         ? postComments.slice(firstCommentIndex, lastCommentIndex)
         : [];
     const renderContent = () => {
-        if (!postByID.post_content) return null; 
+        if (!postByID?.post_content) return null; 
         return postByID.post_content.split('\n').map((line, index) => (
             <h4 className={cx('blog-description')} key={index}>
                 
@@ -184,7 +184,7 @@ function Question() {
                         {currentComment.map((comment) => {
                             return (
                                 <CommentItem 
-                                    key={comment._id}
+                                    key={comment?._id}
                                     data={comment}
                                     owner={userInfo ? userInfo?.email : ""} 
                                     postID={id} 
@@ -195,7 +195,7 @@ function Question() {
                     </div>
                     <div className={cx('pagination')}>
                         <Pagination
-                            totalPosts={postComments.length}
+                            totalPosts={(postComments || []).length}
                             postsPerPage={commentsPerPage}
                             setCurrentPage={setCurrentPage}
                             currentPage={currentPage}

@@ -1,12 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './CreateBlog.module.scss';
 import PageTitle from '../../components/PageTitle';
-import BlogItem from '../../components/BlogItem';
 import Button from '../../components/Button';
 import { useState, useEffect } from 'react';
 import useArticles from '../../hook/useArticles';
 import useAccount from '../../hook/useAccount';
-import LoadingAnimation from '../../components/LoadingAnimation';
 
 const cx = classNames.bind(styles);
 function CreateBlog() {
@@ -14,19 +12,18 @@ function CreateBlog() {
     const [blogTitle, setBlogTitle] = useState('');
     const [blogContent, setBlogContent] = useState('');
     const [
-        articlesHook,
-        firstArticle,
-        fourArticles,
-        loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
-        getArticlesByID,
-        addComment,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         addArticle,
-        getFiveLatestArticles,
     ] = useArticles();
     const [userInfo, setUserInfo] = useState({});
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo, searchDoctor] = useAccount();
+    const [, , , , , , getAccountByEmail] = useAccount();
 
 
     useEffect(() => {
@@ -41,7 +38,7 @@ function CreateBlog() {
             
             if (item) {
                 let obj = JSON.parse(item);
-                const AccountInfo = await getAccountByEmail(obj.email);
+                const AccountInfo = await getAccountByEmail(obj?.email);
                 setUserInfo(AccountInfo);
             }
         };
@@ -99,11 +96,6 @@ function CreateBlog() {
                 alert("No file selected or invalid file type.");
             }
         };
-
-
-    if (loading) return (
-        <LoadingAnimation></LoadingAnimation>
-    )
 
     return (
         <div className={cx('wrapper')}>

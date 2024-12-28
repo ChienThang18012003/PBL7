@@ -26,7 +26,7 @@ const useAccount = () => {
         try {
             const doctorList = await Account_API.filter_Doctors_List(speciality, region);
             
-            const filteredDoctorList = doctorList.filter((doctor) => doctor.is_deleted === false);
+            const filteredDoctorList = doctorList.filter((doctor) => doctor?.is_deleted === false);
     
             return filteredDoctorList;
         }
@@ -43,7 +43,7 @@ const useAccount = () => {
         try {
             const doctorList = await Account_API.filter_Doctors_List(speciality, region);
             
-            const filteredDoctorList = doctorList.filter((doctor) => doctor.is_deleted === false);
+            const filteredDoctorList = doctorList.filter((doctor) => doctor?.is_deleted === false);
     
             return filteredDoctorList;
         } catch (error) {

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Region_API from '../API/Region_API';
-import Account_API from '../API/Account_API';
 
 const useRegion = () => {
     const [regionHook, setRegionHook] = useState([]);

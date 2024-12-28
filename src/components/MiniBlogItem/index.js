@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 
 function MiniBlogItem({ data }) {
     return (
-        <a className={cx('blog-wrapper')} href={`/bloginfo/${data._id}`}>
+        <a className={cx('blog-wrapper')} href={`/bloginfo/${data?._id}`}>
             <Image className={cx('blog-image')} src={data?.article_image} alt="Blog_image"></Image>
             <div className={cx('blog-content')}>
                 <h4 className={cx('blog-title')}>

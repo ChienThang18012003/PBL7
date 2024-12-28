@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DoctorsLayout, ImageContainer, DoctorsRight } from "./doctors.element";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppContext } from "../../context/AppContext";
 import useSpeciality from '../../hook/useSpeciality';
 import useAccount from '../../hook/useAccount';
 import classNames from 'classnames/bind';
@@ -18,32 +17,30 @@ import { assets } from '../../assets/assets_fe/assets';
 const cx = classNames.bind(styles);
 
 const Doctors = () => {
-    const { speciality } = useParams();
     const [filterDoc, setFilterDoc] = useState([]);
     const navigate = useNavigate();
-    const [showFilter, setShowFilter] = useState(false);
     const [specialityLoading, specialityHook] = useSpeciality();
     const [
-        checkLogin, 
-        signUp, 
+        , 
+        , 
         loadingAccount, 
-        doctorsHook, 
-        getAccountByID, 
+        , 
+        , 
         filterDoctorList, 
-        getAccountByEmail, 
-        checkAccountType, 
-        uploadProof, 
-        changePassword, 
-        getDoctorActiveList, 
-        addDoctorActiveHour, 
-        changeAccountInfo, 
-        changeDoctorInfo, 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
         searchDoctor, 
-        forgotPassword, 
-        getDoctorList, 
-        deleteDoctorActiveHour, 
-        updateDoctorActiveHour,
-        softDeleteAccount,
+        , 
+        , 
+        , 
+        ,
+        ,
         getFilterDoctorList
         ] = useAccount();
     const [selectedFaculty, setSelectedFaculty] = useState('all');
@@ -52,7 +49,6 @@ const Doctors = () => {
     const [regionLoading, regionHook] = useRegion();
     const [currentPage, setCurrentPage] = useState(1);
     const [docPerPage, setDocPerPage] = useState(10);
-    const [isFirstAccess, setIsFirstAccess] = useState(true);
     let intervalId;
 
     
@@ -80,13 +76,13 @@ const Doctors = () => {
              
              const doctors = await filterDoctorList(selectedFaculty, selectedRegion);
              setCurrentPage(1);
-             setFilterDoc(doctors);
+             if (doctors && Array.isArray(doctors)) setFilterDoc(doctors);
          };
         fetchDoctors();
 
         const fetchDoctorsPeriodically = async () => {
             const doctors = await getFilterDoctorList(selectedFaculty, selectedRegion);
-            if (doctors) setFilterDoc(doctors);
+            if (doctors && Array.isArray(doctors)) setFilterDoc(doctors);
         };
         
             intervalId = setInterval(() => {
@@ -193,7 +189,7 @@ const Doctors = () => {
                 <div className={cx('pagination-wrapper')}>
                 <div className={cx('pagination')}>
                     <Pagination
-                        totalPosts={filterDoc.length}
+                        totalPosts={(filterDoc || []).length}
                         postsPerPage={docPerPage}
                         setCurrentPage={setCurrentPage}
                         currentPage={currentPage}

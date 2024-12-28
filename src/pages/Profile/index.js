@@ -4,16 +4,13 @@ import PageTitle from '../../components/PageTitle';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import DateModal from '../../components/DateModal';
-import InsuranceModal from '../../components/InsuranceModal';
 import ProofModal from '../../components/ProofModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faQuestion, faMagnifyingGlass, faUpload, faFloppyDisk, faRightFromBracket, faPen, faTrash, faUserXmark } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faFloppyDisk, faTrash, faUserXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import useAccount from '../../hook/useAccount';
 import useRegion from '../../hook/useRegion';
 import useSpeciality from '../../hook/useSpeciality';
-import Account_API from '../../API/Account_API';
 import { useNavigate } from 'react-router-dom';
 import ListModal from '../../components/ListModal';
 import useAppointment from '../../hook/useAppointment';
@@ -21,6 +18,7 @@ import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
 import ArticleListModal from '../../components/ArticleListModal';
 import useArticles from '../../hook/useArticles';
+import { assets } from '../../assets/assets_fe/assets';
 
 
 const cx = classNames.bind(styles);
@@ -29,43 +27,43 @@ function Profile() {
     const [image, setImage] = useState();
 
     const [
-        checkLogin, 
-        signUp, 
+        , 
+        , 
         loadingAccount, 
-        doctorsHook, 
-        getAccountByID, 
-        filterDoctorList, 
+        , 
+        , 
+        , 
         getAccountByEmail, 
-        checkAccountType, 
-        uploadProof, 
-        changePassword, 
+        , 
+        , 
+        , 
         getDoctorActiveList, 
-        addDoctorActiveHour, 
+        , 
         changeAccountInfo, 
         changeDoctorInfo, 
-        searchDoctor, 
-        forgotPassword, 
-        getDoctorList, 
+        , 
+        , 
+        , 
         deleteDoctorActiveHour, 
-        updateDoctorActiveHour,
+        ,
         softDeleteAccount,
         ] = useAccount();
-    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook] = useSpeciality();
     const [regionLoading, regionHook] = useRegion();
-    const [appointmentLoading, appointmentHook, addAppointment, getAllAppointmentByUserID, cancelAppointment, getAllAppointmentByDoctor] = useAppointment();
+    const [appointmentLoading, , , getAllAppointmentByUserID, , getAllAppointmentByDoctor] = useAppointment();
     const [
-        articlesHook,
-        firstArticle,
-        fourArticles,
+        ,
+        ,
+        ,
         loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
-        getArticlesByID,
-        addComment,
-        addArticle,
-        getFiveLatestArticles,
-        getFourLatestArticles,
-        searchArticle,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         getAllArticleByDoctor,
     ] = useArticles();
     const [userInfo, setUserInfo] = useState({});
@@ -170,7 +168,7 @@ function Profile() {
     useEffect(()=>{
         const fetchActiveHoursPeriodically = async () => {
             const activeHours = await getDoctorActiveList(userInfo?._id, false);
-            if (activeHours) setDoctorActiveHours(activeHours?.active_hours);
+            if (activeHours && typeof activeHours === 'object') setDoctorActiveHours(activeHours?.active_hours);
         };
 
         if (isDoctor) {
@@ -202,9 +200,9 @@ function Profile() {
         setDoctorActiveHours((prev) => {
             const updated = prev.filter(
               (hour) =>
-                hour.day !== oldActiveHour.day &&
-                hour.start_time !== oldActiveHour.start_time &&
-                hour.end_time !== oldActiveHour.end_time
+                hour?.day !== oldActiveHour?.day &&
+                hour?.start_time !== oldActiveHour?.start_time &&
+                hour?.end_time !== oldActiveHour?.end_time
             );
             return [...updated, newActiveHour];
           });
@@ -286,7 +284,7 @@ function Profile() {
     const handleSubmitAccountInfo = async () => {
         if (!image) {
             await changeAccountInfo(
-                userInfo._id, 
+                userInfo?._id, 
                 userName, 
                 phoneNum, 
                 underlyingCondition, 
@@ -374,7 +372,7 @@ function Profile() {
         <div className={cx('wrapper')}>
             <PageTitle>TÀI KHOẢN CÁ NHÂN</PageTitle>
             <div className={cx('image-container')}>
-                 <img className={cx('background-img')} src="https://media.gettyimages.com/id/1312706413/photo/modern-hospital-building.jpg?s=612x612&w=gi&k=20&c=1-EC4Mxf--5u4ItDIzrIOrduXlbKRnbx9xWWtiifrDo="></img>
+                 <img className={cx('background-img')} src={assets.HospitalImage}></img>
                  <div className={cx('profile-image-container')}>
                  <Image 
                     src={image?.preview || userInfo?.profile_image || 'default-placeholder.jpg'}

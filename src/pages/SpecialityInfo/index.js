@@ -1,13 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './SpecialityInfo.module.scss';
 import PageTitle from '../../components/PageTitle';
-import Button from '../../components/Button';
 import OtherSpeciality from '../../components/OtherSpeciality';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faQuestion, faMagnifyingGlass, faUpload, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
 import PageTitle2 from '../../components/PageTitle2';
-import RelatedDoctors from '../../components/RelatedDoctors/RelatedDoctors';
 import useSpeciality from '../../hook/useSpeciality';
 import { useEffect, useState } from 'react';
 import useAccount from '../../hook/useAccount';
@@ -20,30 +17,29 @@ const cx = classNames.bind(styles);
 
 function SpecialityInfo(){
     const {id} = useParams();
-    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook, getSpecialityByID, , getAllSpeciality] = useSpeciality();
     const [
-        checkLogin, 
-        signUp, 
+        , 
+        , 
         loadingAccount, 
-        doctorsHook, 
-        getAccountByID, 
+        , 
+        , 
         filterDoctorList, 
-        getAccountByEmail, 
-        checkAccountType, 
-        uploadProof, 
-        changePassword, 
-        getDoctorActiveList, 
-        addDoctorActiveHour, 
-        changeAccountInfo, 
-        changeDoctorInfo, 
-        searchDoctor, 
-        forgotPassword, 
-        getDoctorList, 
-        deleteDoctorActiveHour, 
-        updateDoctorActiveHour,
-        softDeleteAccount,
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        ,
+        ,
         getFilterDoctorList,
-        getAccountStatus
         ] = useAccount();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentDoctorIndex, setCurrentDoctorIndex] = useState(0);
@@ -124,10 +120,10 @@ function SpecialityInfo(){
     useEffect(()=> {
         const fetchSpecialitiesAndDoctorsPeriodically = async () => {
             const specialities = await getAllSpeciality();
-            if (specialities) setOtherSpecialities(specialities);
+            if (specialities && Array.isArray(specialities)) setOtherSpecialities(specialities);
             if (specialityName) {
                 const RelatedDoctors = await getFilterDoctorList(specialityName);
-                if (RelatedDoctors) setRelatedDoctors(RelatedDoctors);
+                if (RelatedDoctors && Array.isArray(RelatedDoctors)) setRelatedDoctors(RelatedDoctors);
             }
         };
 
@@ -211,7 +207,7 @@ function SpecialityInfo(){
                         )
                     }
                     <div className={cx('other-specialities')}>
-                        {visibleSpecialities.map((speciality, index) => (
+                        {(visibleSpecialities || []).map((speciality, index) => (
                             <OtherSpeciality key={index} data={speciality} />
                         ))}
                     </div>
@@ -235,7 +231,7 @@ function SpecialityInfo(){
                         )
                     }
                      <div className={cx('related-doctors-container')}>
-                     {visibleDoctors.map((doctor) => (
+                     {(visibleDoctors || []).map((doctor) => (
                          <DoctorItem data={doctor}></DoctorItem>
                      ))}
                      </div>

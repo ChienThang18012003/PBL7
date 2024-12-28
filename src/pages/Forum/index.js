@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Forum.module.scss';
 import PageTitle from '../../components/PageTitle';
-import BlogItem from '../../components/BlogItem';
 import Button from '../../components/Button';
 import { useState, useEffect } from 'react';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +17,7 @@ const cx = classNames.bind(styles);
 
 function Forum() {
     const [specialityLoading, specialityHook] = useSpeciality();
-    const [postLoading, postHook, getAllPostsBySpecialty, sortAllPosts, addPost, searchPost, getPost, addComment, updateComment, deleteComment, getComments, getAllPosts, getFilteredPosts, sortFilterdPosts] = usePost();
+    const [postLoading, postHook, getAllPostsBySpecialty, sortAllPosts, addPost, searchPost, , , , , , getAllPosts, getFilteredPosts, sortFilterdPosts] = usePost();
     const [selectedFaculty, setSelectedFaculty] = useState('all');
     const [displayedPosts, setDisplayedPosts] = useState([]);
     const [sortBy, setSortBy] = useState('newest');
@@ -29,7 +28,7 @@ function Forum() {
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage, setPostPerPage] = useState(4);
     const [userInfo, setUserInfo] = useState({});
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo, searchDoctor] = useAccount();
+    const [, , loadingAccount, , , filterDoctorList, getAccountByEmail] = useAccount();
     let intervalId;
 
     const lastPostIndex = currentPage * postPerPage;
@@ -82,7 +81,7 @@ function Forum() {
             if (newPost && typeof newPost === 'object'){
                 setPostTitle('');
                 setPostContent('');
-                setFormSelectedFaculty(specialityHook[0]);
+                setFormSelectedFaculty(specialityHook[0] || "");
                 alert("Thêm câu hỏi thành công!");
                 window.location.reload();
             }
@@ -140,13 +139,13 @@ function Forum() {
         const fetchPostsPeriodically = async () => {
             if (selectedFaculty === 'all') {
                 const allPost = await getAllPosts();
-                if (allPost) {
+                if (allPost && Array.isArray(allPost)) {
                     const sortedPost = sortFilterdPosts(sortBy, allPost);
                     setDisplayedPosts(sortedPost);
                 }
             } else {
                 const filteredPost = await getFilteredPosts(selectedFaculty, sortBy);
-                if (filteredPost) setDisplayedPosts(filteredPost);
+                if (filteredPost && Array.isArray(filteredPost)) setDisplayedPosts(filteredPost);
             }
         };
         
@@ -222,7 +221,7 @@ function Forum() {
                 </div>
             </div>
             <div className={cx('forum-questions-wrapper')}>
-                {currentPosts.map((post) => {
+                {(currentPosts || []).map((post) => {
                     return <ForumItem data={post} onHashtagClick={handleHashtagClick}></ForumItem>;
                 })}
             </div>

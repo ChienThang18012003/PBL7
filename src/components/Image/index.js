@@ -11,7 +11,7 @@ const Image = forwardRef(({ src, alt, className, fallback: customFallback = asse
         setFallback(customFallback);
     };
 
-    const imageSource = src || customFallback; // Nếu src là null hoặc không hợp lệ, sử dụng fallback
+    const imageSource = src || customFallback;
 
     return (
         <img

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
 import classNames from 'classnames/bind';
 import styles from './AppointmentInfo.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faQuestion, faMagnifyingGlass, faUpload, faXmark, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faRotate } from '@fortawesome/free-solid-svg-icons';
 import useAppointment from "../../hook/useAppointment";
 
 const cx = classNames.bind(styles);
 
 function AppointmentInfo({data, onUpdateData}) {
-    const [appointmentLoading, appointmentHook, addAppointment, getAllAppointmentByUserID, cancelAppointment, getAllAppointmentByDoctor, addInsurance, softDeleteAppointment, restoreAppointment] = useAppointment();
+    const [ , , , , cancelAppointment, , , softDeleteAppointment, restoreAppointment] = useAppointment();
     const handleCancelAppointment = async() => {
         if (data?.is_deleted) {
             const userConfirmed = window.confirm("Bạn có chắc chắn muốn xóa cuộc hẹn này không?");
@@ -17,7 +15,7 @@ function AppointmentInfo({data, onUpdateData}) {
                 const canceledAppointment = await cancelAppointment(data?._id);
                 if (canceledAppointment && typeof canceledAppointment === 'object') {
                     alert("Xóa cuộc hẹn thành công!");
-                    onUpdateData("delete", data._id);
+                    onUpdateData("delete", data?._id);
                     return;
                 }
                 else if (canceledAppointment && typeof canceledAppointment !== 'object') {
@@ -139,7 +137,7 @@ function AppointmentInfo({data, onUpdateData}) {
                         <span>{data?.health_issue}</span>
                     </div>
                  </div>
-                 {data?.insurance.length > 0 && 
+                 {(data?.insurance || []).length > 0 && 
                     (
                         <div className={cx('appointment-field-wrapper')}>
                             <div className={cx('appointment-field-title')}>
@@ -149,7 +147,7 @@ function AppointmentInfo({data, onUpdateData}) {
                     )
                  }
                  
-                 {data?.insurance.map((insurance) => (
+                 {(data?.insurance || []).map((insurance) => (
                      
                     <>
                         <div className={cx('appointment-field-wrapper')}>

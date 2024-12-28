@@ -12,7 +12,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
   const [insuranceID, setInsuranceID] = useState('');
   const [location, setLocation] = useState('');
   const [expiredDate, setExpiredDate] = useState(null);
-  const [appointmentLoading, , , , , , addInsurance] = useAppointment();
+  const [ , , , , , , addInsurance] = useAppointment();
 
   const toggleModal = () => {
     setModal(!modal);
@@ -64,7 +64,6 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
         <div className={cx('modal')}>
           <div
             className={cx('overlay')}
-            // Ngăn overlay đóng modal
             onClick={(e) => e.stopPropagation()}
           ></div>
           <div className={cx('modal-content')}>
@@ -118,7 +117,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
                   submitTwo
                   type="button"
                   onClick={() => {
-                    setModal(false); // Đóng modal khi nhấn Hủy
+                    setModal(false);
                     alert("Thêm cuộc hẹn thành công!");
                     window.location.reload();
                   }}

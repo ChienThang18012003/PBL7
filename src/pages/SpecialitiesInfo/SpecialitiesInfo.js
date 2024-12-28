@@ -2,12 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {AppContext} from "../../context/AppContext";
 import {
-    HeaderUnderline,
     SIBiggerContainer, SIBottom,
-    SIContainer,
     SIHeader, SIInfo,
     SIInfoLeft, SIInfoRight, SIInfoRightBottom, SIInfoRightTop,
-    SILayout, SIMiddle, SIMiddleBottom, SIMiddleTop, SITop, Test, TestDeco
+    SILayout, SIMiddle, SIMiddleBottom, SIMiddleTop, SITop
 } from "./specialitiesinfo.element";
 
 const SpecialitiesInfo = () => {

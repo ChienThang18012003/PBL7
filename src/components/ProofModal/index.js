@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import classNames from "classnames/bind";
 import styles from "./ProofModal.module.scss";
 import Button from "../Button";
@@ -10,9 +10,8 @@ export default function ProofModal({ children, disabled = false, data }) {
   const [modal, setModal] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
-  const [fileProof, setFileProof] = useState(data?.proof || null);
   const [error, setError] = useState("");
-  const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof] = useAccount();
+  const [, , , , , , , , uploadProof] = useAccount();
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -36,7 +35,7 @@ export default function ProofModal({ children, disabled = false, data }) {
     }
 
     try {
-      const newProof = await uploadProof(file, data._id);
+      const newProof = await uploadProof(file, data?._id);
       if (newProof && typeof newProof === 'object') {
         alert("Upload proof success");
         setModal(false);

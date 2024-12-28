@@ -1,11 +1,9 @@
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 import styles from './CommentItem.module.scss';
 import { faUserDoctor, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '../Image';
 import { useState, useEffect } from 'react';
-import Button from '../Button';
 import usePost from '../../hook/usePost';
 
 const cx = classNames.bind(styles);
@@ -18,7 +16,7 @@ function CommentItem({ data, owner, postID, onDeleteComment }) {
     const [updatedComment, setUpdatedComment] = useState("");
     const [originalComment, setOriginalComment] = useState("");
 
-    const [postloading, postHook, getAllPostsBySpecialty, sortAllPosts, addPost, searchPost, getPost, addComment, updateComment, deleteComment] = usePost();
+    const [, , , , , , , , updateComment, deleteComment] = usePost();
 
     useEffect(() => {
         setTextareaValue(data?.comment_content);

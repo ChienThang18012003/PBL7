@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import classNames from 'classnames/bind';
 import styles from './ListModal.module.scss';
 import Button from "../Button";
-import useAccount from "../../hook/useAccount";
 import AppointmentInfo from "../AppointmentInfo";
 import useAppointment from "../../hook/useAppointment";
 
@@ -13,7 +12,7 @@ export default function ListModal({ children, disabled = false, data: initialDat
   const [data, setData] = useState(initialData?.appointment_list || []);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [selectedButton, setSelectedButton] = useState("incoming");
-  const [appointmentLoading, appointmentHook, addAppointment, getAllAppointmentByUserID, cancelAppointment, getAllAppointmentByDoctor, addInsurance, softDeleteAppointment, restoreAppointment] = useAppointment();
+  const [, , , getAllAppointmentByUserID, , getAllAppointmentByDoctor] = useAppointment();
 
 
   const toggleModal = () => {
@@ -51,11 +50,11 @@ export default function ListModal({ children, disabled = false, data: initialDat
 
   const handleUpdateData = (action, payload) => {
     if (action === "delete") {
-      setData((prev) => prev.filter((appointment) => appointment._id !== payload));
+      setData((prev) => prev.filter((appointment) => appointment?._id !== payload));
     } else if (action === "update") {
       setData((prev) =>
         prev.map((appointment) =>
-          appointment._id === payload._id ? { ...appointment, ...payload } : appointment
+          appointment?._id === payload?._id ? { ...appointment, ...payload } : appointment
         )
       );
     }

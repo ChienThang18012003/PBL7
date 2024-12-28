@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import HomePic from "../../assets/assets_fe/home.webp"
 import {
     BodyPic,
@@ -6,9 +6,9 @@ import {
     InfoContainer,
     InfoItem,
     InfoPic,
-    InfoSection, NewButton, NewItem1, NewItem2, NewPicAndContent, NewPicItem1, NewPicItem2,
+    InfoSection, NewButton, NewItem1, NewItem2, NewPicItem1,
     News, NewsButtonContainer,
-    NewsHeader, NewsSection, NewsTitleAndContent, NewsHeaderWrapper
+    NewsHeader, NewsSection, NewsHeaderWrapper
 } from "./home.element";
 import {assets} from "../../assets/assets_fe/assets";
 import {useNavigate} from "react-router-dom";
@@ -20,23 +20,23 @@ import Image from "../../components/Image";
 
 const Home = () => {
     const [
-        articlesHook,
+        ,
         firstArticle,
         fourArticles,
         loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
-        getArticlesByID,
-        addComment,
-        addArticle,
-        getFiveLatestArticles,
-        getFourLatestArticles,
-        searchArticle,
-        getAllArticleByDoctor,
-        softDeleteArticle,
-        permaDeleteArticle,
-        restoreArticle,
-        updateArticle,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         getAllArticles
     ] = useArticles();
     const navigate = useNavigate();

@@ -1,23 +1,20 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {AContainer, AHeader, ALayout, ALeftSide, ARightSide, ARSItem, ASpace, AUnderline, ALoading} from "./appointment.element";
-import {IoIosArrowRoundForward} from "react-icons/io";
+import {AContainer, AHeader, ALayout, ALeftSide, ARightSide, ARSItem, ASpace, AUnderline} from "./appointment.element";
 import * as provincesService from "../../services/Provinces"
 import useRegion from '../../hook/useRegion';
 import useSpeciality from '../../hook/useSpeciality';
 import useAccount from '../../hook/useAccount';
 import AppointmentModal from '../../components/AppointmentModal';
-import DateModal from '../../components/DateModal';
 import useAppointment from '../../hook/useAppointment';
 import InsuranceModal from '../../components/InsuranceModal';
 import { useAppContext } from '../../context/AppContext';
-import {assets} from "../../assets/assets_fe/assets";
 import LoadingAnimation from '../../components/LoadingAnimation';
 
 const Appointment = () => {
     const [provinces, setProvinces] = useState([]);
     const [regionLoading, regionHook] = useRegion();
     const insuranceModalRef = useRef(null);
-    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook] = useSpeciality();
     const [selectedRegion, setSelectedRegion] = useState('');
     const [selectedSpeciality, setSelectedSpeciality] = useState('');
     const [filteredDoctor, setFilterDoctor] = useState([]);
@@ -25,30 +22,30 @@ const Appointment = () => {
     const [healthIssues, setHealthIssues] = useState('');
     const [typeService, setTypeService] = useState('appointment');
     const [
-        checkLogin, 
-        signUp, 
+        , 
+        , 
         loadingAccount, 
-        doctorsHook, 
-        getAccountByID, 
+        , 
+        , 
         filterDoctorList, 
         getAccountByEmail, 
-        checkAccountType, 
-        uploadProof, 
-        changePassword, 
+        , 
+        , 
+        , 
         getDoctorActiveList, 
-        addDoctorActiveHour, 
-        changeAccountInfo, 
-        changeDoctorInfo, 
-        searchDoctor, 
-        forgotPassword, 
-        getDoctorList, 
-        deleteDoctorActiveHour, 
-        updateDoctorActiveHour,
-        softDeleteAccount,
-        getFilterDoctorList,
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        , 
+        ,
+        ,
+        ,
         getAccountStatus
         ] = useAccount();
-    const [appointmentLoading, appointmentHook, addAppointment] = useAppointment();
+    const [appointmentLoading, , addAppointment] = useAppointment();
     const [doctorActiveHour, setDoctorActiveHour] = useState([]);
     const [appointmentDate, setAppointmentDate] = useState('');
     const [appointmentDay, setAppointmentDay] = useState('');
@@ -61,22 +58,14 @@ const Appointment = () => {
     const [userInfo, setUserInfo] = useState({});
     let intervalId;
 
-    const getAllProvinces = async () => {
-        const result = await provincesService.apiGetPublicProvinces();
-        setProvinces(result.data.results);
-    }
-
-    
-
     useEffect(() => {
         const fetchAccount = async () => {
             let item = localStorage.getItem('isLoginSuccess');
             
-            // Nếu item tồn tại, chuyển đổi từ chuỗi JSON thành đối tượng
             if (item) {
                 let obj = JSON.parse(item);
-                const AccountInfo = await getAccountByEmail(obj.email);
-                setUserID(AccountInfo?._id);  // Set userInfo
+                const AccountInfo = await getAccountByEmail(obj?.email);
+                setUserID(AccountInfo?._id); 
                 setUserInfo(AccountInfo);
             }
         };
@@ -160,8 +149,8 @@ const Appointment = () => {
           setAppointmentDate(`${data.dayName} ${data.formattedDate} ${data.selectedTime}`);
           setAppointmentDay(`${data.dayName} ${data.formattedDate}`);
 
-          setAppointmentTimeStart(startTime);  // Cập nhật thời gian bắt đầu
-          setAppointmentTimeEnd(endTime);      // Cập nhật thời gian kết thúc
+          setAppointmentTimeStart(startTime); 
+          setAppointmentTimeEnd(endTime);
       };
 
      const handleSubmitAppointment = async() => {
@@ -270,8 +259,8 @@ const Appointment = () => {
                             >
                                 <option value="">Chọn bác sĩ</option>
                                 {(filteredDoctor || []).map((item) => (
-                                    <option key={item._id} value={item.username}>
-                                        {item.username}
+                                    <option key={item?._id} value={item?.username}>
+                                        {item?.username}
                                     </option>
                                 ))}
                             </select>

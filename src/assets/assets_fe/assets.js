@@ -2,6 +2,7 @@ import Pic1 from "../../assets/assets_fe/1.png"
 import Pic2 from "../../assets/assets_fe/2.png"
 import Pic3 from "../../assets/assets_fe/3.png"
 import Pic4 from "../../assets/assets_fe/4.png"
+import HospitalImage from "../../assets/assets_fe/Hospital.jpg"
 import NewsPic1 from "../../assets/assets_fe/item1.jpg"
 import MedicalLogo from '../../assets/assets_fe/MedicalLogo.svg';
 import LoadingAnimation from '../../assets/assets_fe/LoadingAnimation.svg';
@@ -30,7 +31,8 @@ export const assets = {
     search_icon,
     LoadingAnimation,
     PageLoader,
-    NoImage
+    NoImage,
+    HospitalImage,
 }
 export const specialityData = [
     {

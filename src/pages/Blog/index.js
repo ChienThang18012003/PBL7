@@ -6,8 +6,7 @@ import useArticles from '../../hook/useArticles';
 import { useState, useEffect } from 'react';
 import Pagination from '../../components/Pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import { faQuestion, faMagnifyingGlass, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useDebounce from '../../hook/useDebounce';
 import LoadingAnimation from '../../components/LoadingAnimation';
 
@@ -15,22 +14,22 @@ const cx = classNames.bind(styles);
 function Blog() {
     const [
         articlesHook,
-        firstArticle,
-        fourArticles,
+        ,
+        ,
         loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
-        getArticlesByID,
-        addComment,
-        addArticle,
-        getFiveLatestArticles,
-        getFourLatestArticles,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         searchArticle,
-        getAllArticleByDoctor,
-        softDeleteArticle,
-        permaDeleteArticle,
-        restoreArticle,
-        updateArticle,
+        ,
+        ,
+        ,
+        ,
+        ,
         getAllArticles
     ] = useArticles();
     
@@ -64,7 +63,7 @@ function Blog() {
 
         const fetchArticlesPeriodically = async () => {
             const articles = await getAllArticles();
-            if (articles) setFilteredArticle(articles);
+            if (articles && Array.isArray(articles)) setFilteredArticle(articles);
         };
 
         const intervalId = setInterval(() => {
@@ -98,7 +97,7 @@ function Blog() {
             </div>
             <div className={cx('pagination')}>
                 <Pagination
-                    totalPosts={filteredArticle?.length || 0}
+                    totalPosts={(filteredArticle || []).length || 0}
                     postsPerPage={articlesPerPage}
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}

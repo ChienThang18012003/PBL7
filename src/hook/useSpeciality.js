@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Speciality_API from '../API/Speciality_API';
-import Account_API from '../API/Account_API';
 
 const useSpeciality = () => {
     const [specialityHook, setSpecialityHook] = useState([]);
@@ -22,7 +21,7 @@ const useSpeciality = () => {
     const getAllSpeciality = async() => {
         try {
             const allSpecialities = await Speciality_API.get_All_Speciality();
-            const sortedSpecialities = allSpecialities.sort((a, b) => a.name.localeCompare(b.name));
+            const sortedSpecialities = allSpecialities.sort((a, b) => a?.name.localeCompare(b?.name));
             return sortedSpecialities;
         } catch (error) {
             console.error('Failed to fetch specialities:', error);
@@ -34,7 +33,7 @@ const useSpeciality = () => {
     const searchSpeciality = (searchValue, displayedSpecialities) => {
         if (!searchValue) return displayedSpecialities;
 
-        return displayedSpecialities.filter((speciality) =>
+        return (displayedSpecialities || []).filter((speciality) =>
             speciality.name.toUpperCase().includes(searchValue.toUpperCase())
         );
     };

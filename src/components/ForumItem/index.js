@@ -1,6 +1,4 @@
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import { useState } from 'react'; // Thêm useState để quản lý trạng thái hiển thị
 import styles from './ForumItem.module.scss';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +9,7 @@ const cx = classNames.bind(styles);
 
 function ForumItem({ data, onHashtagClick }) {
     const removeAllSpaces = (str) => {
+        if (typeof str !== 'string') return '';
         return str.replace(/\s+/g, '');
     }
 
@@ -69,7 +68,7 @@ function ForumItem({ data, onHashtagClick }) {
                         </h4>
                     </div>
                     <div className={cx('question-link-wrapper')}>
-                        <a className={cx('link')} href={`/forum/${data._id}`}>
+                        <a className={cx('link')} href={`/forum/${data?._id}`}>
                             Xem câu trả lời
                         </a>
                     </div>

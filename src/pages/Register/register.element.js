@@ -50,6 +50,7 @@ export const RContent = styled.div`
 `
 export const RButton = styled.div`
     margin-top: 3rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: center;
     button{

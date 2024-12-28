@@ -5,21 +5,14 @@ import {
     MobileIcon,
     Nav, Nav2,
     NavbarContainer,
-    NavBtnLink,
-    NavItem,
     NavItemBtn,
-    NavLinks,
     NavLogo,
     NavMenu, GroupButtonLink, NavLinks2, NavbarContainer2, NavItem2, NavBtnLink2
 } from "./navbar.element";
 import {FaBars, FaTimes} from "react-icons/fa";
 import {IconContext} from "react-icons";
-import {IoPersonOutline} from "react-icons/io5";
-import {RiQuestionMark} from "react-icons/ri";
-import {MdOutlineCalendarMonth} from "react-icons/md";
 import {useNavigate} from "react-router-dom";
 import {assets} from "../../assets/assets_fe/assets";
-import Button from "../Button";
 import useAccount from "../../hook/useAccount";
 import Image from "../Image";
 
@@ -28,12 +21,11 @@ import Image from "../Image";
 const Navbar = () => {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
-    const location = useLocation();
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [isClickedOn, setIsClickedOn] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType] = useAccount();
+    const [, , , , , , getAccountByEmail] = useAccount();
 
     const [button, setButton] = useState(true);
     const [userInfo, setUserInfo] = useState({});
@@ -120,7 +112,7 @@ const Navbar = () => {
                                                         <Button2 onClick={() => navigate('/register')} primary>ĐĂNG KÍ</Button2>
                                                     </NavBtnLink2>
                                                 ) : (
-                                                    <NavBtnLink2 to='/sign-up'>
+                                                    <NavBtnLink2 to='/register'>
                                                         <Button2 onClick={closeMobileMenu} fontBig primary>
                                                             ĐĂNG KÍ
                                                         </Button2>
@@ -187,7 +179,7 @@ const Navbar = () => {
                                 isMobile && !isLoggedin && (
                                     <>
                                         <NavItem2>
-                                            <NavLinks2 to={'/sign-up'} className={window.location.pathname === '/sign-up' ? 'active' : ''}>
+                                            <NavLinks2 to={'/register'} className={window.location.pathname === '/register' ? 'active' : ''}>
                                                 ĐĂNG KÝ
                                             </NavLinks2>
                                         </NavItem2>

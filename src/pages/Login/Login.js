@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-    Deco2, Deco3, Deco4,
+    Deco2, Deco4,
     LoginButton,
     LoginContainer, LoginDeco, LoginDeco2,
     LoginHeader,
@@ -13,13 +13,12 @@ import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LoadingAnimation from '../../components/LoadingAnimation';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID, filterDoctorList, getAccountByEmail, checkAccountType, uploadProof, changePassword, getDoctorActiveList, addDoctorActiveHour, changeAccountInfo, changeDoctorInfo, searchDoctor, forgotPassword] = useAccount();
+    const [checkLogin] = useAccount();
     const navigate = useNavigate();
 
     const handleLogin = async () => {

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
-    HeaderUnderline, PageInput, PageSelect, PaginationButton, PaginationContainer, PaginationInfo,
+    HeaderUnderline, PageInput, PaginationButton, PaginationContainer, PaginationInfo,
     SearchBar,
     SpecialitiesContainer,
     SpecialitiesContent,
@@ -22,8 +22,7 @@ import Image from '../../components/Image';
 const Specialities = () => {
     const navigate = useNavigate();
     const {speciality} = useParams();
-    const {specialityData} = useContext(AppContext);
-    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook, searchSpeciality, getAllSpeciality] = useSpeciality();
     const [filterSpec, setFilterSpec] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -60,7 +59,7 @@ const Specialities = () => {
         applyFilter();
         const fetchSpecialitiesPeriodically = async () => {
             const specialities = await getAllSpeciality();
-            if (specialities) setFilterSpec(specialities);
+            if (specialities && Array.isArray(specialities)) setFilterSpec(specialities);
         };
 
         const intervalId = setInterval(() => {
@@ -85,17 +84,6 @@ const Specialities = () => {
         pagination.pageIndex * pagination.pageSize,
         (pagination.pageIndex + 1) * pagination.pageSize
     );
-
-    function arrayBufferToBase64(buffer) {
-        let binary = '';
-        const bytes = new Uint8Array(buffer);
-        const len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-            binary += String.fromCharCode(bytes[i]);
-        }
-        return window.btoa(binary);
-    }
-
 
     if (specialityLoading) return (
         <LoadingAnimation></LoadingAnimation>
@@ -157,23 +145,6 @@ const Specialities = () => {
                             }}
                         />
                     </PaginationInfo>
-                    {/*/!* Page Size Selector *!/*/}
-                    {/*<PageSelect*/}
-                    {/*    value={pagination.pageSize}*/}
-                    {/*    onChange={(e) => setPagination(prev => ({*/}
-                    {/*        ...prev,*/}
-                    {/*        pageSize: Number(e.target.value),*/}
-                    {/*        pageIndex: 0*/}
-                    {/*    }))}*/}
-                    {/*>*/}
-                    {/*    {[5, 10, 15, 20].map(size => (*/}
-                    {/*        <option key={size} value={size}>*/}
-                    {/*            Show {size}*/}
-                    {/*        </option>*/}
-                    {/*    ))}*/}
-                    {/*</PageSelect>*/}
-
-
                 </PaginationContainer>
             </SpecialitiesContainer>
         </SpecialitiesLayout>

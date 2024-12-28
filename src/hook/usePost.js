@@ -27,7 +27,7 @@ const usePost = () => {
         try {
             const postsBySpecialty1 = await Post_API.getAllPostsBySpecialty(specialtyName);
             if (!postsBySpecialty1) return [];
-            const postsBySpecialty = postsBySpecialty1.filter((post) => post.is_deleted === false);
+            const postsBySpecialty = postsBySpecialty1.filter((post) => post?.is_deleted === false);
     
             if (!sortBy) return postsBySpecialty;
             let filteredPosts;
@@ -49,7 +49,7 @@ const usePost = () => {
     const getAllPosts = async() => {
         try {
             const allPosts1 = await Post_API.get_All_Posts();
-            const allPosts = (allPosts1 || []).filter((post) => post.is_deleted === false);
+            const allPosts = (allPosts1 || []).filter((post) => post?.is_deleted === false);
             const sortedPosts = (allPosts || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             return sortedPosts;
         } catch (error) {
@@ -62,14 +62,14 @@ const usePost = () => {
         try {
             const postsBySpecialty1 = await Post_API.getAllPostsBySpecialty(specialtyName);
             if (!postsBySpecialty1) return [];
-            const postsBySpecialty = postsBySpecialty1.filter((post) => post.is_deleted === false);
+            const postsBySpecialty = postsBySpecialty1.filter((post) => post?.is_deleted === false);
     
             if (!sortBy) return postsBySpecialty;
             let filteredPosts;
             if (sortBy && sortBy === 'A-Z')
-                filteredPosts = postsBySpecialty.slice().sort((a, b) => a.post_title.localeCompare(b.post_title));
+                filteredPosts = postsBySpecialty.slice().sort((a, b) => a?.post_title.localeCompare(b?.post_title));
             else if (sortBy && sortBy === 'Z-A')
-                filteredPosts = postsBySpecialty.slice().sort((a, b) => b.post_title.localeCompare(a.post_title));
+                filteredPosts = postsBySpecialty.slice().sort((a, b) => b?.post_title.localeCompare(a?.post_title));
             else if (sortBy && sortBy === 'newest')
                 filteredPosts = postsBySpecialty.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             return filteredPosts;
@@ -81,7 +81,7 @@ const usePost = () => {
     };
 
     const sortAllPosts = (sortBy) => {
-        const allPosts = postHook;
+        const allPosts = postHook || [];
         if (!sortBy) return postHook;
         let filteredPosts;
         if (sortBy && sortBy === 'A-Z')
@@ -106,7 +106,7 @@ const usePost = () => {
     };
 
     const searchPost = (searchValue, displayedPosts) => {
-        if (!searchValue) return displayedPosts; // If no search term, return all posts
+        if (!searchValue) return displayedPosts;
 
         return displayedPosts.filter((post) => post.post_title.toLowerCase().includes(searchValue.toLowerCase()));
     };

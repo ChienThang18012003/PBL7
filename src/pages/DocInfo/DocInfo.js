@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {
     DocBookButton,
@@ -15,8 +15,7 @@ import {
     HeaderUnderline, RelatedDoctorItem,
     Underline
 } from "./docinfo.element";
-import {AppContext, useAppContext} from "../../context/AppContext";
-import {assets} from "../../assets/assets_fe/assets";
+import {useAppContext} from "../../context/AppContext";
 import RelatedDoctors from "../../components/RelatedDoctors/RelatedDoctors";
 import useAccount from '../../hook/useAccount';
 import LoadingAnimation from '../../components/LoadingAnimation';
@@ -24,7 +23,7 @@ import Image from '../../components/Image';
 import PageTitle from '../../components/PageTitle';
 
 const DocInfo = () => {
-    const [checkLogin, signUp, loadingAccount, doctorsHook, getAccountByID] = useAccount();
+    const [, , loadingAccount, , getAccountByID] = useAccount();
     const {docId} = useParams();
     const [docInfo, setDocInfo] = useState(null);
     const { setSharedData } = useAppContext();
@@ -34,8 +33,8 @@ const DocInfo = () => {
         const fetchDoctor = async () => {
             const doctor = await getAccountByID(docId);
             setDocInfo(doctor);
-            if (doctor && doctor.bio) {
-            setDoctorBio(splitText(doctor.bio));
+            if (doctor && doctor?.bio) {
+            setDoctorBio(splitText(doctor?.bio));
             }
         };
 
@@ -67,7 +66,7 @@ const DocInfo = () => {
     
 
     const renderBio = (content) => {
-        // Ensure content is a string
+
         const displayedContent = (content || '').split('\n').map((exp, index) => {
             return (
                 <p key={index} style={{ marginLeft: '20px' }}>

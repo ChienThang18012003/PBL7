@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './Pagination.module.scss';
-import Button from '../Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 

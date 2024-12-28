@@ -13,25 +13,19 @@ export default function ArticleListModal({ children, disabled = false, data: ini
   const [data, setData] = useState(initialData?.article_list || []);
   const [filteredData, setFilteredData] = useState([]);
   const [
-    articlesHook,
-    firstArticle,
-    fourArticles,
-    loading,
-    getArticlesByDoctor,
-    getArticlesBySpecialty,
-    getArticlesByID,
-    addComment,
-    addArticle,
-    getFiveLatestArticles,
-    getFourLatestArticles,
-    searchArticle,
-    getAllArticleByDoctor,
-    softDeleteArticle,
-    permaDeleteArticle,
-    restoreArticle,
-    updateArticle,
-    getAllArticles,
-    getFiveLatestArticlesList
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    getAllArticleByDoctor
 ] = useArticles();
   let intervalId;
 
@@ -56,7 +50,7 @@ export default function ArticleListModal({ children, disabled = false, data: ini
   useEffect(()=>{
   const fetchArticlesPeriodically = async () => {
       const articles = await getAllArticleByDoctor(initialData?.email, false);
-      if (articles) setData(articles);
+      if (articles && Array.isArray(articles)) setData(articles);
   };
 
   if (initialData?.is_doc) {

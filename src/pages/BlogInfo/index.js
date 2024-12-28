@@ -4,12 +4,9 @@ import styles from './BlogInfo.module.scss';
 import PageTitle from '../../components/PageTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
-import Button from '../../components/Button';
-import CommentItem from '../../components/CommentItem';
 import useArticles from '../../hook/useArticles';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import Pagination from '../../components/Pagination';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
 
@@ -29,31 +26,31 @@ function BlogInfo() {
     const [fiveArticles, setFiveArticles] = useState([]);
 
     const [
-        articlesHook,
-        firstArticle,
-        fourArticles,
+        ,
+        ,
+        ,
         loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
+        ,
+        ,
         getArticlesByID,
-        addComment,
-        addArticle,
+        ,
+        ,
         getFiveLatestArticles,
-        getFourLatestArticles,
-        searchArticle,
-        getAllArticleByDoctor,
-        softDeleteArticle,
-        permaDeleteArticle,
-        restoreArticle,
-        updateArticle,
-        getAllArticles,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         getFiveLatestArticlesList
     ] = useArticles();
 
     useEffect(() => {
         const fetchArticle = async () => {
             const article = await getArticlesByID(id);
-            setArticleByID(article);
+            if (article && Array.isArray(article)) setArticleByID(article);
         };
 
         fetchArticle();
@@ -62,14 +59,13 @@ function BlogInfo() {
     useEffect(() => {
         const fetchFiveArticles = async () => {
             const latestArticles = await getFiveLatestArticles(id);
-            setFiveArticles(latestArticles);
+            if (latestArticles && Array.isArray(latestArticles)) setFiveArticles(latestArticles);
         };
         fetchFiveArticles();
 
         const fetchArticlesPeriodically = async () => {
-            const articles = await getFiveLatestArticlesList();
-            console.log("nhim ne");
-            setFiveArticles(articles);
+            const articles = await getFiveLatestArticlesList(id);
+            if (articles && Array.isArray(articles)) setFiveArticles(articles);
         };
 
         const intervalId = setInterval(() => {
@@ -83,8 +79,8 @@ function BlogInfo() {
 
 
     const renderContent = () => {
-        if (!articleByID.article_content) return null; 
-        return articleByID.article_content.split('\n').map((line, index) => (
+        if (!articleByID?.article_content) return null; 
+        return articleByID?.article_content.split('\n').map((line, index) => (
             <h4 className={cx('blog-content')} key={index}>
                 
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;{line.trim()}</span>
@@ -104,7 +100,7 @@ function BlogInfo() {
             <div className={cx('blog-content-wrapper')}>
                 <div className={cx('blog-wrapper')}>
                     <h4 className={cx('blog-title')}>
-                        <span>{articleByID.article_title}</span>
+                        <span>{articleByID?.article_title}</span>
                     </h4>
                     <div className={cx('blog-info-wrapper')}>
                         <div className={cx('info-wrapper')}>
@@ -122,7 +118,7 @@ function BlogInfo() {
                     </div>
                     <hr className={cx('list-blog-separator')}></hr>
                     <div className={cx('blog-content-container')}>
-                        <Image className={cx('blog-image')} src={articleByID.article_image} alt="Blog Image"></Image>
+                        <Image className={cx('blog-image')} src={articleByID?.article_image} alt="Blog Image"></Image>
                         {renderContent()}
                     </div>
                     

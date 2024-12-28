@@ -2,11 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './EditBlog.module.scss';
 import Image from '../Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar} from '@fortawesome/free-regular-svg-icons';
+import { faCalendar} from '@fortawesome/free-regular-svg-icons';
 import { faXmark, faPenToSquare, faRotate} from '@fortawesome/free-solid-svg-icons';
 import useArticles from '../../hook/useArticles';
 import { useState, useEffect } from 'react';
-import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
@@ -19,19 +18,19 @@ function EditBlog({ data : initialData, onUpdateData }) {
     const [isDisabled, setIsDisabled] = useState(true);
     
     const [
-        articlesHook,
-        firstArticle,
-        fourArticles,
-        loading,
-        getArticlesByDoctor,
-        getArticlesBySpecialty,
-        getArticlesByID,
-        addComment,
-        addArticle,
-        getFiveLatestArticles,
-        getFourLatestArticles,
-        searchArticle,
-        getAllArticleByDoctor,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
         softDeleteArticle,
         permaDeleteArticle,
         restoreArticle,
@@ -98,7 +97,7 @@ function EditBlog({ data : initialData, onUpdateData }) {
 
         const userConfirmed = window.confirm("Bạn có chắc chắn muốn chỉnh sửa bài báo này không?");
         if (userConfirmed) {
-            const message = await updateArticle(data._id, blogTitle, blogContent, image);
+            const message = await updateArticle(data?._id, blogTitle, blogContent, image);
             if (message && typeof message === 'object') {
                 alert("Chỉnh sửa bài báo thành công!");
                 setData(message);
@@ -126,7 +125,7 @@ function EditBlog({ data : initialData, onUpdateData }) {
             const message = await permaDeleteArticle(data?._id);
             if (message && typeof message === "object") {
               alert("Xóa bài báo vĩnh viễn thành công!");
-              onUpdateData("delete", data._id);
+              onUpdateData("delete", data?._id);
             } else {
               alert(message || "Có lỗi xảy ra, vui lòng thử lại sau!");
             }
@@ -148,7 +147,7 @@ function EditBlog({ data : initialData, onUpdateData }) {
       const handleRestoreArticle = async () => {
         const userConfirmed = window.confirm("Bạn có chắc chắn muốn khôi phục bài báo này không?");
         if (userConfirmed) {
-          const message = await restoreArticle(data._id);
+          const message = await restoreArticle(data?._id);
           if (message && typeof message === "object") {
             alert("Khôi phục bài báo thành công!");
             onUpdateData("update", { ...data, is_deleted: false });
@@ -208,7 +207,7 @@ function EditBlog({ data : initialData, onUpdateData }) {
                     <div className={cx('edit-blog-form-container')}>
                         <div className={cx('edit-blog-form')}>
                             <div className={cx('edit-image-container')}>
-                                <img name="image" src={image ? image.preview : data.article_image} alt="" className={cx('edit-blog-image')}></img>
+                                <img name="image" src={image ? image?.preview : data?.article_image} alt="" className={cx('edit-blog-image')}></img>
                             </div>
                             <div className={cx('edit-input-file-container')}>
                                 <input type="file" className={cx('edit-image-picker')} onChange={handlePreviewImage}></input>
