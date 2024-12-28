@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
 import useArticles from '../../hook/useArticles';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect} from 'react';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
 
@@ -50,7 +50,7 @@ function BlogInfo() {
     useEffect(() => {
         const fetchArticle = async () => {
             const article = await getArticlesByID(id);
-            if (article && Array.isArray(article)) setArticleByID(article);
+            if (article) setArticleByID(article);
         };
 
         fetchArticle();
