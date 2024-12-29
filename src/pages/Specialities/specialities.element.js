@@ -2,9 +2,8 @@ import styled from "styled-components";
 import {Container} from "../../globalStyles";
 
 export const SpecialitiesLayout = styled.div`
-    background: #F0F2F1;
     overflow: visible;
-
+    padding-bottom: 20px;
 `
 export const SpecialitiesContainer = styled(Container)`
     display: flex;
@@ -56,8 +55,8 @@ export const SearchBar = styled.div`
 export const SpecialitiesContent = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; 
-    justify-content: space-between;
+    gap: 35px; 
+    justify-content: center;
     cursor: pointer;
     overflow: visible;
 

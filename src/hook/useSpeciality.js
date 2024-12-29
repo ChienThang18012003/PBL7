@@ -21,7 +21,7 @@ const useSpeciality = () => {
     const getAllSpeciality = async() => {
         try {
             const allSpecialities = await Speciality_API.get_All_Speciality();
-            const sortedSpecialities = allSpecialities.sort((a, b) => a?.name.localeCompare(b?.name));
+            const sortedSpecialities = allSpecialities.sort((a, b) => a.name.localeCompare(b.name));
             return sortedSpecialities;
         } catch (error) {
             console.error('Failed to fetch specialities:', error);

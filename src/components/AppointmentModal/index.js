@@ -63,7 +63,7 @@ export default function AppointmentModal({ children, data = [], onSubmit, disabl
   };
 
   const getHighlightedDates = () => {
-    if (!Array.isArray(data)) return []; // Kiểm tra nếu `data` không phải là mảng
+    if (!Array.isArray(data)) return []; 
     return data
       .map((item) => dayToIndexMap[item.day])
       .filter((dayIndex) => dayIndex !== undefined);

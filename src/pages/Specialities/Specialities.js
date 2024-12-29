@@ -22,7 +22,7 @@ import Image from '../../components/Image';
 const Specialities = () => {
     const navigate = useNavigate();
     const {speciality} = useParams();
-    const [specialityLoading, specialityHook, searchSpeciality, getAllSpeciality] = useSpeciality();
+    const [specialityLoading, specialityHook, , searchSpeciality, getAllSpeciality] = useSpeciality();
     const [filterSpec, setFilterSpec] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -30,7 +30,7 @@ const Specialities = () => {
 
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 12,
     });
 
     const applyFilter = () => {
@@ -64,12 +64,12 @@ const Specialities = () => {
 
         const intervalId = setInterval(() => {
             fetchSpecialitiesPeriodically();
-        }, 5000);
+        }, 8000);
 
         return () => {
             clearInterval(intervalId);
         };
-    }, [specialityHook, speciality]);
+    }, [specialityHook]);
 
     const table = useReactTable({
         data: filterSpec,
@@ -97,7 +97,7 @@ const Specialities = () => {
                 </SpecialitiesHeader>
                 <SearchBar>
                     <img src={assets.search_icon} alt='icon'/>
-                    <input type='text' placeholder='Tìm kiếm chuyên khoa' value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
+                    <input type='text' placeholder='Tìm kiếm' value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}}/>
                 </SearchBar>
 
                 <SpecialitiesContent >
