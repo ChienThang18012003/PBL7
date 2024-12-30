@@ -4,6 +4,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHashtag } from '@fortawesome/free-solid-svg-icons';
 import Image from '../Image';
+import { assets } from '../../assets/assets_fe/assets';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +30,7 @@ function ForumItem({ data, onHashtagClick }) {
         <div className={cx('container')}>
             <div className={cx('wrapper')}>
                 <div className={cx('user-avatar-section')}>
-                    <Image className={cx('user-avatar')} src={data?.user_id?.profile_image} alt="User Avatar" />
+                    <Image className={cx('user-avatar')} src={data?.user_id?.profile_image} alt="User Avatar" fallback={assets.UserImage}/>
                 </div>
 
                 <div className={cx('question-section')}>

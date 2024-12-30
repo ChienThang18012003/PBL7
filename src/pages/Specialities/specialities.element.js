@@ -4,6 +4,7 @@ import {Container} from "../../globalStyles";
 export const SpecialitiesLayout = styled.div`
     overflow: visible;
     padding-bottom: 20px;
+    background-color: #f1f2f3;
 `
 export const SpecialitiesContainer = styled(Container)`
     display: flex;

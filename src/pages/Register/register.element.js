@@ -18,15 +18,24 @@ export const Deco = styled.div`
     top: -200px;
     width: 100%;
     height: 400px;
-    background-color: #3BA5A9;
-    border-radius: 50%;
+    background-color: #00a6a9;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    h1 {
-        color: white;
+    p {
+        color: #fff;
+        font-size: 30px;
+        font-weight: 500;
         text-transform: uppercase;
-        text-align: center;
-        margin-top: 300px;
+    }
 
+    img {
+        width: 120px;
+        height: 120px;
+        margin-top: 200px;
+        cursor: pointer;
     }
 
 `
@@ -50,7 +59,7 @@ export const RContent = styled.div`
 `
 export const RButton = styled.div`
     margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     button{
@@ -62,19 +71,57 @@ export const RButton = styled.div`
         border-radius: 5px;
         border: none;
         cursor: pointer;
-        
+        border-radius: 50px;
+        &:hover{
+           background-color: #50ACE9;
+        }
+    }
+`
+
+export const RLink = styled.div`
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+
+    p{
+        color: #000;
+        text-align: center;
+        font-size: 2rem;
+        margin-right: 10px;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+
+    h5 {
+        color: #50ACE9;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
 `
 
 export const RBodyL = styled.div`
     width: 40%;
-    padding: 20px;
+    padding: 10px;
 
     input {
         width: 100%;
-        height: 30px;
+        height: 40px;
         border: 1px solid gainsboro;
-        border-radius: 5px;
+        border-radius: 50px;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        &:focus {
+            border: 1px solid gainsboro; /* Đổi border khi focus vào input */
+            outline: none; /* Loại bỏ outline mặc định */
+        }
     }
 
     @media (max-width: 1024px) {
@@ -90,19 +137,26 @@ export const RBodyL = styled.div`
 export const RBodyLItem = styled.div`
     margin: 30px;
     font-size: 20px;
+    color: #00D3D6;
     //margin-left: 200px;
 
 
 `
 export const RBodyR = styled.div`
     width: 40%;
-    padding: 20px;
+    padding: 10px;
 
     input, select {
         width: 100%;
-        height: 30px;
+        height: 40px;
         border: 1px solid gainsboro;
-        border-radius: 5px;
+        border-radius: 50px;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        &:focus{
+           outline:none;
+        }
     }
 
     @media (max-width: 1024px) {
@@ -119,6 +173,7 @@ export const RBodyR = styled.div`
 export const RBodyRItem = styled.div`
     margin: 30px;
     font-size: 20px;
+    color: #00D3D6;
 
     @media (max-width: 1024px) {
        margin-top: 0px;

@@ -7,12 +7,16 @@ import {
     LoginItem, LoginItemAndHeader,
     LoginItemList,
     LoginLayout,
-    LoginLink
+    LoginLink,
+    LoginItem2,
+    LoginLink2,
+    LoginLogo
 } from "./login.element";
 import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { assets } from '../../assets/assets_fe/assets';
 
 const Login = () => {
 
@@ -43,8 +47,16 @@ const Login = () => {
         }
     };
 
-    const handleForgotPassword = async () => {
+    const handleForgotPassword = () => {
         navigate("/forgot-password");
+    }
+
+    const handleRegister = () => {
+        navigate("/register");
+    }
+
+    const handleLogoClick = () => {
+        navigate("/");
     }
 
     return (
@@ -57,6 +69,9 @@ const Login = () => {
                     </LoginDeco>
 
                     <LoginItemAndHeader>
+                        <LoginLogo>
+                            <img src={assets.MobileLogo} onClick={handleLogoClick}></img>
+                        </LoginLogo>
                         <LoginHeader>Đăng Nhập</LoginHeader>
                         <LoginItemList>
                             <LoginItem>
@@ -70,7 +85,13 @@ const Login = () => {
                             <LoginButton onClick={handleLogin}>
                                 Đăng Nhập
                             </LoginButton>
-                            <LoginLink onClick={handleForgotPassword}>Quên mật khẩu</LoginLink>
+                            <LoginLink>
+                                <p onClick={handleForgotPassword}>Quên mật khẩu?</p>
+                            </LoginLink>
+                            <LoginItem2>
+                                <p>Bạn chưa có tài khoản?</p>
+                                <LoginLink2 onClick={handleRegister}>Tạo tài khoản</LoginLink2>
+                            </LoginItem2>
                         </LoginItemList>
                     </LoginItemAndHeader>
 

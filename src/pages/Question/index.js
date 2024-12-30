@@ -11,6 +11,7 @@ import usePost from '../../hook/usePost';
 import useAccount from '../../hook/useAccount';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
+import { assets } from '../../assets/assets_fe/assets';
 
 const cx = classNames.bind(styles);
 function Question() {
@@ -164,6 +165,7 @@ function Question() {
                             <Image
                                 className={cx('user-avatar')}
                                 src={userInfo?.profile_image}
+                                fallback={assets.UserImage}
                                 alt="User Avatar"
                             ></Image>
                         </div>

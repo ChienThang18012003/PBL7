@@ -9,13 +9,14 @@ import {
     RButton, RContent,
     RHeader,
     RLayout,
-    RSpace
+    RSpace,
+    RLink
 } from "./register.element";
-import {Deco2} from "../Login/login.element";
 import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { assets } from '../../assets/assets_fe/assets';
 
 const Register = () => {
     const [ , signUp] = useAccount();
@@ -26,6 +27,14 @@ const Register = () => {
     const [role, setRole] = useState('0');
     const [phone, setPhone] = useState('');  
     const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/');
+    }
+
+    const handleLoginClick = () => {
+        navigate('/login');
+    }
 
     const handleSubmitSignUp = async() => {
         if (userName === ''){
@@ -70,7 +79,8 @@ const Register = () => {
                 <RHeader>
 
                     <Deco>
-                        <h1>Đăng kí tài khoản</h1>
+                        <img src={assets.MobileLogo2} onClick={handleLogoClick}></img>
+                        <p>Đăng ký tài khoản</p>
                     </Deco>
                 </RHeader>
                 <RBody>
@@ -78,8 +88,8 @@ const Register = () => {
                         <RSpace/>
                         <RBodyL>
                             <RBodyLItem>
-                                <p>Họ và tên</p>
-                                <input type='text' autoFocus value={userName} onChange={(e) => {setUserName(e.target.value)}}/>
+                                <p>Email</p>
+                                <input type='email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
                             </RBodyLItem>
                             <RBodyLItem>
                                 <p>Mật khẩu</p>
@@ -94,15 +104,15 @@ const Register = () => {
                         </RBodyL>
                         <RBodyR>
                             <RBodyRItem>
-                                <p>Email</p>
-                                <input type='email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
+                                <p>Họ và tên</p>
+                                <input type='text' autoFocus value={userName} onChange={(e) => {setUserName(e.target.value)}}/>
                             </RBodyRItem>
                             <RBodyRItem>
                                 <p>Số điện thoại</p>
                                 <input type='number' value={phone} onChange={(e) => {setPhone(e.target.value)}}/>
                             </RBodyRItem>
                             <RBodyRItem>
-                                <p>Bạn là</p>
+                                <p>Loại tài khoản</p>
                                 <select value={role} onChange={(e) => {setRole(e.target.value)}}>
                                     <option value="0">Người dùng</option>
                                     <option value="1">Bác sĩ</option>
@@ -117,6 +127,10 @@ const Register = () => {
                     <RButton>
                         <button onClick={handleSubmitSignUp}>Đăng ký</button>
                     </RButton>
+                    <RLink>
+                        <p>Đã có tài khoản?</p>
+                        <h5 onClick={handleLoginClick}>Đăng nhập</h5>
+                    </RLink>
                 </RBody>
 
 

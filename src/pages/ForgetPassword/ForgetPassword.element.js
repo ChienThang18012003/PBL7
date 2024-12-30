@@ -37,7 +37,7 @@ export const LoginItemAndHeader = styled.div`
 
 export const LoginHeader = styled.p`
     color: #609799;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     font-size: 40px;
 `
 export const LoginItemList = styled.div`
@@ -52,14 +52,18 @@ export const LoginItemList = styled.div`
 `
 export const LoginItem = styled.div`
     font-size: 20px;
-    color: #50ACE9;
+    color: #00D3D6;
     input{
         display: block;
         width: 100%; 
         margin: 10px 0; 
         padding: 10px; 
         border: 1px solid gainsboro;
-        border-radius: 3px;
+        border-radius: 50px;
+        padding-left: 10px;
+        &:focus{
+           outline: none;
+        }
     }
     
 `
@@ -71,9 +75,14 @@ export const LoginButton = styled.button`
     color: white;
     background-color: #00D3D6;
     font-size: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    &:hover{
+       background-color: #50ACE9;
+    }
 `
 
 export const LoginLink = styled.p`

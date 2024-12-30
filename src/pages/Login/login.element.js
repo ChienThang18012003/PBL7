@@ -34,10 +34,19 @@ export const LoginItemAndHeader = styled.div`
         width: 80%;
     }
 `
+export const LoginLogo = styled.div`
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+`
 
 export const LoginHeader = styled.p`
-    color: #609799;
-    margin-bottom: 100px;
+    color: #00D3D6;
+    margin-bottom: 20px;
     font-size: 40px;
 `
 export const LoginItemList = styled.div`
@@ -52,16 +61,43 @@ export const LoginItemList = styled.div`
 `
 export const LoginItem = styled.div`
     font-size: 20px;
-    color: #50ACE9;
+    color: #00D3D6;
     input{
         display: block;
         width: 100%; 
-        margin: 10px 0; 
+        margin: 5px 0; 
         padding: 10px; 
         border: 1px solid gainsboro;
-        border-radius: 3px;
+        border-radius: 50px;
+        &:focus{
+           outline:none;
+        }
     }
     
+`
+
+export const LoginItem2 = styled.div`
+    font-size: 20px;
+    color: #000;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    
+`
+
+export const LoginLink2 = styled.p`
+    color: #50ACE9;
+    font-size: 20px;
+    font-style: italic;
+    cursor: pointer;
+
+    &:hover{
+       text-decoration: underline;
+    }
 `
 
 export const LoginButton = styled.button`
@@ -70,21 +106,26 @@ export const LoginButton = styled.button`
     font-weight: bold;
     color: white;
     background-color: #00D3D6;
+    margin-top: 5px;
     font-size: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
+    &:hover{
+      background-color: #50ACE9;
+    }
 `
 
-export const LoginLink = styled.p`
-    color: #50ACE9;
+export const LoginLink = styled.div`
     margin-top: 10px;
-    font-size: 20px;
-    font-style: italic;
-    cursor: pointer;
-
-    &:hover{
-       text-decoration: underline;
+    p{
+        color: #50ACE9;
+        font-size: 20px;
+        font-style: italic;
+        cursor: pointer;
+        &:hover{
+          text-decoration: underline;
+        }
     }
     
 `

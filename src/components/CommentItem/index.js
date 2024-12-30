@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '../Image';
 import { useState, useEffect } from 'react';
 import usePost from '../../hook/usePost';
+import { assets } from '../../assets/assets_fe/assets';
 
 const cx = classNames.bind(styles);
 
@@ -90,7 +91,7 @@ function CommentItem({ data, owner, postID, onDeleteComment }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('user-avatar-section')}>
-                <Image className={cx('user-avatar')} src={data?.replier?.profile_image}></Image>
+                <Image className={cx('user-avatar')} src={data?.replier?.profile_image} fallback={assets.UserImage}></Image>
             </div>
             
             {

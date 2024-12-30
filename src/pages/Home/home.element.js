@@ -225,7 +225,7 @@ export const NewsButtonContainer = styled.div`
 export const NewButton = styled.button`
   color: white;
   background: #00D3D6;
-  width: 150px;
+  width: 180px;
   height: 50px;
   margin-top: 10px;
   border: none;

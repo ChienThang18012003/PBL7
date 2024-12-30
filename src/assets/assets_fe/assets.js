@@ -18,6 +18,9 @@ import Pediatricians from './Pediatricians.svg'
 import Dermatologist from './Dermatologist.svg'
 import PageLoader from '../../assets/assets_fe/PageLoader.gif';
 import NoImage from '../../assets/assets_fe/NoImage.png';
+import MobileLogo from '../../assets/assets_fe/MobileLogo.png';
+import MobileLogo2 from '../../assets/assets_fe/MobileLogo2.png';
+import UserImage from '../../assets/assets_fe/User.png';
 
 
 export const assets = {
@@ -33,6 +36,9 @@ export const assets = {
     PageLoader,
     NoImage,
     HospitalImage,
+    MobileLogo,
+    MobileLogo2,
+    UserImage
 }
 export const specialityData = [
     {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Button as Button2} from '../../globalStyles';
-import { useLocation } from 'react-router-dom';
 import {
     MobileIcon,
     Nav, Nav2,
@@ -109,12 +108,12 @@ const Navbar = () => {
                                             <NavItemBtn>
                                                 {button ? (
                                                     <NavBtnLink2>
-                                                        <Button2 onClick={() => navigate('/register')} primary>ĐĂNG KÍ</Button2>
+                                                        <Button2 onClick={() => navigate('/register')} primary>ĐĂNG KÝ</Button2>
                                                     </NavBtnLink2>
                                                 ) : (
                                                     <NavBtnLink2 to='/register'>
                                                         <Button2 onClick={closeMobileMenu} fontBig primary>
-                                                            ĐĂNG KÍ
+                                                            ĐĂNG KÝ
                                                         </Button2>
                                                     </NavBtnLink2>
                                                 )}
@@ -139,7 +138,7 @@ const Navbar = () => {
                                               <div className="user-email">
                                                 <span>{userInfo?.email}</span>
                                               </div>
-                                              <Image className="profile_image" src={userInfo?.profile_image} alt="Login status" onClick={()=>{setIsClickedOn(!isClickedOn)}}/>
+                                              <Image className="profile_image" src={userInfo?.profile_image} fallback={assets.UserImage} alt="Login status" onClick={()=>{setIsClickedOn(!isClickedOn)}}/>
                                               
                                               
                                               <div className="Button-container">
