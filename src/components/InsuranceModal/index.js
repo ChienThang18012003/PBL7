@@ -75,6 +75,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
                 <input
                   className={cx('field-input')}
                   value={insuranceName}
+                  placeholder="Nhập tên bảo hiểm"
                   onChange={(e) => setInsuranceName(e.target.value)}
                 />
               </div>
@@ -83,6 +84,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
                   <span>Mã số</span>
                 </div>
                 <input
+                  placeholder="Nhập mã số"
                   className={cx('field-input')}
                   value={insuranceID}
                   onChange={(e) => setInsuranceID(e.target.value)}
@@ -93,6 +95,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
                   <span>Nơi cấp</span>
                 </div>
                 <input
+                  placeholder="Nhập nơi cấp"
                   className={cx('field-input')}
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
@@ -104,6 +107,7 @@ const InsuranceModal = forwardRef(({ children, data }, ref) => {
                 </div>
                 <input
                   type="date"
+                  placeholder="Nhập ngày hết hạn"
                   className={cx('field-input')}
                   value={expiredDate || ''}
                   onChange={handleExpiredDateChange}

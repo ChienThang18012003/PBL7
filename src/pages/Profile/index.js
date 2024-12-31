@@ -375,9 +375,10 @@ function Profile() {
                  <img className={cx('background-img')} src={assets.HospitalImage}></img>
                  <div className={cx('profile-image-container')}>
                  <Image 
-                    src={image?.preview || userInfo?.profile_image || 'default-placeholder.jpg'}
+                    src={image?.preview || userInfo?.profile_image}
                     alt="User Profile" 
                     className={cx('profile-image')}
+                    fallback = {assets.UserImage}
                 />
 
                  </div>

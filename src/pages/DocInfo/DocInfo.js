@@ -21,6 +21,7 @@ import useAccount from '../../hook/useAccount';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
 import PageTitle from '../../components/PageTitle';
+import { assets } from '../../assets/assets_fe/assets';
 
 const DocInfo = () => {
     const [, , loadingAccount, , getAccountByID] = useAccount();
@@ -94,7 +95,7 @@ const DocInfo = () => {
             <PageTitle>THÔNG TIN BÁC SĨ</PageTitle>
             <DocInfoLayout>
                 <DocInfoLeft>
-                    <Image className='image-background' src={docInfo?.profile_image} alt='pic'/>
+                    <Image className='image-background' fallback={assets.DoctorImage} src={docInfo?.profile_image} alt='pic'/>
                 </DocInfoLeft>
                 <DocInfoRight>
                     <DocName>
@@ -104,7 +105,17 @@ const DocInfo = () => {
                     {docInfo?.speciality_id ? (
                         <p>{docInfo?.speciality_id?.name || 'Chưa xác định'}</p>
                     ) : (
-                        <p>Chưa xác định</p>
+                        <p>Chưa xác định chuyên khoa</p>
+                    )}
+                    {docInfo?.region_id ? (
+                        <p>{docInfo?.region_id?.name || 'Chưa xác định'}</p>
+                    ) : (
+                        <p>Chưa xác định chi nhánh</p>
+                    )}
+                    {docInfo?.email ? (
+                        <p>Thông tin liên hệ: {docInfo?.email || 'Chưa xác định'}</p>
+                    ) : (
+                        <p></p>
                     )}
                     </DocSD>
                     <DocBookButton onClick={handleBooking}>
@@ -126,13 +137,13 @@ const DocInfo = () => {
                 <DoctorInformationItem>
                     <DocHeader>QUÁ TRÌNH CÔNG TÁC</DocHeader>
                     <Underline/>
-                    <p>{renderBio(doctorBio.workExperience || '')}</p>
+                    <p>{renderBio(doctorBio.workExperience || 'Chưa có thông tin')}</p>
                 </DoctorInformationItem>
 
                 <DoctorInformationItem>
                     <DocHeader>QUÁ TRÌNH HỌC TẬP</DocHeader>
                     <Underline/>
-                    <p>{renderBio(doctorBio.education || '')}</p>
+                    <p>{renderBio(doctorBio.education || 'Chưa có thông tin')}</p>
                 </DoctorInformationItem>
 
 

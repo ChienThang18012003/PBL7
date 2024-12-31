@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {ImageContainer, RelatedCard, RelatedContainer, RelateDisplay} from "./relateddoctors.element";
 import useAccount from '../../hook/useAccount';
 import Image from '../Image';
+import { assets } from '../../assets/assets_fe/assets';
 
 const RelatedDoctors = ({speciality, docId}) => {
     const [
@@ -72,7 +73,7 @@ const RelatedDoctors = ({speciality, docId}) => {
                                  key={index}
                     >
                         <ImageContainer>
-                            <Image className='img-custom' src={item?.profile_image} alt='img'/>
+                            <Image className='img-custom' fallback={assets.DoctorImage} src={item?.profile_image} alt='img'/>
 
                         </ImageContainer>
                         <div className='info-custom'>

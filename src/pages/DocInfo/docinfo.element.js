@@ -26,7 +26,7 @@ export const DocInfoLeft = styled.div`
     .image-background {
         background-color: #00D3D6;
         width: 100%;
-        height: 100%;
+        height: 200px;
         object-fit: cover;
         max-width: 18rem;
         border-radius: 0.5rem;
@@ -35,6 +35,7 @@ export const DocInfoLeft = styled.div`
 `
 export const DocInfoRight = styled.div`
     flex: 1;
+    height: 200px;
     border: 1px solid #cbd5e1;
     justify-content: space-between;
     display: flex;
@@ -61,7 +62,7 @@ export const DocName = styled.p`
 
 export const DocSD = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.5rem;
     font-size: 1.4rem; 
     margin-top: 0.25rem; 

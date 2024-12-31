@@ -147,13 +147,16 @@ const Navbar = () => {
                                                   <button
                                                         className="profile-buttons"
                                                         onClick={() => {
-                                                            localStorage.removeItem('isLoginSuccess');
-                                                            if (window.location.pathname === '/profile') {
-                                                                navigate('/login', { replace: true });
-                                                            } else {
-                                                                navigate('/login');
+                                                            const userConfirmed = window.confirm("Bạn có chắc muốn đăng xuất không ?")
+                                                            if (userConfirmed) {
+                                                                localStorage.removeItem('isLoginSuccess');
+                                                                if (window.location.pathname === '/profile') {
+                                                                    navigate('/login', { replace: true });
+                                                                } else {
+                                                                    navigate('/login');
+                                                                }
+                                                                window.location.reload();
                                                             }
-                                                            window.location.reload();
                                                         }}
                                                     >
                                                         Đăng xuất
@@ -206,13 +209,16 @@ const Navbar = () => {
                                         </NavItem2>
                                         <NavItem2>
                                             <NavLinks2 onClick={() => {
-                                                            localStorage.removeItem('isLoginSuccess');
-                                                            if (window.location.pathname === '/profile') {
-                                                                navigate('/login', { replace: true });
-                                                            } else {
-                                                                navigate('/login');
+                                                            const userConfirmed = window.confirm("Bạn có chắc muốn đăng xuất không ?")
+                                                            if (userConfirmed) {
+                                                                localStorage.removeItem('isLoginSuccess');
+                                                                if (window.location.pathname === '/profile') {
+                                                                    navigate('/login', { replace: true });
+                                                                } else {
+                                                                    navigate('/login');
+                                                                }
+                                                                window.location.reload();
                                                             }
-                                                            window.location.reload();
                                                         }}>
                                                 ĐĂNG XUẤT
                                             </NavLinks2>

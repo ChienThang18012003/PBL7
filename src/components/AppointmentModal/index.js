@@ -101,24 +101,25 @@ export default function AppointmentModal({ children, data = [], onSubmit, disabl
 
   return (
     <>
-      <Button type="button" primary disabled={disabled} onClick={toggleModal}>
+      <button type="button" className={cx('modal-button')} disabled={disabled} onClick={toggleModal}>
         {children}
-      </Button>
+      </button>
 
       {modal && (
         <div className={cx("modal")}>
           <div onClick={toggleModal} className={cx("overlay")}></div>
           <div className={cx("modal-content")}>
-            <h1>Chọn ngày và giờ làm việc</h1>
+            <h1 className={cx("title")}>Chọn ngày và giờ làm việc</h1>
 
             <div className={cx("calendar-container")}>
               <Calendar
                 onChange={handleDateChange}
                 value={selectedDate}
-                tileClassName={tileClassName} 
-                tileDisabled={tileDisabled} 
+                tileClassName={tileClassName}
+                tileDisabled={tileDisabled}
               />
             </div>
+
 
             <div className={cx("field-container")}>
             

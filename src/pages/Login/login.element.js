@@ -76,6 +76,39 @@ export const LoginItem = styled.div`
     
 `
 
+export const LoginItem3 = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    border: 1px solid gainsboro;
+    margin: 5px 0;
+    position: relative;
+    input{
+        display: block;
+        width: 100%; 
+        padding: 10px; 
+        padding-right: 40px;
+        border-radius: 50px;
+        border: none;
+        &:focus{
+           outline:none;
+        }
+    }
+    .eye-icon{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.6rem;
+        cursor: pointer;
+        &:hover{
+           color:rgb(151, 152, 153);
+        }
+    }
+
+`
+
 export const LoginItem2 = styled.div`
     font-size: 20px;
     color: #000;

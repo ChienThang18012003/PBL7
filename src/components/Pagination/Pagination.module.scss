@@ -1,12 +1,12 @@
 .pagination {
     height: 70px;
     display: flex;
-    flex-shrink: 0; /* Chỉnh lại từ 'none' thành '0' */
+    flex-shrink: 0; 
     flex-wrap: wrap;
     background-color: #fff;
     border-radius: 2px;
-    justify-content: center; /* Thay đổi thành center để căn giữa các items */
-    align-items: center; /* Đảm bảo căn giữa các item theo chiều dọc */
+    justify-content: center; 
+    align-items: center; 
     gap: 20px;
 }
 
@@ -35,4 +35,25 @@
     background-color: #005a5c;
     border-radius: 2px;
     cursor: pointer;
+}
+
+// mobile (width<740px)
+@media only screen and (max-width: 740px) {
+    .pagination{
+        width: 300px;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .pagination button{
+        width: 20px;
+        height: 20px;
+        font-size: 1.4rem;
+    }
+
+    .pagination button.active{
+        width: 20px;
+        height: 20px;
+        font-size: 1.4rem;
+    }
 }

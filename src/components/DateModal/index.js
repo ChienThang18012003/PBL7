@@ -327,6 +327,7 @@ export default function DateModal({children , disabled = false, data = [], onAdd
                       disableDayPicker
                       value={startTimeValue}
                       onChange={handleStartTimeChange}
+                      placeholder="Chọn thời gian bắt đầu"
                       format="HH:mm"
                       plugins={[<TimePicker position="bottom" hideSeconds={true} hideAMPM={true} />]}
                       style={{
@@ -346,6 +347,7 @@ export default function DateModal({children , disabled = false, data = [], onAdd
                       disableDayPicker
                       value={endTimeValue}
                       onChange={handleEndTimeChange}
+                      placeholder="Chọn thời gian kết thúc"
                       format="HH:mm"
                       plugins={[<TimePicker position="bottom" hideSeconds={true} hideAMPM={true} />]}
                       style={{
@@ -361,7 +363,7 @@ export default function DateModal({children , disabled = false, data = [], onAdd
                     <div className={cx('field-name')}>
                         <span>Nhập giới hạn số lượng</span>
                     </div>
-                    <input type="number" className={cx('field-input')} value={appointmentLimit} onChange={(e)=>{setAppointmentLimit(e.target.value)}}></input>
+                    <input type="number" placeholder="Nhập giới hạn số lượng" className={cx('field-input')} value={appointmentLimit} onChange={(e)=>{setAppointmentLimit(e.target.value)}}></input>
                 </div>
                 {
                   type === "add" ? (

@@ -105,6 +105,15 @@ export const ARightSide = styled.div`
 export const ARSItem = styled.div`
     margin-left: 10px;
     width: 100%;
+    position: relative;
+
+    .calendar-icon{
+       color: #000 !important;
+    }
+    .calendar-icon.disabled {
+        opacity: 0.5; 
+        cursor: default; 
+    }
     
     p{
         font-weight: bold;

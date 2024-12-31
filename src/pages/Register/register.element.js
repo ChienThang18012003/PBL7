@@ -135,13 +135,53 @@ export const RBodyL = styled.div`
     }
 `
 export const RBodyLItem = styled.div`
-    margin: 30px;
+    margin: 30px 30px 0px 30px;
     font-size: 20px;
     color: #00D3D6;
     //margin-left: 200px;
 
 
 `
+
+export const RBodyLItem2 = styled.div`
+    display: flex;
+    width: calc(100%-20px);
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    border: 1px solid gainsboro;
+    margin: 10px 30px 30px 30px;
+    position: relative;
+    input{
+        display: block;
+        width: 100%; 
+        margin: 0px;
+        padding: 10px; 
+        padding-right: 40px;
+        border-radius: 50px;
+        border: none;
+        &:focus{
+           outline:none;
+        }
+    }
+    input[type="password"]::-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: black !important;
+    }
+    .eye-icon{
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        font-size: 1.6rem;
+        cursor: pointer;
+        &:hover{
+           color:rgb(151, 152, 153);
+        }
+    }
+
+
+`
+
 export const RBodyR = styled.div`
     width: 40%;
     padding: 10px;

@@ -27,6 +27,7 @@ body.active-modal {
     position: absolute;
     top: 40%;
     left: 50%;
+    height: 200px;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     padding: 14px 28px;
@@ -76,10 +77,10 @@ body.active-modal {
 
 .modal-field-container{
     width: 300px;
-    height: 450px;
+    height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     align-content: space-between;
 }

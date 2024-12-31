@@ -142,6 +142,7 @@ const Doctors = () => {
                                 type="text"
                                 value={searchValue}
                                 onChange={handleSearchChange}
+                                placeholder='Nhập tên bác sĩ'
                             ></input>
                             <button className={cx('search-bar-button')} onClick={handleSubmitSearch}>
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -171,7 +172,7 @@ const Doctors = () => {
                     {Array.isArray(currentDoctors) && currentDoctors.map((item, index) => (
                         <div onClick={() => navigate(`/appointment/${item?._id}`)} className='card' key={index}>
                             
-                            <ImageContainer><Image className='image-background' src={item?.profile_image} alt='img' fallback={assets.NoImage}/></ImageContainer>
+                            <ImageContainer><Image className='image-background' src={item?.profile_image} fallback={assets.DoctorImage} alt='img'/></ImageContainer>
 
                             
                             <div className='content'>

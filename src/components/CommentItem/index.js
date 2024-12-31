@@ -140,6 +140,7 @@ function CommentItem({ data, owner, postID, onDeleteComment }) {
                         <div className={cx('textarea-wrapper')}>
                         <textarea
                                 className={cx('edit-textarea')}
+                                placeholder='Viết bình luận...'
                                 value={textareaValue}
                                 onChange={(e) => {
                                     setTextareaValue(e.target.value);

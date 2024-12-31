@@ -84,7 +84,7 @@ export default function ProofModal({ children, disabled = false, data }) {
               </div>
               
                 <Button submitTwo onClick={handleUploadProof}>
-                  Tải lên
+                  Thêm
                 </Button>
               
             </div>

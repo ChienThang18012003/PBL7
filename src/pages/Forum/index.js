@@ -203,6 +203,7 @@ function Forum() {
                                 type="text"
                                 value={searchValue}
                                 onChange={handleSearchChange}
+                                placeholder='Nhập chủ đề'
                             ></input>
                             <button className={cx('search-bar-button')} onClick={handleSubmitSearch}>
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -273,6 +274,7 @@ function Forum() {
                             </h4>
                             <textarea
                                 name="topic"
+                                placeholder='Nhập chủ đề'
                                 className={cx('question-topic')}
                                 value={postTitle}
                                 onChange={(e) => {
@@ -290,6 +292,7 @@ function Forum() {
                             </h4>
                             <textarea
                                 name="question"
+                                placeholder='Nhập câu hỏi'
                                 className={cx('question')}
                                 value={postContent}
                                 onChange={(e) => {

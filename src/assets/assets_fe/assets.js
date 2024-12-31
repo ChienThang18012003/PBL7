@@ -21,6 +21,8 @@ import NoImage from '../../assets/assets_fe/NoImage.png';
 import MobileLogo from '../../assets/assets_fe/MobileLogo.png';
 import MobileLogo2 from '../../assets/assets_fe/MobileLogo2.png';
 import UserImage from '../../assets/assets_fe/User.png';
+import DoctorImage from '../../assets/assets_fe/DoctorImage.png';
+import ArticleImage from '../../assets/assets_fe/ArticleImage.png'
 
 
 export const assets = {
@@ -38,7 +40,9 @@ export const assets = {
     HospitalImage,
     MobileLogo,
     MobileLogo2,
-    UserImage
+    UserImage,
+    DoctorImage,
+    ArticleImage
 }
 export const specialityData = [
     {

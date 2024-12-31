@@ -1,5 +1,6 @@
 body.active-modal {
     overflow-y: hidden;
+    background: #007bff !important;
 }
 
 .btn-modal {
@@ -24,6 +25,8 @@ body.active-modal {
     background: rgba(49,49,49,0.8);
 }
 .modal-content {
+    color: #00A6A9 !important;
+    font-size: 1.2rem !important;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -41,6 +44,11 @@ body.active-modal {
     background-image: linear-gradient(180deg, #00A6A9, #0c507c);
     border-radius: 20px;
     z-index: 2001;
+}
+
+.title{
+    color: #fff !important;
+    font-size: 2rem !important;
 }
 
 .close-modal {
@@ -92,21 +100,38 @@ body.active-modal {
 .highlighted-day {
     background: #ffcc00 !important;
     color: white !important;
-    border-radius: 50%;
     font-weight: bold;
-  }
+    font-size: 1.4rem;
+    margin: 5px;
+    &:hover{
+        background: #ffa600 !important;
+    }
+}
   
 
 .calendar-container {
     margin: 20px 0;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.modal-button{
+    border:none;
+    border-radius: 5px;
+    position: absolute;
+    top: 40px;
+    right: 11%;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #fff !important;
+}
+
 .react-calendar {
-    background: white;
+    background: #000 !important; /* Nền màu đen */
+    color: #fff; /* Chữ màu trắng */
     border: none;
     border-radius: 10px;
     width: 100%;
@@ -114,28 +139,34 @@ body.active-modal {
 }
 
 .selected-day {
-    background-color: #ffa07a; /* Màu cam nhạt */
+    background-color: #ff5c5c !important; 
+    font-weight: bold;
     color: #fff;
-    border-radius: 50%;
+    font-size: 1.4rem;
+    margin: 5px;
   }
 
 .react-calendar__navigation {
     display: flex;
     justify-content: space-between;
-    background: #00A6A9;
-    color: white;
+    background: #00A6A9 !important;
+    color: #000;
     border-radius: 10px 10px 0 0;
     padding: 5px 10px;
 }
 
 .react-calendar__navigation button {
-    background: transparent;
+    background-color: violet !important;
     border: none;
     color: white;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
 }
+  
+  .react-calendar__month-view__days {
+    margin-top: 10px;
+  }
 
 .react-calendar__month-view__days__day {
     padding: 10px;
@@ -148,11 +179,18 @@ body.active-modal {
 }
 
 .react-calendar__month-view__days__day--weekend {
-    color: #ff6b6b; /* Màu cho ngày cuối tuần */
+    color: #ff6b6b; 
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
-    color: #b5b5b5; /* Màu cho ngày thuộc tháng trước hoặc tháng sau */
+    color: #b5b5b5;
+}
+
+.react-calendar__tile {
+    border-radius: 10px !important;
+    background: #0c507c;
+    color: white;
+    border-radius: 10px;
 }
 
 .react-calendar__tile--active {
@@ -168,51 +206,23 @@ body.active-modal {
 }
 
 .react-calendar__tile--now {
-    background: #00A6A9;
+    background: #00A6A9 !important;
     color: white;
     border-radius: 10px;
     font-weight: bold;
 }
 
-.radio-button {
-    width: 5px; /* Kích thước chiều rộng */
-    height: 5px; /* Kích thước chiều cao */
-    border: 2px solid #007bff; /* Đường viền */
-    border-radius: 50%; /* Tạo hình tròn */
-    cursor: pointer;
-    position: relative;
-  
-    /* Hiệu ứng khi được chọn */
-    &:checked {
-      background-color: #007bff; /* Màu nền khi chọn */
-    }
-  
-    /* Hiệu ứng hover */
-    &:hover {
-      border-color: #0056b3; /* Đổi màu đường viền khi hover */
-    }
-  
-    /* Thêm vòng tròn bên trong khi được chọn */
-    &::after {
-      content: "";
-      display: block;
-      width: 8px; /* Kích thước vòng tròn nhỏ bên trong */
-      height: 8px;
-      background-color: white; /* Màu bên trong */
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      visibility: hidden; /* Ẩn mặc định */
-    }
-  
-    &:checked::after {
-      visibility: visible; /* Hiện vòng tròn khi được chọn */
-    }
-  }
-  
+.react-calendar__month-view__weekdays {
+    color: var(--primary) !important; /* Chữ màu đen */
+    font-weight: bold; /* Tùy chọn: Làm cho chữ đậm hơn */
+}
+
 
 .glJkNE time-picker select{
     width: 50px !important;
 }
+
+.kCAYfl {
+    color: #000 !important;
+}
+  

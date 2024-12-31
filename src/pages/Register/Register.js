@@ -10,13 +10,16 @@ import {
     RHeader,
     RLayout,
     RSpace,
-    RLink
+    RLink,
+    RBodyLItem2
 } from "./register.element";
 import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { assets } from '../../assets/assets_fe/assets';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
     const [ , signUp] = useAccount();
@@ -27,6 +30,8 @@ const Register = () => {
     const [role, setRole] = useState('0');
     const [phone, setPhone] = useState('');  
     const navigate = useNavigate();
+    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible2, setIsVisible2] = useState(false);
 
     const handleLogoClick = () => {
         navigate('/');
@@ -89,27 +94,33 @@ const Register = () => {
                         <RBodyL>
                             <RBodyLItem>
                                 <p>Email</p>
-                                <input type='email' value={email} onChange={(e) => {setEmail(e.target.value)}}/>
+                                <input type='email' value={email} placeholder='Email' onChange={(e) => {setEmail(e.target.value)}}/>
                             </RBodyLItem>
                             <RBodyLItem>
                                 <p>Mật khẩu</p>
-                                <input type='password' value={password} onChange={(e) => {setPassword(e.target.value)}}/>
                             </RBodyLItem>
+                            <RBodyLItem2>
+                                <input type={isVisible ? 'text' : 'password'} placeholder='Password' name="someUnusualName" autocomplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <FontAwesomeIcon icon={isVisible ? faEye : faEyeSlash} onClick={()=>{setIsVisible(!isVisible)}} className="eye-icon"></FontAwesomeIcon>
+                            </RBodyLItem2>
                             <RBodyLItem>
                                 <p>Xác nhận lại mật khẩu</p>
-                                <input type='password' value={rewritePassword} onChange={(e) => {setRewritePassword(e.target.value)}}/>
                             </RBodyLItem>
+                            <RBodyLItem2>
+                                <input type={isVisible2 ? 'text' : 'password'} placeholder='Password' name="someUnusualName" autocomplete="new-password" value={rewritePassword} onChange={(e) => setRewritePassword(e.target.value)} />
+                                <FontAwesomeIcon icon={isVisible2 ? faEye : faEyeSlash} onClick={()=>{setIsVisible2(!isVisible2)}} className="eye-icon"></FontAwesomeIcon>
+                            </RBodyLItem2>
 
 
                         </RBodyL>
                         <RBodyR>
                             <RBodyRItem>
                                 <p>Họ và tên</p>
-                                <input type='text' autoFocus value={userName} onChange={(e) => {setUserName(e.target.value)}}/>
+                                <input type='text' autoFocus value={userName} placeholder='Full Name' onChange={(e) => {setUserName(e.target.value)}}/>
                             </RBodyRItem>
                             <RBodyRItem>
                                 <p>Số điện thoại</p>
-                                <input type='number' value={phone} onChange={(e) => {setPhone(e.target.value)}}/>
+                                <input type='number' value={phone} placeholder='Phone Number' onChange={(e) => {setPhone(e.target.value)}}/>
                             </RBodyRItem>
                             <RBodyRItem>
                                 <p>Loại tài khoản</p>

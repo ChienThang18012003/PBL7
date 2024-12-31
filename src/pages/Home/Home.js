@@ -118,7 +118,7 @@ const Home = () => {
                         firstArticle && (
                             <NewItem1 onClick={()=>{navigate(`/bloginfo/${firstArticle._id}`)}}>
                                 <NewPicItem1>
-                                    <Image src={firstArticle?.article_image} alt="pic1" className="pic"/>
+                                    <Image src={firstArticle?.article_image} fallback={assets.ArticleImage} alt="pic1" className="pic"/>
                                 </NewPicItem1>
                                 <p className="title">{firstArticle?.article_title}</p>
                                 <p className="content1">{firstArticle?.article_content}</p>

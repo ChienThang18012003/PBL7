@@ -182,7 +182,7 @@ function SpecialityInfo(){
                              <span>GIỚI THIỆU</span>
                         </div>
                         <div className={cx('content')}>
-                             <span>{renderIntroduction(specialityDes.introduction)}</span>
+                             <span>{renderIntroduction(specialityDes.introduction || 'Chưa có thông tin')}</span>
                         </div>
                     </div>
                  </div>
@@ -192,7 +192,7 @@ function SpecialityInfo(){
                              <span>DỊCH VỤ</span>
                         </div>
                         <div className={cx('content')}>
-                             <span>{renderService(specialityDes.service)}</span>
+                             <span>{renderService(specialityDes.service || 'Chưa có thông tin')}</span>
                         </div>
                     </div>
                  </div>

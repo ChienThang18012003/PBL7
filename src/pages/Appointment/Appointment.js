@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {AContainer, AHeader, ALayout, ALeftSide, ARightSide, ARSItem, ASpace, AUnderline} from "./appointment.element";
-import * as provincesService from "../../services/Provinces"
 import useRegion from '../../hook/useRegion';
 import useSpeciality from '../../hook/useSpeciality';
 import useAccount from '../../hook/useAccount';
@@ -9,9 +8,10 @@ import useAppointment from '../../hook/useAppointment';
 import InsuranceModal from '../../components/InsuranceModal';
 import { useAppContext } from '../../context/AppContext';
 import LoadingAnimation from '../../components/LoadingAnimation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 const Appointment = () => {
-    const [provinces, setProvinces] = useState([]);
     const [regionLoading, regionHook] = useRegion();
     const insuranceModalRef = useRef(null);
     const [specialityLoading, specialityHook] = useSpeciality();
@@ -268,13 +268,13 @@ const Appointment = () => {
 
                         <ARSItem>
                             <p>Chọn ngày - khung giờ muốn khám</p>
-                            <input type='text' value={appointmentDate} readOnly />
+                            <input type='text' placeholder='Chọn ngày - khung giờ muốn khám' value={appointmentDate} readOnly />
                             <AppointmentModal 
                                 data={doctorActiveHour} 
                                 onSubmit={handleSubmitActiveHour} 
                                 disabled={!selectedDoctor}
                             >
-                                Chọn
+                                <FontAwesomeIcon icon={faCalendar} className={`calendar-icon ${!selectedDoctor ? 'disabled' : ''}`} disabled={!selectedDoctor}></FontAwesomeIcon>
                             </AppointmentModal>
                         </ARSItem>
 
@@ -293,6 +293,7 @@ const Appointment = () => {
                             <button 
                                 type = "button"
                                 onClick={handleSubmitAppointment} 
+                                className="next-button"
                             >
                                 TIẾP THEO
                             </button>

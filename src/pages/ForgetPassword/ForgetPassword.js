@@ -45,7 +45,7 @@ const ForgetPassword = () => {
                         <LoginItemList>
                             <LoginItem>
                                 <p>Nhập email của bạn để lấy lại tài khoản</p>
-                                <input autoFocus value={email} onChange={(e) => setEmail(e.target.value)} type='email' />
+                                <input autoFocus value={email} placeholder='Nhập email' onChange={(e) => setEmail(e.target.value)} type='email' />
                             </LoginItem>
                             <LoginButton onClick={handleForgotPassword}>
                                  Lấy lại mật khẩu

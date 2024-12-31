@@ -10,13 +10,16 @@ import {
     LoginLink,
     LoginItem2,
     LoginLink2,
-    LoginLogo
+    LoginLogo,
+    LoginItem3
 } from "./login.element";
 import useAccount from '../../hook/useAccount';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { assets } from '../../assets/assets_fe/assets';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
 
@@ -24,6 +27,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [checkLogin] = useAccount();
     const navigate = useNavigate();
+    const [isVisible, setIsVisible] = useState(false);
 
     const handleLogin = async () => {
         if (email === "") {
@@ -76,12 +80,15 @@ const Login = () => {
                         <LoginItemList>
                             <LoginItem>
                                 <p>Email</p>
-                                <input autoFocus value={email} onChange={(e) => setEmail(e.target.value)} type='email' />
+                                <input autoFocus value={email} placeholder='Nhập email' onChange={(e) => setEmail(e.target.value)} type='email' />
                             </LoginItem>
                             <LoginItem>
                                 <p>Mật khẩu</p>
-                                <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                             </LoginItem>
+                            <LoginItem3>
+                                <input type={isVisible ? 'text' : 'password'} placeholder='Nhập password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <FontAwesomeIcon icon={isVisible ? faEye : faEyeSlash} onClick={()=>{setIsVisible(!isVisible)}} className="eye-icon"></FontAwesomeIcon>
+                            </LoginItem3>
                             <LoginButton onClick={handleLogin}>
                                 Đăng Nhập
                             </LoginButton>

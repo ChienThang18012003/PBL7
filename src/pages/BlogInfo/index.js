@@ -118,7 +118,11 @@ function BlogInfo() {
                     </div>
                     <hr className={cx('list-blog-separator')}></hr>
                     <div className={cx('blog-content-container')}>
-                        <Image className={cx('blog-image')} src={articleByID?.article_image} alt="Blog Image"></Image>
+                        {
+                            articleByID?.article_image && (
+                                <Image className={cx('blog-image')} src={articleByID?.article_image} alt="Blog Image"></Image>
+                            )
+                        }
                         {renderContent()}
                     </div>
                     
