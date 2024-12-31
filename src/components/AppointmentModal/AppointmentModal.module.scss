@@ -144,7 +144,28 @@ body.active-modal {
     color: #fff;
     font-size: 1.4rem;
     margin: 5px;
+    &:hover{
+        background: #ff5c92 !important;
+    }
   }
+
+.today{
+    background-color: #3a4dc9 !important; 
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 5px;
+    &:hover{
+        background: #925cff !important;
+    }
+}
+
+.disabled{
+    cursor: default !important;
+    &:hover{
+        background-color: #f0f0f0 !important;
+    }
+}
 
 .react-calendar__navigation {
     display: flex;
@@ -156,12 +177,15 @@ body.active-modal {
 }
 
 .react-calendar__navigation button {
-    background-color: violet !important;
+    
     border: none;
     color: white;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
+    &:hover {
+        background-color: violet !important;
+    }
 }
   
   .react-calendar__month-view__days {

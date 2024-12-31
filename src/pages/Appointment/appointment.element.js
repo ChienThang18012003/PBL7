@@ -140,7 +140,7 @@ export const ARSItem = styled.div`
         margin-top: -10px;
     }
     button{
-        background-color: #80ACAD;
+        background-color: #00A6A9;
         width: 90%;
         height: 35px;
         border-radius: 6px;

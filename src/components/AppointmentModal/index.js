@@ -79,9 +79,13 @@ export default function AppointmentModal({ children, data = [], onSubmit, disabl
       return cx("selected-day");
     }
 
+    if (date.toDateString() === today.toDateString()) {
+      return cx("today");
+    }
+
     return highlightedDays.includes(date.getDay()) && date >= today
       ? cx("highlighted-day")
-      : null;
+      : cx("disabled");
   };
 
   const tileDisabled = ({ date }) => {
