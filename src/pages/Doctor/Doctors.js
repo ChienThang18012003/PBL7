@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { DoctorsLayout, ImageContainer, DoctorsRight } from "./doctors.element";
 import { useNavigate, useParams } from "react-router-dom";
 import useSpeciality from '../../hook/useSpeciality';
@@ -17,6 +17,7 @@ import { assets } from '../../assets/assets_fe/assets';
 const cx = classNames.bind(styles);
 
 const Doctors = () => {
+    const countRef = useRef(false);
     const [filterDoc, setFilterDoc] = useState([]);
     const navigate = useNavigate();
     const [specialityLoading, specialityHook] = useSpeciality();
@@ -82,7 +83,7 @@ const Doctors = () => {
 
         const fetchDoctorsPeriodically = async () => {
             const doctors = await getFilterDoctorList(selectedFaculty, selectedRegion);
-            if (doctors && Array.isArray(doctors)) setFilterDoc(doctors);
+            if (doctors && Array.isArray(doctors) && !countRef.current) setFilterDoc(doctors);
         };
         
             intervalId = setInterval(() => {
@@ -95,6 +96,14 @@ const Doctors = () => {
         };
 
     }, [selectedFaculty, selectedRegion]);
+
+    useEffect(()=>{
+        if (searchValue === '') {
+            countRef.current = false;
+        } else {
+            countRef.current = true;
+        }
+    }, [searchValue]);
 
     if (loadingAccount || regionLoading || specialityLoading) return (
         <LoadingAnimation></LoadingAnimation>

@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Forum.module.scss';
 import PageTitle from '../../components/PageTitle';
 import Button from '../../components/Button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ForumItem from '../../components/ForumItem';
@@ -17,6 +17,7 @@ import { assets } from '../../assets/assets_fe/assets';
 const cx = classNames.bind(styles);
 
 function Forum() {
+    const countRef = useRef(false);
     const [specialityLoading, specialityHook] = useSpeciality();
     const [postLoading, postHook, getAllPostsBySpecialty, sortAllPosts, addPost, searchPost, , , , , , getAllPosts, getFilteredPosts, sortFilterdPosts] = usePost();
     const [selectedFaculty, setSelectedFaculty] = useState('all');
@@ -140,13 +141,13 @@ function Forum() {
         const fetchPostsPeriodically = async () => {
             if (selectedFaculty === 'all') {
                 const allPost = await getAllPosts();
-                if (allPost && Array.isArray(allPost)) {
+                if (allPost && Array.isArray(allPost) && !countRef.current) {
                     const sortedPost = sortFilterdPosts(sortBy, allPost);
                     setDisplayedPosts(sortedPost);
                 }
             } else {
                 const filteredPost = await getFilteredPosts(selectedFaculty, sortBy);
-                if (filteredPost && Array.isArray(filteredPost)) setDisplayedPosts(filteredPost);
+                if (filteredPost && Array.isArray(filteredPost) && !countRef.current) setDisplayedPosts(filteredPost);
             }
         };
         
@@ -159,6 +160,14 @@ function Forum() {
             clearInterval(intervalId);
         };
     }, [selectedFaculty, sortBy, postHook]);
+
+    useEffect(()=>{
+        if (searchValue === '') {
+            countRef.current = false;
+        } else {
+            countRef.current = true;
+        }
+    }, [searchValue]);
 
     if (postLoading || specialityLoading || loadingAccount) {
         return (

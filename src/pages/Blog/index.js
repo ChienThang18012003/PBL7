@@ -63,7 +63,7 @@ function Blog() {
 
         const fetchArticlesPeriodically = async () => {
             const articles = await getAllArticles();
-            if (articles && Array.isArray(articles)) setFilteredArticle(articles);
+            if (articles && Array.isArray(articles) && searchValue !== "") setFilteredArticle(articles);
         };
 
         const intervalId = setInterval(() => {

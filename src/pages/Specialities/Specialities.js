@@ -59,7 +59,7 @@ const Specialities = () => {
         applyFilter();
         const fetchSpecialitiesPeriodically = async () => {
             const specialities = await getAllSpeciality();
-            if (specialities && Array.isArray(specialities)) setFilterSpec(specialities);
+            if (specialities && Array.isArray(specialities) && searchValue !== "") setFilterSpec(specialities);
         };
 
         const intervalId = setInterval(() => {
