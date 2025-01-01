@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const RLayout = styled.div`
-    width: 100vw;
-    overflow: auto;
+    width: 100%;
     display: flex;
+    overflow: visible;
     flex-direction: column;
     margin: 0;
 
@@ -79,7 +79,7 @@ export const RButton = styled.div`
 `
 
 export const RLink = styled.div`
-    margin-bottom: 4rem;
+    margin-bottom: 3.8rem;
     display: flex;
     justify-content: center;
     font-size: 2rem;
