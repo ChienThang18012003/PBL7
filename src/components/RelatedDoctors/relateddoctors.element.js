@@ -89,14 +89,14 @@ export const RelatedCard = styled.div`
 
 export const ImageContainer = styled.div`
     width: 100%;
-    height: 240px;
+    height: 300px;
 
 
     .img-custom {
         background-color: #f0f9ff;
         width: 100%;
         object-fit: cover;
-        height: 240px;
+        height: 300px;
     }
         
 `

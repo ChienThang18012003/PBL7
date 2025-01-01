@@ -50,7 +50,7 @@ function SpecialityInfo(){
     const [otherSpecialities, setOtherSpecialities] = useState([]);
 
     const maxVisible = 6; 
-    const maxDoctorVisible = 4;
+    const maxDoctorVisible = 3;
 
     function splitText(text) {
         const validText = text || '';
@@ -224,7 +224,7 @@ function SpecialityInfo(){
                 <PageTitle2>BÁC SĨ THUỘC CHUYÊN KHOA</PageTitle2>
                 <div className={cx('speciality-doctor')}>
                     {
-                        (relatedDoctors || []).length > 4 && (
+                        (relatedDoctors || []).length > 3 && (
                             <button className={cx('back-button')} onClick={handleDoctorBack}>
                                 <FontAwesomeIcon icon={faBackward} className={cx('button-icon')}></FontAwesomeIcon>
                             </button>
@@ -236,7 +236,7 @@ function SpecialityInfo(){
                      ))}
                      </div>
                      {
-                        (relatedDoctors || []).length > 4 && (
+                        (relatedDoctors || []).length > 3 && (
                             <button className={cx('fort-button')} onClick={handleDoctorForward}>
                                 <FontAwesomeIcon icon={faForward} className={cx('button-icon')}></FontAwesomeIcon>
                             </button>

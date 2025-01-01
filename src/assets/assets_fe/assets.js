@@ -2,6 +2,8 @@ import Pic1 from "../../assets/assets_fe/1.png"
 import Pic2 from "../../assets/assets_fe/2.png"
 import Pic3 from "../../assets/assets_fe/3.png"
 import Pic4 from "../../assets/assets_fe/4.png"
+import Pic5 from "../../assets/assets_fe/5.png"
+import Pic6 from "../../assets/assets_fe/6.png"
 import HospitalImage from "../../assets/assets_fe/Hospital.jpg"
 import NewsPic1 from "../../assets/assets_fe/item1.jpg"
 import MedicalLogo from '../../assets/assets_fe/MedicalLogo.svg';
@@ -30,6 +32,8 @@ export const assets = {
     Pic2,
     Pic3,
     Pic4,
+    Pic5,
+    Pic6,
     NewsPic1,
     MedicalLogo,
     verified_icon,

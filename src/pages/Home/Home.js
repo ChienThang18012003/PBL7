@@ -8,7 +8,7 @@ import {
     InfoPic,
     InfoSection, NewButton, NewItem1, NewItem2, NewPicItem1,
     News, NewsButtonContainer,
-    NewsHeader, NewsSection, NewsHeaderWrapper
+    NewsHeader, NewsSection, NewsHeaderWrapper, InfoWrapper
 } from "./home.element";
 import {assets} from "../../assets/assets_fe/assets";
 import {useNavigate} from "react-router-dom";
@@ -67,38 +67,47 @@ const Home = () => {
             <Info>
                 <InfoContainer>
                     <InfoSection>
-                        <InfoItem>
+                        <InfoWrapper onClick={()=>{navigate('/forum')}}>
                             <InfoPic>
                                 <img src={assets.Pic2} alt="1" className="pic"/>
+                            </InfoPic>
+                            <InfoItem>
                                 <p className="title">TƯ VẤN KHÁM BỆNH</p>
                                 <p>Liên hệ với đội ngũ tư vấn viên của chúng tôi để nhận phản hồi về tình trạng sức khỏe
-                                    của bạn</p>
-                            </InfoPic>
-                        </InfoItem>
+                                        của bạn</p>
+                            </InfoItem>
+                        </InfoWrapper>
 
-                        <InfoItem>
+                        <InfoWrapper onClick={()=>{navigate('/specialities')}}>
                             <InfoPic>
-                                <img src={assets.Pic1} alt="1" className="pic"/>
-                                <p className="title">TRA CỨU KẾT QUẢ</p>
-                                <p>Tra cứu kết quả xét nghiệm bệnh của bạn</p>
+                                <img src={assets.Pic6} alt="1" className="pic"/>
                             </InfoPic>
-                        </InfoItem>
+                            <InfoItem>
+                                <p className="title">CHUYÊN KHOA</p>
+                                <p>Tra cứu dịch vụ khám bệnh của từng chuyên khoa</p>
+                            </InfoItem>
+                        </InfoWrapper>
 
-                        <InfoItem>
+                        <InfoWrapper onClick={()=>{navigate('/doctors')}}>
                             <InfoPic>
                                 <img src={assets.Pic4} alt="1" className="pic"/>
+                            </InfoPic>
+                            <InfoItem>
                                 <p className="title">CHUYÊN GIA - BÁC SĨ</p>
                                 <p>Tìm hiểu thông tin chi tiết về đội ngũ chuyên gia - bác sĩ</p>
-                            </InfoPic>
-                        </InfoItem>
+                            </InfoItem>
+                        </InfoWrapper>
 
-                        <InfoItem>
+                        <InfoWrapper onClick={()=>{navigate('/appointment')}}>
                             <InfoPic>
-                                <img src={assets.Pic3} alt="1" className="pic"/>
-                                <p className="title">BẢNG GIÁ</p>
-                                <p>Tra cứu giá thành điều trị</p>
+                                <img src={assets.Pic5} alt="1" className="pic"/>
                             </InfoPic>
-                        </InfoItem>
+                            <InfoItem>
+                                <p className="title">ĐẶT LỊCH KHÁM</p>
+                                <p>Đặt lịch khám trực tuyến với các chuyên gia bác sĩ của chúng tôi</p>
+                            </InfoItem>
+                        </InfoWrapper>
+
                     </InfoSection>
                 </InfoContainer>
             </Info>

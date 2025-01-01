@@ -43,7 +43,7 @@ export const DoctorsLeft = styled.div`
 `
 export const ImageContainer = styled.div` 
     width: 100%;
-    height: 70%;
+    height: 300px;
 `
 export const DoctorsRight = styled.div`
     width: 100%;

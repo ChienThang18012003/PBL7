@@ -45,24 +45,39 @@ export const InfoSection = styled.div`
 `;
 
 export const InfoItem = styled.div`
+  z-index: 2 !important;
   color: black;
   font-size: 22px;
-  //padding: 10px; /* Adds space inside each item */
   width: 300px;
-  height: 300px;
+  height: 120px;
   background: #fff;
-  border-radius: 10px;
-  p{
-    color: #B4B4B4;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  transition: top 0.3s ease-in-out;
+
+  p {
+    color: #b4b4b4;
     font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
-  .title{
+
+  .title {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
     color: black;
     font-size: 17px;
   }
 `;
 
+
 export const InfoPic = styled.div`
+  position: absolute;
+  z-index: 3 !important;
   width: 300px;
   height: 200px;
   border-radius: 10px;
@@ -72,6 +87,30 @@ export const InfoPic = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+export const InfoWrapper = styled.div`
+  font-size: 22px;
+  width: 300px;
+  overflow: visible;
+  background: #000;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 250px;
+  cursor: pointer;
+  transition: all 0.5s ease; 
+    &:hover {
+        transform: translateY(-10px); 
+    }
+
+  &:hover ${InfoItem} {
+    top: 180px; /* Di chuyển từ 80px lên 180px khi hover */
+    transition: top 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động */
+  }
+
+  &:hover ${InfoPic} {
+    background: #2197E3;
   }
 `;
 
@@ -220,6 +259,7 @@ export const NewsButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 export const NewButton = styled.button`

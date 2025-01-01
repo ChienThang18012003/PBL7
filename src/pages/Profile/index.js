@@ -368,7 +368,7 @@ function Profile() {
         }
     } 
 
-    return (
+    return userInfo && appointmentInfo && (!isDoctor || (articleList && doctorActiveHours)) && (
         <div className={cx('wrapper')}>
             <PageTitle>TÀI KHOẢN CÁ NHÂN</PageTitle>
             <div className={cx('image-container')}>
