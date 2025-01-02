@@ -113,12 +113,7 @@ export default function ListModal({ children, disabled = false, data: initialDat
               >
                 Incoming
               </button>
-              <button
-                className={cx('status-button', { selected: selectedButton === "canceled" })}
-                onClick={() => filterAppointments("canceled")}
-              >
-                Canceled
-              </button>
+              
             </div>
             <div className={cx('modal-field-container')}>
               {Array.isArray(filteredAppointments) && filteredAppointments.map((appointment, index) => (

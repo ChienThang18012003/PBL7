@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function AppointmentInfo({data, onUpdateData}) {
     const [ , , , , cancelAppointment, , , softDeleteAppointment, restoreAppointment] = useAppointment();
     const handleCancelAppointment = async() => {
-        if (data?.is_deleted) {
+        if (!data?.is_deleted) {
             const userConfirmed = window.confirm("Bạn có chắc chắn muốn xóa cuộc hẹn này không?");
             if (userConfirmed) {
                 const canceledAppointment = await cancelAppointment(data?._id);
@@ -31,26 +31,26 @@ function AppointmentInfo({data, onUpdateData}) {
             return;
             }
         }
-        else {
-            const userConfirmed = window.confirm("Bạn có chắc chắn muốn hủy cuộc hẹn này không?");
-            if (userConfirmed) {
-                const deletedAppointment = await softDeleteAppointment(data?._id);
-                if (deletedAppointment && typeof deletedAppointment === 'object') {
-                    alert("Hủy cuộc hẹn thành công!");
-                    onUpdateData("update", { ...data, is_deleted: true });
-                    return;
-                }
-                else if (deletedAppointment && typeof deletedAppointment !== 'object') {
-                    alert(deletedAppointment);
-                }
-                else {
-                    alert("Có lỗi xảy ra, vui lòng thử lại sau!");
-                    return;
-                }
-            } else {
-            return;
-            }
-        }
+        // else {
+        //     const userConfirmed = window.confirm("Bạn có chắc chắn muốn hủy cuộc hẹn này không?");
+        //     if (userConfirmed) {
+        //         const deletedAppointment = await softDeleteAppointment(data?._id);
+        //         if (deletedAppointment && typeof deletedAppointment === 'object') {
+        //             alert("Hủy cuộc hẹn thành công!");
+        //             onUpdateData("update", { ...data, is_deleted: true });
+        //             return;
+        //         }
+        //         else if (deletedAppointment && typeof deletedAppointment !== 'object') {
+        //             alert(deletedAppointment);
+        //         }
+        //         else {
+        //             alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+        //             return;
+        //         }
+        //     } else {
+        //     return;
+        //     }
+        // }
         
     }
     const handleRestoreAppointment = async() => { 
