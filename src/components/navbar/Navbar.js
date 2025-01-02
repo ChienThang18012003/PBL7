@@ -32,6 +32,13 @@ const Navbar = () => {
 
     const closeMobileMenu = () => setClick(false);
 
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
+
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -228,43 +235,43 @@ const Navbar = () => {
                             }
 
                             <NavItem2>
-                                <NavLinks2 to={'/'} className={window.location.pathname === '/' ? 'active' : ''}>
+                                <NavLinks2 to={'/'} onClick={()=>{scrollToTop()}} className={window.location.pathname === '/' ? 'active' : ''}>
                                     GIỚI THIỆU
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2 >
-                                <NavLinks2 to={'/specialities'} className={window.location.pathname === '/specialities' ? 'active' : ''}>
+                                <NavLinks2 to={'/specialities'} onClick={()=>{scrollToTop()}} className={window.location.pathname === '/specialities' ? 'active' : ''}>
                                     CHUYÊN KHOA
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to={'/doctors'} className={window.location.pathname === '/doctors' ? 'active' : ''}>
+                                <NavLinks2 to={'/doctors'} onClick={()=>{scrollToTop()}} className={window.location.pathname === '/doctors' ? 'active' : ''}>
                                     CHUYÊN GIA - BÁC SĨ
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2 >
-                                <NavLinks2 to='/appointment' className={window.location.pathname === '/appointment' ? 'active' : ''}>
+                                <NavLinks2 to='/appointment' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/appointment' ? 'active' : ''}>
                                     ĐẶT LỊCH KHÁM
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to='/blog' className={window.location.pathname === '/blog' ? 'active' : ''}>
+                                <NavLinks2 to='/blog' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/blog' ? 'active' : ''}>
                                     TIN TỨC
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to='/forum' className={window.location.pathname === '/forum' ? 'active' : ''}>
+                                <NavLinks2 to='/forum' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/forum' ? 'active' : ''}>
                                     HỎI ĐÁP
                                 </NavLinks2>
                             </NavItem2>
 
                             <NavItem2>
-                                <NavLinks2 to='/create-blog' className={window.location.pathname === '/create-blog' ? 'active' : ''}>
+                                <NavLinks2 to='/create-blog' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/create-blog' ? 'active' : ''}>
                                     TẠO BLOG
                                 </NavLinks2>
                             </NavItem2>
