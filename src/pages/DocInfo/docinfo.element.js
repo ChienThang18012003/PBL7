@@ -30,6 +30,15 @@ export const DocInfoLeft = styled.div`
         border-radius: 0.5rem;
     }
 
+    @media (max-width: 750px) {
+        width: 100px;
+        .image-background {
+            width: 100px;
+            height: 150px;
+            border-radius: 0.5rem;
+        }
+    }
+
 `
 export const DocInfoRight = styled.div`
     flex: 1;
@@ -45,6 +54,10 @@ export const DocInfoRight = styled.div`
         margin-left: 0;
         margin-right: 0;
         margin-top: 0;
+    }
+
+    @media (max-width: 750px) {
+        height: 350px;
     }
 
 `
