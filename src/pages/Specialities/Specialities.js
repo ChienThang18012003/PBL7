@@ -5,7 +5,8 @@ import {
     SpecialitiesContainer,
     SpecialitiesContent,
     SpecialitiesHeader,
-    SpecialitiesLayout
+    SpecialitiesLayout,
+    SpecialitiesImage
 } from "./specialities.element";
 import {assets} from "../../assets/assets_fe/assets";
 import {AppContext} from "../../context/AppContext";
@@ -18,6 +19,7 @@ import useSpeciality from '../../hook/useSpeciality';
 import useDebounce from '../../hook/useDebounce';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Image from '../../components/Image';
+import Pagination from '../../components/Pagination';
 
 const Specialities = () => {
     const navigate = useNavigate();
@@ -27,6 +29,13 @@ const Specialities = () => {
     const [searchValue, setSearchValue] = useState('');
 
     const debounced = useDebounce(searchValue, 500);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [articlesPerPage, setArticlesPerPage] = useState(8);
+
+    const lastArticleIndex = currentPage * articlesPerPage;
+    const firstArticleIndex = lastArticleIndex - articlesPerPage;
+    const currentArticles = (filterSpec || []).slice(firstArticleIndex, lastArticleIndex);
 
     const [pagination, setPagination] = useState({
         pageIndex: 0,
@@ -50,6 +59,7 @@ const Specialities = () => {
         const fetchSearchResult = async () => {
             const relatedSpecialities = await searchSpeciality(debounced, specialityHook);
             setFilterSpec(relatedSpecialities);
+            setCurrentPage(1);
         };
 
         fetchSearchResult();
@@ -91,7 +101,11 @@ const Specialities = () => {
 
     return (
         <SpecialitiesLayout>
+            <SpecialitiesImage>
+                <img src={assets.SpecialitiesImage2}></img>
+            </SpecialitiesImage>
             <SpecialitiesContainer>
+                
                 <SpecialitiesHeader>DANH SÁCH CHUYÊN KHOA
                     <HeaderUnderline/>
                 </SpecialitiesHeader>
@@ -102,7 +116,7 @@ const Specialities = () => {
 
                 <SpecialitiesContent >
                     {
-                        paginatedData.map((item, index) => (
+                        currentArticles.map((item, index) => (
                             <div onClick={() => navigate(`/speciality-info/${item?._id}`)} className='card-spec' key={index}>
                                 <div className='content'>
                                     <div className='image-wrapper'><Image className='speciality-img' src={item?.speciality_image} alt={item?.speciality}/></div>
@@ -114,37 +128,12 @@ const Specialities = () => {
                 </SpecialitiesContent>
 
                 <PaginationContainer>
-                    <PaginationButton
-                        onClick={() => setPagination(prev => ({
-                            ...prev,
-                            pageIndex: Math.max(prev.pageIndex - 1, 0)}))}
-                        disabled={pagination.pageIndex === 0}
-                    >
-                        Previous
-                    </PaginationButton>
-                    <PaginationInfo>
-                        Page <strong>{pagination.pageIndex + 1} of {Math.ceil(filterSpec.length / pagination.pageSize)}</strong>
-                    </PaginationInfo>
-                    <PaginationButton
-                        onClick={() => setPagination(prev => ({
-                            ...prev,
-                            pageIndex: Math.min(prev.pageIndex + 1, Math.ceil(filterSpec.length / pagination.pageSize) - 1)
-                        }))}
-                        disabled={(pagination.pageIndex + 1) * pagination.pageSize >= filterSpec.length}
-                    >
-                        Next
-                    </PaginationButton>
-                    <PaginationInfo>
-                        Go to page:
-                        <PageInput
-                            type="number"
-                            defaultValue={table.getState().pagination.pageIndex + 1}
-                            onChange={(e) => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                                table.setPageIndex(page);
-                            }}
-                        />
-                    </PaginationInfo>
+                <Pagination
+                    totalPosts={(filterSpec || []).length || 0}
+                    postsPerPage={articlesPerPage}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                ></Pagination>
                 </PaginationContainer>
             </SpecialitiesContainer>
         </SpecialitiesLayout>

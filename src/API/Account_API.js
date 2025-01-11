@@ -73,6 +73,22 @@ const get_Doctors_List = async () => {
     }
 };
 
+const get_Top_Doctors = async () => {
+    try {
+        const res = await client.get('/doc/top-doctor');
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+}; 
+
 const get_Account_By_ID = async (id) => {
     try {
         const res = await client.post(`/acc/get-acc/${id}`);
@@ -347,4 +363,5 @@ export default {
     update_Doctor_Active_Hour,
     soft_Delete_Account,
     get_Account_Status,
+    get_Top_Doctors,
 };

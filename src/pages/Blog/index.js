@@ -52,6 +52,7 @@ function Blog() {
         const fetchSearchResult = () => {
             const relatedArticles = searchArticle(debounced, articlesHook || []);
             setFilteredArticle(relatedArticles);
+            setCurrentPage(1);
         };
     
         fetchSearchResult();
@@ -63,6 +64,7 @@ function Blog() {
 
         const fetchArticlesPeriodically = async () => {
             const articles = await getAllArticles();
+            console.log(articles);
             if (articles && Array.isArray(articles) && searchValue !== "") setFilteredArticle(articles);
         };
 

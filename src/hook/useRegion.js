@@ -18,11 +18,24 @@ const useRegion = () => {
         }
     };
 
+    const getRegionByID = async (id) => {
+            isRegionLoading(true);
+            try {
+                const Region = await Region_API.get_Region_By_ID(id);
+                return Region;
+            } catch (error) {
+                console.error('Failed to fetch region by ID:', error);
+                return null;
+            } finally {
+                isRegionLoading(false);
+            }
+    }
+
     useEffect(() => {
         filterRegion();
     }, []);
 
-    return [regionLoading, regionHook];
+    return [regionLoading, regionHook, getRegionByID];
 };
 
 export default useRegion;

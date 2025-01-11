@@ -13,7 +13,7 @@ import Image from '../../components/Image';
 const cx = classNames.bind(styles);
 function BlogInfo() {
     const { id } = useParams();
-
+    
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
@@ -106,7 +106,7 @@ function BlogInfo() {
                         <div className={cx('info-wrapper')}>
                             <FontAwesomeIcon className={cx('blog-info-user-icon')} icon={faUser} />
                             <h4 className={cx('blog-owner')}>
-                                <span>{articleByID?.doctor_id?.email}</span>
+                                <span>{articleByID?.doctor_id?.username}</span>
                             </h4>
                         </div>
                         <div className={cx('info-wrapper')}>

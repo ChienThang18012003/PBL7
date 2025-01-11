@@ -76,7 +76,6 @@
 .other-specialities-wrapper{
     width: 100%;
     overflow: visible;
-    background-color: #f0f2f1;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -141,12 +140,13 @@
 
 .related-doctors-container{
     width: 80%;
-    flex-wrap: wrap;
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    z-index: 1;
 }
 
 .related-info{

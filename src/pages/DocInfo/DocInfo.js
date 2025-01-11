@@ -33,6 +33,7 @@ const DocInfo = () => {
     useEffect(() => {
         const fetchDoctor = async () => {
             const doctor = await getAccountByID(docId);
+            console.log(doctor);
             setDocInfo(doctor);
             if (doctor && doctor?.bio) {
             setDoctorBio(splitText(doctor?.bio));
@@ -99,16 +100,16 @@ const DocInfo = () => {
                 </DocInfoLeft>
                 <DocInfoRight>
                     <DocName>
-                        {docInfo?.username}
+                        Bác sĩ: {docInfo?.username}
                     </DocName>
                     <DocSD>
                     {docInfo?.speciality_id ? (
-                        <p>{docInfo?.speciality_id?.name || 'Chưa xác định'}</p>
+                        <p>Chuyên khoa:     {docInfo?.speciality_id?.name || 'Chưa xác định'}</p>
                     ) : (
                         <p>Chưa xác định chuyên khoa</p>
                     )}
                     {docInfo?.region_id ? (
-                        <p>{docInfo?.region_id?.name || 'Chưa xác định'}</p>
+                        <p>Chi nhánh: {docInfo?.region_id?.name || 'Chưa xác định'}</p>
                     ) : (
                         <p>Chưa xác định chi nhánh</p>
                     )}

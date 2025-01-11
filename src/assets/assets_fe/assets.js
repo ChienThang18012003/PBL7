@@ -24,7 +24,10 @@ import MobileLogo from '../../assets/assets_fe/MobileLogo.png';
 import MobileLogo2 from '../../assets/assets_fe/MobileLogo2.png';
 import UserImage from '../../assets/assets_fe/User.png';
 import DoctorImage from '../../assets/assets_fe/DoctorImage.png';
+import DoctorsImage from '../../assets/assets_fe/DoctorsImage.jpg';
 import ArticleImage from '../../assets/assets_fe/ArticleImage.png'
+import SpecialitiesImage from '../../assets/assets_fe/SpecialitiesImage.png'
+import SpecialitiesImage2 from '../../assets/assets_fe/SpecialitiesImage.jpeg'
 
 
 export const assets = {
@@ -46,7 +49,10 @@ export const assets = {
     MobileLogo2,
     UserImage,
     DoctorImage,
-    ArticleImage
+    ArticleImage,
+    SpecialitiesImage,
+    SpecialitiesImage2,
+    DoctorsImage
 }
 export const specialityData = [
     {

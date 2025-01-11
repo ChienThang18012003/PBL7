@@ -34,45 +34,77 @@ export const RelateDisplay = styled.div`
 
 
 `
-export const RelatedCard = styled.div`
-
-    border: 2px solid #00A6A9; 
+export const RelatedCard = styled.div` 
     border-radius: 10px; 
-    overflow: hidden;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
     height: auto;
     width: 250px;
     position: relative;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: inherit; 
-        //background: linear-gradient(to right, #00FBFF 0%, #0C507C 100%);
-        z-index: -1; 
-        opacity: 0; 
-        transition: opacity 0.3s ease;
-   
+
+    @property --angle{
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
     }
 
-   &:hover::before {
-        opacity: 1; 
-    }
+    &:hover::before {
+            display: block; 
+        }
+
+        &:hover::before {
+            animation: 3s spin linear infinite;
+        }
+     
+        &:hover::after {
+            animation: 3s spin linear infinite;
+        }
     
-    &:hover {
-        transform: translateY(-10px);
+    &::after{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-image: conic-gradient(from var(--angle),  #0C507C, #00FBFF , #0C507C);
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        padding: 3px;
+        border-radius: 0.75rem; 
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-image: conic-gradient(from var(--angle),  #0C507C, #00FBFF , #0C507C);
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        padding: 3px;
+        border-radius: 0.75rem; 
+        display: none;
+        filter: blur(1.5rem);
+        opacity: 0.5;
+    }
+
+    @keyframes spin{
+       from{
+        --angle: 0deg;
+       }
+       to{
+        --angle: 360deg;
+       }
     }
   
     .info-custom{
         padding: 16px;
-      
-           
-        
+        background-color: #fff;
+        border-bottom-left-radius: 0.75rem;
+        border-bottom-right-radius: 0.75rem;
     }
 
     .name-doc {
@@ -89,14 +121,16 @@ export const RelatedCard = styled.div`
 
 export const ImageContainer = styled.div`
     width: 100%;
-    height: 300px;
+    height: 340px;
 
 
     .img-custom {
         background-color: #f0f9ff;
         width: 100%;
         object-fit: cover;
-        height: 300px;
+        height: 340px;
+        border-top-left-radius: 0.75rem;
+        border-top-right-radius: 0.75rem;
     }
         
 `

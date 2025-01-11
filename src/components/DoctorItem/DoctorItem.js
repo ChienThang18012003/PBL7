@@ -7,8 +7,6 @@ const DoctorItem = ({data}) => {
     const navigate = useNavigate()
 
     return (
-        <RelatedContainer>
-            <RelateDisplay>
                 
 
                     <RelatedCard onClick={() => {
@@ -24,14 +22,11 @@ const DoctorItem = ({data}) => {
                         <div className='info-custom'>
 
                             <p className='name-doc'>{data?.username}</p>
-                            <p className='speciality-doc'>{data?.speciality_id?.name}</p>
+                            <p className='speciality-doc'>{data?.region_id?.name}</p>
                         </div>
                     </RelatedCard>
 
                 
-            </RelateDisplay>
-
-        </RelatedContainer>
     );
 };
 

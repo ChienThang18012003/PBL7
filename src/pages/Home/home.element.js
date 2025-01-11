@@ -54,7 +54,7 @@ export const InfoItem = styled.div`
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   position: absolute;
-  top: 80px;
+  top: 180px;
   left: 0px;
   transition: top 0.3s ease-in-out;
 
@@ -87,6 +87,10 @@ export const InfoPic = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.8s;
+     &:hover{
+      transform: scale(1.4);
+    }
   }
 `;
 
@@ -97,25 +101,24 @@ export const InfoWrapper = styled.div`
   background: #000;
   border-radius: 10px;
   position: relative;
-  margin-bottom: 250px;
+  margin-bottom: 280px;
   cursor: pointer;
   transition: all 0.5s ease; 
     &:hover {
         transform: translateY(-10px); 
     }
 
-  &:hover ${InfoItem} {
-    top: 180px; /* Di chuyển từ 80px lên 180px khi hover */
-    transition: top 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động */
-  }
+  // &:hover ${InfoItem} {
+  //   top: 180px; /* Di chuyển từ 80px lên 180px khi hover */
+  //   transition: top 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động */
+  // }
 
-  &:hover ${InfoPic} {
-    background: #2197E3;
-  }
+  // &:hover ${InfoPic} {
+  //   background: #2197E3;
+  // }
 `;
 
 export const News = styled.div`
-  background: #F0F1F2;
   padding-top: 10px;
   padding-bottom: 20px;
   overflow: visible;
@@ -136,7 +139,6 @@ export const NewsHeader = styled.p`
 `;
 
 export const NewsHeaderWrapper = styled.div`
-  background-color: #F0F1F2;
   width: 80%;
 `;
 
@@ -160,9 +162,11 @@ export const NewItem1 = styled.div`
   height: 550px;
   background: #fff;
   cursor: pointer;
+  border: 2px solid #f0f1f2;
   transition: all 0.5s ease; 
     &:hover {
-        transform: translateY(-10px); 
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px #9e9e9e; 
     }
   p{
     color: #B4B4B4;
@@ -196,9 +200,14 @@ export const NewItem1 = styled.div`
 export const NewPicItem1 = styled.div`
   width: 100%;
   height: 400px;
+  overflow: hidden;
   .pic{
     width: 100%;
     height: 100%;
+    transition: all ease 0.8s;
+    &:hover{
+       transform: scale(1.2);
+    }
   }
 `;
 
@@ -268,8 +277,19 @@ export const NewButton = styled.button`
   width: 180px;
   height: 50px;
   margin-top: 10px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 50px;
   border: none;
   cursor: pointer;
+  transition: all ease 0.8s;
+  &:hover{
+     color: #00D3D6;
+     background-color: #fff;
+     border: 2px solid #00D3D6;
+     transform: scale(1.2);
+     box-shadow: 0 0 20px #9e9e9e;
+  }
   //position: absolute; left: 50% ; top: 50%; transform: translateX(-50%) translateY(-50%)
 `;
 

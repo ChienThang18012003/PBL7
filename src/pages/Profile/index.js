@@ -370,7 +370,6 @@ function Profile() {
 
     return userInfo && appointmentInfo && (!isDoctor || (articleList && doctorActiveHours)) && (
         <div className={cx('wrapper')}>
-            <PageTitle>TÀI KHOẢN CÁ NHÂN</PageTitle>
             <div className={cx('image-container')}>
                  <img className={cx('background-img')} src={assets.HospitalImage}></img>
                  <div className={cx('profile-image-container')}>

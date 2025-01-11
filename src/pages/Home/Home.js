@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HomePic from "../../assets/assets_fe/home.webp"
 import {
     BodyPic,
@@ -16,9 +16,15 @@ import useArticles from "../../hook/useArticles";
 import MiniBlogItem from "../../components/MiniBlogItem";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import Image from "../../components/Image";
+import TopDoctor from "../../components/TopDoctor/TopDoctor";
+import useAccount from "../../hook/useAccount";
+import useSpeciality from "../../hook/useSpeciality";
+import TopSpeciality from "../../components/TopSpeciality/TopSpeciality";
 
 
 const Home = () => {
+    const [topDocs, setTopDocs] = useState({});
+    const [topSpecialities, setTopSpecialities] = useState({});
     const [
         ,
         firstArticle,
@@ -39,9 +45,50 @@ const Home = () => {
         ,
         getAllArticles
     ] = useArticles();
+
+    const [
+        checkLogin, 
+        signUp, 
+        loadingAccount, 
+        doctorsHook, 
+        getAccountByID, 
+        filterDoctorList, 
+        getAccountByEmail, 
+        checkAccountType, 
+        uploadProof, 
+        changePassword, 
+        getDoctorActiveList, 
+        addDoctorActiveHour, 
+        changeAccountInfo, 
+        changeDoctorInfo, 
+        searchDoctor, 
+        forgotPassword, 
+        getDoctorList, 
+        deleteDoctorActiveHour, 
+        updateDoctorActiveHour,
+        softDeleteAccount,
+        getFilterDoctorList,
+        getAccountStatus,
+        getTopDoctors
+        ] = useAccount();
     const navigate = useNavigate();
 
+    const [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality, getTopSpecialities] = useSpeciality();
+
     useEffect(() => {
+        const fetchTopDoctors = async() => {
+            const topDoctors = await getTopDoctors();
+            if (topDoctors && typeof topDoctors === 'object') {
+                setTopDocs(topDoctors);
+            }
+        }
+
+        const fetchTopSpecialities = async() => {
+            const topSpecialities = await getTopSpecialities();
+            if (topSpecialities && typeof topSpecialities === 'object') {
+                setTopSpecialities(topSpecialities);
+            }
+        }
         const fetchArticlesPeriodically = async () => {
             const articles = await getAllArticles();
         };
@@ -50,12 +97,15 @@ const Home = () => {
             fetchArticlesPeriodically();
         }, 5000);
 
+        fetchTopDoctors();
+        fetchTopSpecialities();
+
         return () => {
             clearInterval(intervalId);
         };
     }, []);
 
-    if (loading) return (
+    if (loading || loadingAccount) return (
         <LoadingAnimation></LoadingAnimation>
     )
 
@@ -111,6 +161,46 @@ const Home = () => {
                     </InfoSection>
                 </InfoContainer>
             </Info>
+
+            <News>
+                <NewsHeaderWrapper>
+                    <NewsHeader>
+                        CHUYÊN KHOA
+                        <div className="lower-header">
+                            Các chuyên khoa có nhiều bác sĩ nhất !!
+                        </div>
+                    </NewsHeader>
+    
+                </NewsHeaderWrapper>
+                <NewsSection>
+                    {
+                        (topSpecialities?.data || []).slice(0, 4).map((data)=>(
+                            <TopSpeciality data={data}></TopSpeciality>
+                        ))
+                    }
+                </NewsSection>
+
+            </News>
+
+            <News>
+                <NewsHeaderWrapper>
+                    <NewsHeader>
+                        BÁC SĨ
+                        <div className="lower-header">
+                            Các bác sĩ có nhiều lượt khám nhất !!
+                        </div>
+                    </NewsHeader>
+    
+                </NewsHeaderWrapper>
+                <NewsSection>
+                    {
+                        (topDocs?.data || []).slice(0, 4).map((data)=>(
+                            <TopDoctor data={data}></TopDoctor>
+                        ))
+                    }
+                </NewsSection>
+
+            </News>
 
             <News>
                 <NewsHeaderWrapper>

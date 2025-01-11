@@ -2,7 +2,6 @@
     width: 100%;
     display: block;
     overflow: auto;
-    background-color: #f0f2f1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,6 +14,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top:  20px;
+    margin-bottom: 40px;
+}
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
 
 .blog-form {
@@ -27,6 +34,49 @@
     justify-content: space-around;
     align-items: center;
     align-content: space-between;
+    position: relative;
+    animation: 3s spin linear infinite;
+
+    &:after{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        animation: 3s spin linear infinite;
+        background-image: conic-gradient(from var(--angle),  #ff4545, #00ff99 , #006aff, #ff0095);
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        padding: 3px;
+        border-radius: 20px; 
+    }
+
+    &:before{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        animation: 3s spin linear infinite;
+        background-image: conic-gradient(from var(--angle),  #ff4545, #00ff99 , #006aff, #ff0095);
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        z-index: -1;
+        padding: 3px;
+        border-radius: 20px; 
+        filter: blur(1.5rem);
+        opacity: 0.5;
+    }
+
+    @keyframes spin{
+       from{
+        --angle: 0deg;
+       }
+       to{
+        --angle: 360deg;
+       }
+    }
 }
 
 .image-container {

@@ -6,7 +6,7 @@ export const PageTitleContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f2f1;
+    background-color: #fff;
 `;
 
 export const PageTitleContent = styled.h1`

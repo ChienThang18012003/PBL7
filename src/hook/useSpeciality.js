@@ -52,11 +52,25 @@ const useSpeciality = () => {
         }
     }
 
+    const getTopSpecialities = async () => {
+        isSpecialityLoading(true);
+        try {
+            const Speciality = await Speciality_API.get_Top_Specialities();
+            return Speciality;
+        } catch (error) {
+            console.error('Failed to fetch top speciality:', error);
+            return null;
+        } finally {
+            isSpecialityLoading(false);
+        }
+    }
+
+
     useEffect(() => {
         filterSpeciality();
     }, []);
 
-    return [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality];
+    return [specialityLoading, specialityHook, getSpecialityByID, searchSpeciality, getAllSpeciality, getTopSpecialities];
 };
 
 export default useSpeciality;

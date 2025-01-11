@@ -5,7 +5,7 @@ import useSpeciality from '../../hook/useSpeciality';
 import useAccount from '../../hook/useAccount';
 import classNames from 'classnames/bind';
 import styles from './Doctor.module.scss';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faStethoscope, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useRegion from '../../hook/useRegion';
 import Pagination from '../../components/Pagination';
@@ -115,6 +115,9 @@ const Doctors = () => {
 
     return (
         <div>
+            <div className={cx('page-image')}>
+                 <Image className={cx('doctors-image')} src={assets.DoctorsImage}></Image>
+            </div>
             <PageTitle>CHUYÊN GIA - BÁC SĨ</PageTitle>
             <div className={cx('search-section')}>
                 <div className={cx('search-section-title-wrapper')}>
@@ -179,17 +182,21 @@ const Doctors = () => {
 
                 <DoctorsRight>
                     {Array.isArray(currentDoctors) && currentDoctors.map((item, index) => (
-                        <div onClick={() => navigate(`/appointment/${item?._id}`)} className='card' key={index}>
+                        <div onClick={() => {navigate(`/appointment/${item?._id}`); window.scrollTo(0,0);}} className='card' key={index}>
                             
                             <ImageContainer><Image className='image-background' src={item?.profile_image} fallback={assets.DoctorImage} alt='img'/></ImageContainer>
 
                             
                             <div className='content'>
-                                <div className='status'>
-                                    <p className='dot'></p> <p>Available</p>
-                                </div>
                                 <p className='name-style'>{item?.username}</p>
-                                <p className='speciality-style'>{item?.speciality_id?.name}</p>
+                                <div className='status'>
+                                    <FontAwesomeIcon icon={faStethoscope} className="speciality-icon"></FontAwesomeIcon>
+                                    <p className='speciality-style'>{item?.speciality_id?.name}</p>
+                                </div>
+                                <div className='status'>
+                                    <FontAwesomeIcon icon={faLocationDot} className="location-icon"></FontAwesomeIcon>
+                                    <p className='speciality-style'>{item?.region_id?.name}</p>
+                                </div>
                             </div>
                         </div>
                     ))}

@@ -16,26 +16,24 @@ export const DocInfoHeader = styled.p`
     font-size: 25px;
     color: #2197E3;
     text-align: center;
-    margin: 0 auto;
+    margin: 50px auto;
 
 
 `
 
 export const DocInfoLeft = styled.div`
 
+    width: 250px;
     .image-background {
-        background-color: #00D3D6;
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        max-width: 18rem;
+        width: 250px;
+        height: 300px;
         border-radius: 0.5rem;
     }
 
 `
 export const DocInfoRight = styled.div`
     flex: 1;
-    height: 200px;
+    height: 300px;
     border: 1px solid #cbd5e1;
     justify-content: space-between;
     display: flex;
@@ -55,7 +53,7 @@ export const DocName = styled.p`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 500;
     color: #111827;
 `
@@ -64,7 +62,7 @@ export const DocSD = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-size: 1.4rem; 
+    font-size: 1.8rem; 
     margin-top: 0.25rem; 
     color: #4B5563;
     .doc-experience {
@@ -86,6 +84,14 @@ export const DocBookButton = styled.button`
     cursor: pointer;
     margin-top: auto; // day the p len gan voi docname
     align-self: flex-start;
+    transition: all ease 0.8s;
+
+    &:hover{
+       background-color: #fff;
+       border: 2px solid #00D3D6;
+       color: #00D3D6;
+       transform: scale(1.1);
+    }
 
 `
 
@@ -97,6 +103,7 @@ export const DoctorInformation = styled.div`
     gap: 16px;
 
     justify-content: space-around;
+    flex-direction: column;
 
     @media (max-width: 740px) {
        flex-direction: column;
@@ -113,11 +120,11 @@ export const DoctorInformationItem = styled.div`
     p{
         color: white;
         margin-top: 10px;
-        font-size: 1.4rem;
+        font-size: 1.8rem;
     }
 `
 export const DocHeader = styled.p`
-    font-size: 18px;
+    font-size: 2rem;
     color: white;
 `
 export const Underline = styled.div`

@@ -29,6 +29,7 @@ const Navbar = () => {
     const [button, setButton] = useState(true);
     const [userInfo, setUserInfo] = useState({});
     const [currentUser, setCurrentUser] = useState({});
+    const [role, setRole] = useState('');
 
     const closeMobileMenu = () => setClick(false);
 
@@ -61,8 +62,10 @@ const Navbar = () => {
             if (item) {
                 let obj = JSON.parse(item);
                 setCurrentUser(obj);
+                if (obj?.adminAccess) setRole('Admin');
                 if (obj?.email){
                     const AccountInfo = await getAccountByEmail(obj?.email);
+                    if (AccountInfo?.__t) setRole('Doctor'); else setRole('User');
                     setUserInfo(AccountInfo);
                 }
                 else {
@@ -270,11 +273,16 @@ const Navbar = () => {
                                 </NavLinks2>
                             </NavItem2>
 
-                            <NavItem2>
-                                <NavLinks2 to='/create-blog' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/create-blog' ? 'active' : ''}>
-                                    TẠO BLOG
-                                </NavLinks2>
-                            </NavItem2>
+                            {
+                                (role === 'Admin' || role === 'Doctor') && (
+                                    <NavItem2>
+                                        <NavLinks2 to='/create-blog' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/create-blog' ? 'active' : ''}>
+                                            TẠO BLOG
+                                        </NavLinks2>
+                                    </NavItem2>
+                                )
+                            }
+                            
                         </NavMenu>
                     </NavbarContainer2>
                 </Nav2>

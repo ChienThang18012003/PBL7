@@ -11,6 +11,7 @@ function CreateBlog() {
     const [image, setImage] = useState();
     const [blogTitle, setBlogTitle] = useState('');
     const [blogContent, setBlogContent] = useState('');
+    const [role, setRole] = useState('');
     const [
         ,
         ,
@@ -38,6 +39,7 @@ function CreateBlog() {
             
             if (item) {
                 let obj = JSON.parse(item);
+                if (obj?.adminAccess) setRole('Admin');
                 const AccountInfo = await getAccountByEmail(obj?.email);
                 setUserInfo(AccountInfo);
             }
@@ -61,7 +63,7 @@ function CreateBlog() {
                 return;
             }
             let obj = JSON.parse(item);
-            if (userInfo?.__t) {
+            if (userInfo?.__t || role === 'Admin') {
                 const newArticle = await addArticle(obj?.email, blogTitle, blogContent, image);
                 if (newArticle && typeof newArticle === 'object') {
                     setBlogContent('');

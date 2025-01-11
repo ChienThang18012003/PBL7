@@ -64,6 +64,7 @@ export const NavMenu = styled.ul`
   justify-content: space-between;
   position: relative;
   z-index: 5000;
+  
 
   .Button-container {
   background-color: #f0f1f2;
@@ -99,17 +100,17 @@ export const NavMenu = styled.ul`
 
 .user-email{
    font-size: 1.4rem;
-   font-weight: 500;
+   font-weight: 700;
    color: #fff;
    margin-right: 10px;
-   margin-top: 20px;
+   margin-top: 25px;
    z-index: 9999;
 }
 
 .profile_image {
-  width: 32px;
-  height: 32px;
-  margin-top: 20px;
+  width: 40px;
+  height: 40px;
+  margin-top: 25px;
   object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
@@ -301,6 +302,7 @@ export const NavbarContainer2 = styled(Container)`
   display: flex;
   justify-content: space-between;
   height: 80px;
+  width: 100%;
 
   ${Container}
 `;
@@ -317,6 +319,7 @@ export const Nav2 = styled.nav`
   top: 130px;
   left: 0;
   z-index: 1000;
+  box-shadow: 0 0px 10px rgb(188, 188, 188); /* Hiệu ứng đổ bóng */
 `;
 
 export const NavItem2 = styled.li`

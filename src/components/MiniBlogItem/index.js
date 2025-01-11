@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 function MiniBlogItem({ data }) {
     return (
         <a className={cx('blog-wrapper')} href={`/bloginfo/${data?._id}`}>
-            <Image className={cx('blog-image')} fallback={assets.ArticleImage} src={data?.article_image} alt="Blog_image"></Image>
+            <div className={cx('blog-image-wrapper')}><Image className={cx('blog-image')} fallback={assets.ArticleImage} src={data?.article_image} alt="Blog_image"></Image></div>
             <div className={cx('blog-content')}>
                 <h4 className={cx('blog-title')}>
                     <span>{data?.article_title}</span>

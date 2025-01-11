@@ -312,6 +312,21 @@ const useAccount = () => {
         }
     }
 
+    const getTopDoctors = async() => {
+        isLoadingAccount(true);
+        try {
+            const topDoctors = await Account_API.get_Top_Doctors();
+            return topDoctors;
+        }
+        catch(error){
+            console.error('Failed to fetch top doctors:', error);
+            return null;
+        }
+        finally{
+            isLoadingAccount(false);
+        }
+    }
+
     return [
     checkLogin, 
     signUp, 
@@ -334,7 +349,8 @@ const useAccount = () => {
     updateDoctorActiveHour,
     softDeleteAccount,
     getFilterDoctorList,
-    getAccountStatus
+    getAccountStatus,
+    getTopDoctors
     ];
 };
 

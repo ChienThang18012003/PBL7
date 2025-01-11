@@ -79,7 +79,7 @@ const RelatedDoctors = ({speciality, docId}) => {
                         <div className='info-custom'>
 
                             <p className='name-doc'>{item?.username}</p>
-                            <p className='speciality-doc'>{item?.speciality_id?.name}</p>
+                            <p className='speciality-doc'>{item?.region_id?.name}</p>
                         </div>
                     </RelatedCard>
 
