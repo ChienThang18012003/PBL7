@@ -98,7 +98,8 @@ function App() {
 
     useEffect(() => {
         const fetchAccountStatusPeriodically = async () => {
-            const status = await getAccountStatus(userEmail);
+            if (isLogined) {
+                const status = await getAccountStatus(userEmail);
             if (status && typeof status === 'object') {
                 if (status?.is_deleted) {
                     alert("Tài khoản của bạn đã bị vô hiệu hóa, bạn sẽ được chuyển về trang đăng nhập!");
@@ -122,6 +123,10 @@ function App() {
                     }
                     window.location.reload();
                 }
+            }
+            }
+            else {
+                return;
             }
         };
         

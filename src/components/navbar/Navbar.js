@@ -255,11 +255,15 @@ const Navbar = () => {
                                 </NavLinks2>
                             </NavItem2>
 
-                            <NavItem2 >
-                                <NavLinks2 to='/appointment' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/appointment' ? 'active' : ''}>
-                                    ĐẶT LỊCH KHÁM
-                                </NavLinks2>
-                            </NavItem2>
+                            {
+                                role !== 'Doctor' && (
+                                    <NavItem2 >
+                                        <NavLinks2 to='/appointment' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/appointment' ? 'active' : ''}>
+                                            ĐẶT LỊCH KHÁM
+                                        </NavLinks2>
+                                    </NavItem2>
+                                )
+                            }
 
                             <NavItem2>
                                 <NavLinks2 to='/blog' onClick={()=>{scrollToTop()}} className={window.location.pathname === '/blog' ? 'active' : ''}>
