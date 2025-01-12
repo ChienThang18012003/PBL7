@@ -168,7 +168,6 @@ const Appointment = () => {
         else{
             if (item) {
                 const appointment = await addAppointment(userID, selectedDoctorID, appointmentDay, appointmentTimeStart, appointmentTimeEnd, healthIssues, typeService);
-                console.log(userID, selectedDoctorID, appointmentDay, appointmentTimeStart, appointmentTimeEnd, healthIssues, typeService);
                 if (appointment && typeof appointment === 'object') {
                     setAppointmentInfo(appointment);
                     if (sharedData) setSharedData(null);
