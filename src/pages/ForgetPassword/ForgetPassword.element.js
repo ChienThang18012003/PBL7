@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-
+import bg from '../../assets/assets_fe/JobBackground.jpg';
 
 export const LoginLayout = styled.div`
+    background-image: url(${bg});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -25,6 +29,9 @@ export const LoginItemAndHeader = styled.div`
     flex-direction: column;
     width: 35%;
     align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
 
     @media (max-width: 1024px){
         width: 50%;
@@ -36,8 +43,8 @@ export const LoginItemAndHeader = styled.div`
 `
 
 export const LoginHeader = styled.p`
-    color: #609799;
-    margin-bottom: 50px;
+    color: #089DD8;
+    margin-bottom: 30px;
     font-size: 40px;
 `
 export const LoginItemList = styled.div`
@@ -52,7 +59,7 @@ export const LoginItemList = styled.div`
 `
 export const LoginItem = styled.div`
     font-size: 20px;
-    color: #00D3D6;
+    color: #000;
     input{
         display: block;
         width: 100%; 
@@ -73,7 +80,7 @@ export const LoginButton = styled.button`
     height: 40px;
     font-weight: bold;
     color: white;
-    background-color: #00D3D6;
+    background-color: #34BBF0;
     font-size: 20px;
     border: none;
     border-radius: 50px;
@@ -81,7 +88,7 @@ export const LoginButton = styled.button`
     margin-bottom: 10px;
     margin-top: 5px;
     &:hover{
-       background-color: #50ACE9;
+       background-color: #089DD8;
     }
 `
 

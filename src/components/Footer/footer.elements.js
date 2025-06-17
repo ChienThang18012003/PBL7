@@ -3,7 +3,7 @@ import { FaMagento } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export const FooterContainer = styled.div`
-    background: #00A6A9;
+    background: #1eb6f2;
   padding: 4rem 0 2rem 0;
   display: flex;
   flex-direction: column;
@@ -96,14 +96,14 @@ export const MedicalLogoContainer = styled.div`
     cursor: pointer;
     text-decoration: none;
     display: flex;
-    width: 200px;
-    height: 5px;
+    width: 100px;
+    height: 100px;
     align-items: center;
     margin-left: 75px;
     
     .logo {
-        width: 200px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
     }
 `;

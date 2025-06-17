@@ -50,22 +50,22 @@ function Footer() {
                     </FooterContentItems>
                     <FooterContentItems>
                         <FooterContentTitle>Đường dẫn nhanh</FooterContentTitle>
-                        <FooterContent >Chuyên khoa</FooterContent>
+                        <FooterContent >Nhãn hàng</FooterContent>
                         <FooterContent >Chuyên mục bảo mật</FooterContent>
                         <FooterContent >Chính sách bảo mật</FooterContent>
                         <FooterContent >Đặc san</FooterContent>
                     </FooterContentItems>
                     <FooterContentItems>
                         <FooterContentTitle>Website cùng tập đoàn</FooterContentTitle>
-                        <FooterContent >Viện nghiên cứu </FooterContent>
-                        <FooterContent >Trung tâm hỗ trợ sinh sản</FooterContent>
+                        <FooterContent >Điện thoại giảm giá </FooterContent>
+                        <FooterContent >Trung tâm thương mại điện tử</FooterContent>
                     </FooterContentItems>
                 </FooterContentWrapper>
             </FooterContentContainer>
             <SocialMedia>
                 <SocialMediaWrap>
                     <MedicalLogoContainer >
-                        <img src={assets.MedicalLogo} alt="logo" className="logo"/>
+                        <img src={assets.PhoneLogo} alt="logo" className="logo"/>
                     </MedicalLogoContainer>
 
                     <SocialIcons>

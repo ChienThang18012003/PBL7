@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {
-    Deco2, Deco4,
     LoginButton,
-    LoginContainer, LoginDeco, LoginDeco2,
+    LoginContainer,
     LoginHeader,
     LoginItem, LoginItemAndHeader,
     LoginItemList,
@@ -17,7 +16,23 @@ import 'react-toastify/dist/ReactToastify.css';
 const ForgetPassword = () => {
 
     const [email, setEmail] = useState('');
-    const [, , , , , , , , , , , , , , , forgotPassword] = useAccount();
+    const [
+    checkLogin, 
+    signUp, 
+    loadingAccount, 
+    doctorsHook, 
+    changeAccountInfo,
+    getAccountByEmail,
+    getAllAccount,
+    changeAccountRole,
+    updateAccountStatus,
+    getAccountByID,
+    countUserByRole,
+    statisticUserByDate,
+    sendEmail,
+    changePassword,
+    forgotPassword
+    ] = useAccount();
     const navigate = useNavigate();
 
     const handleForgotPassword = async () => {
@@ -27,7 +42,11 @@ const ForgetPassword = () => {
         }
         else{
             const forgetPassword = await forgotPassword(email);
-            navigate("/login");
+            console.log(forgetPassword)
+            if (forgetPassword) {
+                alert("Lấy lại mật khẩu thành công, vui lòng kiểm tra email của bạn để nhận mật khẩu mới!");
+                navigate("/sign-in");
+            }
         }
     }
 
@@ -36,9 +55,6 @@ const ForgetPassword = () => {
             <ToastContainer position="top-right" autoClose={3000} />
             <LoginLayout>
                 <LoginContainer>
-                    <LoginDeco>
-                        <Deco2 />
-                    </LoginDeco>
 
                     <LoginItemAndHeader>
                         <LoginHeader>Quên mật khẩu</LoginHeader>
@@ -53,10 +69,6 @@ const ForgetPassword = () => {
                             <LoginLink></LoginLink>
                         </LoginItemList>
                     </LoginItemAndHeader>
-
-                    <LoginDeco2>
-                        <Deco4 />
-                    </LoginDeco2>
                 </LoginContainer>
             </LoginLayout>
         </form>

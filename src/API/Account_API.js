@@ -19,14 +19,13 @@ const checkLogin = async (email, password) => {
     }
 };
 
-const signUp = async (email, password, username, phone, is_doc) => {
+const signUp = async (email, password, username, is_doc) => {
     try {
         const res = await client.post('/acc/signup', {
             email: email,
             password: password,
             username: username,
-            phone: phone,
-            is_doc: is_doc,
+            role: "admin",
         });
         return res.data;
     } catch (error) {
@@ -64,6 +63,69 @@ const get_Doctors_List = async () => {
             user: false,
             hidden_state: false,
             verified: true,
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) console.log('Error response: ', error.response.data.error);
+        else console.log('Error not response: ', error.message);
+        return null;
+    }
+};
+
+const get_All_Account = async () => {
+    try {
+        const res = await client.post('/acc/get-all-account');
+        return res.data;
+    } catch (error) {
+        if (error.response) console.log('Error response: ', error.response.data.error);
+        else console.log('Error not response: ', error.message);
+        return null;
+    }
+};
+
+const count_User_By_Role = async () => {
+    try {
+        const res = await client.post('/acc/count-users-by-role');
+        return res.data;
+    } catch (error) {
+        if (error.response) console.log('Error response: ', error.response.data.error);
+        else console.log('Error not response: ', error.message);
+        return null;
+    }
+};
+
+const statistic_User_By_Date = async (start_date, end_date) => {
+    try {
+        const res = await client.post('/acc/statistic-users-by-date', {
+            start_date,
+            end_date
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) console.log('Error response: ', error.response.data.error);
+        else console.log('Error not response: ', error.message);
+        return null;
+    }
+};
+
+const change_Account_Role = async (email, role) => {
+    try {
+        const res = await client.post('/acc/change-acc-role', {
+            email,
+            role
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) console.log('Error response: ', error.response.data.error);
+        else console.log('Error not response: ', error.message);
+        return null;
+    }
+};
+
+const update_Account_Status = async (id, is_active) => {
+    try {
+        const res = await client.post(`/acc/update-account-status/${id}`, {
+            is_active
         });
         return res.data;
     } catch (error) {
@@ -166,15 +228,17 @@ const uploadProof = async (proof, id) => {
     }
 };
 
-const change_Account_Info = async (id ,username, phone, underlying_condition, date_of_birth, address, profile_image = null) => {
+const change_Account_Info = async (id ,username, phone, martial_status, date_of_birth, gender, location_id, profile_image) => {
     try {
         const formData = new FormData();
-        formData.append('username', username);
-        formData.append('phone', phone);
-        formData.append('underlying_condition', underlying_condition);
-        formData.append('date_of_birth', date_of_birth);
-        formData.append('address', address);
+        if (username) formData.append('username', username);
+        if (phone) formData.append('phone', phone);
+        if (martial_status) formData.append('martial_status', martial_status);
+        if (date_of_birth) formData.append('date_of_birth', date_of_birth);
+        if (gender) formData.append('gender', gender);
+        if (location_id) formData.append('location_id', location_id);
         if (profile_image !== null) formData.append('profile_image', profile_image);
+        console.log(profile_image)
 
         const res = await client.post(`/acc/update-acc-info/${id}`, formData, {
             headers: {
@@ -239,6 +303,7 @@ const forgot_Password = async (email) => {
         return null;
     }
 };
+
 
 const get_Doctor_Active_List = async (id) => {
     try {
@@ -342,6 +407,27 @@ const soft_Delete_Account = async (id) => {
 };
 
 
+const send_Email = async (email, receiverEmail, title, content) => {
+    try {
+        const res = await client.post('/acc/send-email',{
+            email,
+            receiverEmail,
+            title,
+            content
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
 
 
 export default {
@@ -364,4 +450,10 @@ export default {
     soft_Delete_Account,
     get_Account_Status,
     get_Top_Doctors,
+    get_All_Account,
+    change_Account_Role,
+    update_Account_Status,
+    count_User_By_Role,
+    statistic_User_By_Date,
+    send_Email
 };

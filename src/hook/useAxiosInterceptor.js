@@ -17,7 +17,7 @@ const useAxiosInterceptor = () => {
                 if (decodedPayload.exp < currentTime) {
                     localStorage.removeItem('isLoginSuccess');
                     alert('Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại.');
-                    navigate('/login');
+                    navigate('/sign-in');
                     return Promise.reject(new Error('Token expired'));
                 }
 

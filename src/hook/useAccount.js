@@ -53,6 +53,66 @@ const useAccount = () => {
         }
     };
 
+    const getAllAccount = async () => {
+        try {
+            const accounts = await Account_API.get_All_Account();
+    
+            return accounts;
+        } catch (error) {
+            console.error('Failed to fetch accounts:', error);
+            return null;
+        } finally {
+        }
+    };
+
+    const countUserByRole = async () => {
+        try {
+            const accounts = await Account_API.count_User_By_Role();
+    
+            return accounts;
+        } catch (error) {
+            console.error('Failed to fetch accounts:', error);
+            return null;
+        } finally {
+        }
+    };
+
+    const statisticUserByDate = async (start_date, end_date) => {
+        try {
+            const accounts = await Account_API.statistic_User_By_Date(start_date, end_date);
+    
+            return accounts;
+        } catch (error) {
+            console.error('Failed to fetch accounts:', error);
+            return null;
+        } finally {
+        }
+    };
+
+    const changeAccountRole = async (email, role) => {
+        try {
+            const accounts = await Account_API.change_Account_Role(email, role);
+    
+            return accounts;
+        } catch (error) {
+            console.error('Failed to change account role:', error);
+            return null;
+        } finally {
+        }
+    };
+
+    const updateAccountStatus = async (id, is_active) => {
+        try {
+            const accounts = await Account_API.update_Account_Status(id, is_active);
+    
+            return accounts;
+        } catch (error) {
+            console.error('Failed to update account status:', error);
+            return null;
+        } finally {
+        }
+    };
+
     const checkLogin = async (email, password) => {
         isLoadingAccount(true);
         try {
@@ -68,10 +128,10 @@ const useAccount = () => {
         }
     };
 
-    const signUp = async (email, password, username, phone, is_doc) => {
+    const signUp = async (email, password, username, is_doc) => {
         isLoadingAccount(true);
         try {
-            const SignUpInfo = await Account_API.signUp(email, password, username, phone, is_doc);
+            const SignUpInfo = await Account_API.signUp(email, password, username, is_doc);
             return SignUpInfo;
         }
         catch(error){
@@ -248,10 +308,11 @@ const useAccount = () => {
     }
 
 
-    const changeAccountInfo = async(id ,username, phone, underlying_condition, date_of_birth, address, profile_image = null) => {
+    const changeAccountInfo = async(id ,username, phone, martial_status, date_of_birth, gender, location_id, profile_image) => {
         isLoadingAccount(true);
         try {
-            await Account_API.change_Account_Info(id ,username, phone, underlying_condition, date_of_birth, address, profile_image);
+            const AccInfo = await Account_API.change_Account_Info(id ,username, phone, martial_status, date_of_birth, gender, location_id, profile_image);
+            return AccInfo;
         }
         catch(error){
             console.error('Failed to change account info:', error);
@@ -327,30 +388,38 @@ const useAccount = () => {
         }
     }
 
+    const sendEmail = async(email, receiverEmail, title, content) => {
+        isLoadingAccount(true);
+        try {
+            const topDoctors = await Account_API.send_Email(email, receiverEmail, title, content);
+            return topDoctors;
+        }
+        catch(error){
+            console.error('Failed to send email:', error);
+            return null;
+        }
+        finally{
+            isLoadingAccount(false);
+        }
+    }
+
     return [
     checkLogin, 
     signUp, 
     loadingAccount, 
     doctorsHook, 
-    getAccountByID, 
-    filterDoctorList, 
-    getAccountByEmail, 
-    checkAccountType, 
-    uploadProof, 
-    changePassword, 
-    getDoctorActiveList, 
-    addDoctorActiveHour, 
-    changeAccountInfo, 
-    changeDoctorInfo, 
-    searchDoctor, 
-    forgotPassword, 
-    getDoctorList, 
-    deleteDoctorActiveHour, 
-    updateDoctorActiveHour,
-    softDeleteAccount,
-    getFilterDoctorList,
-    getAccountStatus,
-    getTopDoctors
+    changeAccountInfo,
+    getAccountByEmail,
+    getAllAccount,
+    changeAccountRole,
+    updateAccountStatus,
+    getAccountByID,
+    countUserByRole,
+    statisticUserByDate,
+    sendEmail,
+    changePassword,
+    forgotPassword,
+    getAccountStatus
     ];
 };
 
