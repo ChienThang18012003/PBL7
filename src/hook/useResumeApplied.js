@@ -112,7 +112,6 @@ const useResumeApplied = () => {
     };
 
     const statisticResumeAppliedByStatus = async (email, start_date, end_date) => {
-        isResumeAppliedLoading(true);
         try {
             const resume = await Resume_Applied_API.statistic_Resume_Applied_By_Status(email, start_date, end_date);
             return resume;
@@ -120,12 +119,10 @@ const useResumeApplied = () => {
             console.error('Failed to delete resume applied:', error);
             return null;
         } finally {
-            isResumeAppliedLoading(false);
         }
     };
 
     const statisticResumeAppliedByDate = async (email, start_date, end_date) => {
-        isResumeAppliedLoading(true);
         try {
             const resume = await Resume_Applied_API.statistic_Resume_Applied_By_Date(email, start_date, end_date);
             return resume;
@@ -133,7 +130,6 @@ const useResumeApplied = () => {
             console.error('Failed to delete resume applied:', error);
             return null;
         } finally {
-            isResumeAppliedLoading(false);
         }
     };
 

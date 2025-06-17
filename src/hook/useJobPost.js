@@ -235,27 +235,23 @@ const useJobPost = () => {
 
     const statisticJobPostByAcademicLevel = async (email, start_date, end_date) => {
         try {
-            isJobPostLoading(true);
             const Job_Post = await Job_Post_API.statistic_Job_Post_By_Academic_Level(email, start_date, end_date);
             return Job_Post;
         } catch (error) {
             console.error('Failed to fetch Job Posts:', error);
             return null;
         } finally {
-            isJobPostLoading(false);
         }
     };
 
     const statisticTop5JobPostByResumeApplied = async (email, start_date, end_date) => {
         try {
-            isJobPostLoading(true);
             const Job_Post = await Job_Post_API.statistic_Top5_Job_Post_By_Resume_Applied(email, start_date, end_date);
             return Job_Post;
         } catch (error) {
             console.error('Failed to fetch Job Posts:', error);
             return null;
         } finally {
-            isJobPostLoading(false);
         }
     };
 
