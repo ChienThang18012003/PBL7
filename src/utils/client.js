@@ -2,8 +2,8 @@ import axios from 'axios';
 
 
 const client = axios.create({
-    //baseURL: 'https://medibackend.azurewebsites.net',
-    baseURL: 'http://localhost:4000',
+    baseURL: 'https://hirehub-backend-j38m.onrender.com/',
+    //baseURL: 'http://localhost:4000',
     timeout: 20000, 
     headers: {
         'Content-Type': 'application/json',
