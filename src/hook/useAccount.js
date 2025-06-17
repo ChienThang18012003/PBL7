@@ -54,6 +54,7 @@ const useAccount = () => {
     };
 
     const getAllAccount = async () => {
+        isLoadingAccount(true);
         try {
             const accounts = await Account_API.get_All_Account();
     
@@ -62,10 +63,12 @@ const useAccount = () => {
             console.error('Failed to fetch accounts:', error);
             return null;
         } finally {
+            isLoadingAccount(false);
         }
     };
 
     const countUserByRole = async () => {
+        isLoadingAccount(true);
         try {
             const accounts = await Account_API.count_User_By_Role();
     
@@ -74,6 +77,7 @@ const useAccount = () => {
             console.error('Failed to fetch accounts:', error);
             return null;
         } finally {
+            isLoadingAccount(false);
         }
     };
 

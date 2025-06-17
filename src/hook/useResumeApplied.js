@@ -100,7 +100,6 @@ const useResumeApplied = () => {
     };
 
     const statisticResumeAppliedByStatus = async (start_date, end_date) => {
-        isResumeAppliedLoading(true);
         try {
             const resume = await Resume_Applied_API.statistic_Resume_Applied_By_Status(start_date, end_date);
             return resume;
@@ -108,7 +107,6 @@ const useResumeApplied = () => {
             console.error('Failed to delete resume applied:', error);
             return null;
         } finally {
-            isResumeAppliedLoading(false);
         }
     };
 

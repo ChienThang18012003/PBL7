@@ -176,14 +176,12 @@ const useJobPost = () => {
 
     const statisticJobPostByStatus = async (start_date, end_date) => {
         try {
-            isJobPostLoading(true);
             const Job_Post = await Job_Post_API.statistic_Job_Post_By_Status(start_date, end_date);
             return Job_Post;
         } catch (error) {
             console.error('Failed to fetch Job Posts:', error);
             return null;
         } finally {
-            isJobPostLoading(false);
         }
     };
 

@@ -70,7 +70,6 @@ const useCareer = () => {
     };
 
     const statisticTop5CareerByJobPost = async (start_date, end_date) => {
-        isCareerLoading(true);
         try {
             const newCareer = await Career_API.statistic_Top5_Career_By_Job_Post(start_date, end_date);
             return newCareer;
@@ -78,7 +77,6 @@ const useCareer = () => {
             console.error('Failed to delete Career:', error);
             return null;
         } finally {
-            isCareerLoading(false);
         }
     };
 
