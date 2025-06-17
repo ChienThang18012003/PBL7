@@ -1,0 +1,581 @@
+.wrapper {
+    width: 100%;
+    display: block;
+    overflow: visible;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f5ff;
+}
+
+.popular-company-container{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-info-container{
+    width: 69%;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-header{
+    width: 100%;
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.cover-image-wrapper{
+    width: 100%;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.cover-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.company-logo-wrapper{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    top: 92%;
+    left: 20px;
+    box-shadow: 0 0 20px #b5b7b7;
+    border: 4px solid white;
+}
+
+.company-logo{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.company-name-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.company-name{
+    font-weight: 700;
+    font-size: 2rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.company-info-wrapper{
+    width: 60%;
+    height: 100%;
+    margin-left: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-container{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.info-wrapper{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.follower-num{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.follower-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.button-wrapper{
+    width: 15%;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.follow-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 2px solid #f4c015;
+    background-color: white;
+    color: #f4c015;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.followed-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #f4c015;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.follow-icon{
+    color: #f4c015;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.followed-icon{
+    color: #fff;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.company-details-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.section-one{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.section-ten{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
+
+.section-two{
+    width: 29%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.title-wrapper{
+    width: 100%;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+.blog-content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blog-content {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 5px 0px;
+    color: #757575;
+    padding: 0;
+    width: 96%;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+}
+
+.website-link{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 10px;
+    color: #089dd8;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.website-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.link-wrapper{
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.facebook-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #0866ff;
+    margin-left: 20px;
+}
+
+.youtube-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #ff0000;
+    margin-left: 20px;
+}
+
+.linkedin-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #0072b1;
+    margin-left: 20px;
+}
+
+.info-wrapper-two{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.info-wrapper-three{
+    display: flex;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.location-num{
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: justify;
+}
+
+.location-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.location-text{
+    margin-left: 5px;
+}
+
+.ggmap-wrapper{
+    width: 95%;
+    height: 200px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.urgent-jobs-container{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.urgent-jobs-wrapper{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.urgent-jobs-title{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+}
+
+.urgent-jobs-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+    margin: 0px 10px;
+}
+
+.job-name-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 40px;
+}
+
+.job-name{
+    font-weight: 700;
+    font-size: 2rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.job-info-wrapper{
+    width: 100%;
+    height: 100%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buttons-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.apply-button{
+    width: 120px;
+    height: 40px;
+    outline: none;
+    border: 2px solid #0b95cc;
+    background-color: white;
+    color: #0b95cc;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.apply-icon{
+    color: #0b95cc;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.applied-button {
+    width: 140px;
+    height: 40px;
+    outline: none;
+    background-color: #0b95cc;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.applied-icon{
+    color: white;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.like-button{
+    width: 120px;
+    height: 40px;
+    outline: none;
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: #0b95cc;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: none;
+    &:hover{
+        color: #0b95cc;
+        background-color: white;
+        border: 2px solid #0b95cc;
+        cursor: pointer;
+        .like-icon{
+            color: #0b95cc;
+        }
+    }
+    transition: all 0.5s ease;
+}
+
+.like-icon{
+    color: white;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.job-details-one{
+    width: 95%;
+    height: 80px;
+    margin-top: 20px;
+    border-top: 1px solid #757575;
+    border-bottom: 1px solid #757575;
+    display: flex;
+    align-items: center;
+}
+
+.job-detail-wrapper{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.job-detail-title{
+    width: 95%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #757575
+}
+
+.job-detail-title-two{
+    width: 95%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #757575;
+    margin-top: 10px;
+}
+
+.job-detail{
+    width: 95%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.info-title{
+    font-weight: 700;
+    font-size: 1.8rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.other-job-title{
+    font-weight: 700;
+    font-size: 1.8rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.separator{
+    width: 90%;
+    height: 5px;
+    background-color: #0b95cc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.job-details-two{
+    width: 95%;
+    height: 180px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.job-detail-wrapper-two{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-detail-container{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.job-detail-container-two{
+    width: 100%;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-details-three{
+    width: 95%;
+    height: 240px;
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.similar-job-container{
+    width: 29%;
+}

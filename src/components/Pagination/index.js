@@ -14,10 +14,7 @@ const Pagination = ({ totalPosts, postsPerPage, currentPage, setCurrentPage }) =
     }
 
     function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+
     }
 
     function handlePreviousPage() {

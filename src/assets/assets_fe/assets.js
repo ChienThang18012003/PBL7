@@ -5,13 +5,16 @@ import Pic4 from "../../assets/assets_fe/4.png"
 import Pic5 from "../../assets/assets_fe/5.png"
 import Pic6 from "../../assets/assets_fe/6.png"
 import HospitalImage from "../../assets/assets_fe/Hospital.jpg"
+import PhoneLogo from "../../assets/assets_fe/PhoneLogo.png"
+import ChatbotLogo from "../../assets/assets_fe/ChatbotLogo.gif"
 import NewsPic1 from "../../assets/assets_fe/item1.jpg"
 import MedicalLogo from '../../assets/assets_fe/MedicalLogo.svg';
 import LoadingAnimation from '../../assets/assets_fe/LoadingAnimation.svg';
 import doc1 from './doc1.png'
 import verified_icon from '../../assets/assets_fe/verified.png'
 import search_icon from './search.png'
-
+import LoginBackground from '../../assets/assets_fe/LoginBackground.png';
+import CompanySearchCover from '../../assets/assets_fe/CompanySearchCover.png';
 import Gastroenterologist from './Gastroenterologist.svg'
 import General_physician from './General_physician.svg'
 import Gynecologist from './Gynecologist.svg'
@@ -24,10 +27,19 @@ import MobileLogo from '../../assets/assets_fe/MobileLogo.png';
 import MobileLogo2 from '../../assets/assets_fe/MobileLogo2.png';
 import UserImage from '../../assets/assets_fe/User.png';
 import DoctorImage from '../../assets/assets_fe/DoctorImage.png';
+import SignUpBackground from '../../assets/assets_fe/SignUpBackground.png';
+import JobBackground from '../../assets/assets_fe/JobBackground.jpg';
+import CompanyCoverImage from '../../assets/assets_fe/CompanyCoverImage.jpg';
+import CompanyLogo from '../../assets/assets_fe/CompanyLogo.jpg';
 import DoctorsImage from '../../assets/assets_fe/DoctorsImage.jpg';
 import ArticleImage from '../../assets/assets_fe/ArticleImage.png'
 import SpecialitiesImage from '../../assets/assets_fe/SpecialitiesImage.png'
-import SpecialitiesImage2 from '../../assets/assets_fe/SpecialitiesImage.jpeg'
+import SpecialitiesImage2 from '../../assets/assets_fe/SpecialitiesImage.png'
+import ChatbotIcon from '../../assets/assets_fe/ChatbotIcon.png'
+import ChatbotIconOne from '../../assets/assets_fe/ChatbotIconOne.png'
+import ChatbotIconTwo from '../../assets/assets_fe/ChatbotIconTwo.png'
+import DefaultBanner from '../../assets/assets_fe/DefaultBanner.jpg'
+import TextLoading from '../../assets/assets_fe/TextLoading.gif'
 
 
 export const assets = {
@@ -52,7 +64,20 @@ export const assets = {
     ArticleImage,
     SpecialitiesImage,
     SpecialitiesImage2,
-    DoctorsImage
+    DoctorsImage,
+    PhoneLogo,
+    LoginBackground,
+    SignUpBackground,
+    JobBackground,
+    CompanySearchCover,
+    CompanyLogo,
+    CompanyCoverImage,
+    ChatbotLogo,
+    ChatbotIcon,
+    ChatbotIconOne,
+    ChatbotIconTwo,
+    TextLoading,
+    DefaultBanner
 }
 export const specialityData = [
     {

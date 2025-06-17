@@ -1,0 +1,198 @@
+.wrapper {
+    width: 30%;
+    height: 500px;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+	border: 2px solid #f0f1f2;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover{
+        border-color: #089dd8;
+    }
+}
+
+.company-info-wrapper{
+    width: 88%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.follower-wrapper{
+    width: 88%;
+    height: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.info-wrapper{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.follower-num{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.follower-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.company-image-wrapper{
+    width: 94%;
+    height: 160px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
+.company-image-container{
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    border: 5px solid white;
+    object-fit: cover;
+    overflow: hidden;
+    position: absolute;
+    top: 78%;
+    left: 10px;
+    box-shadow: 0 0 20px #b5b7b7;
+}
+
+.company-cover-image-container{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.company-image{
+    width: 100%;
+    height: 100%;
+}
+
+.company-name-wrapper{
+    width: 88%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.company-name{
+    font-weight: 700;
+    font-size: 2rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 4.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.job-details{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.other-info{
+    width: 90%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-top: 2px solid #f0f1f2
+}
+
+.hot-icon{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #f4c015;
+}
+.hot-info{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #f4c015;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.follow-button-wrapper{
+    width: 88%;
+    height: 30px;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 2px solid #f4c015;
+    background-color: white;
+    color: #f4c015;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.followed-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #f4c015;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.follow-icon{
+    color: #f4c015;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.followed-icon{
+    color: #fff;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}

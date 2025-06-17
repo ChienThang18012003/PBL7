@@ -90,16 +90,18 @@ export const SubmitThree = styled(Wrapper)`
 export const Rounded = styled(Wrapper)`
     border-radius: 999px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    background-color:#00D3D6;
+    background-color: #1eb6f2;
     color: #fff;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 
     &:hover {
-        background-color: #2197E3;
+        background-color:rgb(11, 149, 204) !important;
     }
 
     &:disabled {
         cursor: default;
-        background-color:rgba(84, 205, 207, 0.74);
+        background-color:rgb(84, 192, 235) !important;
     }
 `;
 

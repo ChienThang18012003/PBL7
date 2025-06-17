@@ -1,0 +1,165 @@
+.wrapper {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+	align-items: center;
+    overflow: hidden;
+    display: flex;
+    background-color: white;
+	border: 2px solid #f0f1f2;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &:hover{
+        border-color: #089dd8;
+    }
+}
+
+.company-info-wrapper{
+    height: 100px;
+    display: flex;
+    width: 84%;
+}
+
+.followed-button{
+    width: 120px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: #f4c015;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    margin-right: 10px;
+}
+
+.followed-icon{
+    color: #fff;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.company-logo{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.company-logo-wrapper{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    margin-left: 10px;
+    border: 2px solid #f0f1f2;
+    border-radius: 5px;
+}
+
+.company-image-wrapper{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-image-container{
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    border: 2px solid #f0f1f2;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.company-image{
+    width: 100%;
+    height: 100%;
+}
+
+.company-name-wrapper{
+    width: 80%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-info{
+    height: 100%;
+    width: 84%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 10px;
+}
+
+.company-name{
+    color:#000;
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-container{
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.info-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.info-text{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.job-details{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.other-info{
+    width: 90%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-top: 2px solid #f0f1f2
+}
+
+.hot-icon{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #f4c015;
+}
+.hot-info{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #f4c015;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+

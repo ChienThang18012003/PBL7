@@ -1,0 +1,223 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+	border: 2px solid #f0f1f2;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    &:hover{
+        border: 2px solid #34bbf0;
+    }
+}
+
+.resume-info-wrapper{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.company-info{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-button-wrapper{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.company-image-wrapper{
+    height: 80px;
+    width: 80px;
+    border: 2px solid #f0f1f2;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.company-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.resume-action-wrapper{
+    height: 100%;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.like-button{
+    color: #f54444;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.view-button{
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.job-detail-wrapper{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-detail-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-name{
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-right: 10px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.company-name{
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.phone-number{
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    margin-left: 5px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.company-info-wrapper{
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.company-info-wrapper-two{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 50px;
+    background-color: #b4b4b4;
+    margin-right: 5px;
+    overflow-wrap: break-word;
+}
+
+.company-info-wrapper-three{
+    display: flex;
+    align-items: center;
+}
+
+.company-icon{
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.hot-icon{
+    color: #f54444;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+.hot-info{
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #f54444;
+}
+
+.job-details-wrapper{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.job-details-wrapper > *:first-child {
+    margin-left: 10px;
+}
+
+.job-details{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.job-info{
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color:#089dd8;
+}
+
+.other-info{
+    width: 95%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 2px solid #f0f1f2
+}
+
+.like-button{
+    color: #f54444;
+    border: none;
+    outline:none;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}

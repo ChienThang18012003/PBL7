@@ -11,7 +11,16 @@ const cx = classNames.bind(styles);
 
 export default function Modal({children , data}) {
   const [modal, setModal] = useState(false);
-  const [, , , , , , , , , changePassword] = useAccount();
+  const [
+    checkLogin, 
+    signUp, 
+    loadingAccount, 
+    doctorsHook, 
+    changeAccountInfo,
+    getAccountByEmail,
+    sendEmail,
+    changePassword
+    ] = useAccount();
   const [newPass, setNewPass] = useState('');
   const [rewriteNewPass, setRewriteNewPass] = useState('');
   const [currentPass, setCurrentPass] = useState('');
@@ -72,9 +81,9 @@ export default function Modal({children , data}) {
 
   return (
     <>
-      <Button primary onClick={toggleModal} >
+      <a className={cx('change-pass-link')} onClick={toggleModal}>
         {children}
-      </Button>
+      </a>
 
       {modal && (
         <div className={cx('modal')}>

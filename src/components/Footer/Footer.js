@@ -28,7 +28,7 @@ function Footer() {
             <FooterContentContainer>
                 <FooterContentWrapper>
                     <FooterContentItems>
-                        <FooterContentTitle>Hệ thống bệnh viện</FooterContentTitle>
+                        <FooterContentTitle>Địa chỉ liên hệ</FooterContentTitle>
                         <FooterContent to='/sign-up'> <IoLocationOutline/> 2B Phổ Quang, Phường 2
                             Q. Tân Bình, Tp. Hồ Chí Minh</FooterContent>
                         <FooterContent ><IoLocationOutline/> 108 Phố Hoàng Như Tiếp,
@@ -50,22 +50,22 @@ function Footer() {
                     </FooterContentItems>
                     <FooterContentItems>
                         <FooterContentTitle>Đường dẫn nhanh</FooterContentTitle>
-                        <FooterContent >Chuyên khoa</FooterContent>
+                        <FooterContent >Về chúng tôi</FooterContent>
                         <FooterContent >Chuyên mục bảo mật</FooterContent>
                         <FooterContent >Chính sách bảo mật</FooterContent>
                         <FooterContent >Đặc san</FooterContent>
                     </FooterContentItems>
                     <FooterContentItems>
                         <FooterContentTitle>Website cùng tập đoàn</FooterContentTitle>
-                        <FooterContent >Viện nghiên cứu </FooterContent>
-                        <FooterContent >Trung tâm hỗ trợ sinh sản</FooterContent>
+                        <FooterContent >Việc làm tuyển gấp </FooterContent>
+                        <FooterContent >Trung tâm thương mại điện tử</FooterContent>
                     </FooterContentItems>
                 </FooterContentWrapper>
             </FooterContentContainer>
             <SocialMedia>
                 <SocialMediaWrap>
                     <MedicalLogoContainer >
-                        <img src={assets.MedicalLogo} alt="logo" className="logo"/>
+                        <img src={assets.PhoneLogo} alt="logo" className="logo"/>
                     </MedicalLogoContainer>
 
                     <SocialIcons>

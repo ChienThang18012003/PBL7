@@ -19,14 +19,34 @@ const checkLogin = async (email, password) => {
     }
 };
 
-const signUp = async (email, password, username, phone, is_doc) => {
+const send_Email = async (email, receiverEmail, title, content) => {
+    try {
+        const res = await client.post('/acc/send-email',{
+            email,
+            receiverEmail,
+            title,
+            content
+        });
+        return res.data;
+    } catch (error) {
+        if (error.response) {
+            console.log('Error response: ', error.response.data.error);
+            return error.response.data.error;
+        } 
+        else {
+            console.log('Error not response: ', error.message);
+            return error.message;
+        } 
+    }
+};
+
+const signUp = async (email, password, username, is_doc) => {
     try {
         const res = await client.post('/acc/signup', {
             email: email,
             password: password,
             username: username,
-            phone: phone,
-            is_doc: is_doc,
+            role: is_doc ? "employer" : "user",
         });
         return res.data;
     } catch (error) {
@@ -166,15 +186,17 @@ const uploadProof = async (proof, id) => {
     }
 };
 
-const change_Account_Info = async (id ,username, phone, underlying_condition, date_of_birth, address, profile_image = null) => {
+const change_Account_Info = async (id ,username, phone, martial_status, date_of_birth, gender, location_id, profile_image) => {
     try {
         const formData = new FormData();
-        formData.append('username', username);
-        formData.append('phone', phone);
-        formData.append('underlying_condition', underlying_condition);
-        formData.append('date_of_birth', date_of_birth);
-        formData.append('address', address);
+        if (username) formData.append('username', username);
+        if (phone) formData.append('phone', phone);
+        if (martial_status) formData.append('martial_status', martial_status);
+        if (date_of_birth) formData.append('date_of_birth', date_of_birth);
+        if (gender) formData.append('gender', gender);
+        if (location_id) formData.append('location_id', location_id);
         if (profile_image !== null) formData.append('profile_image', profile_image);
+        console.log(profile_image)
 
         const res = await client.post(`/acc/update-acc-info/${id}`, formData, {
             headers: {
@@ -364,4 +386,5 @@ export default {
     soft_Delete_Account,
     get_Account_Status,
     get_Top_Doctors,
+    send_Email
 };

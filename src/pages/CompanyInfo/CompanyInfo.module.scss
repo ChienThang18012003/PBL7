@@ -1,0 +1,347 @@
+.wrapper {
+    width: 100%;
+    display: block;
+    overflow: visible;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f5ff;
+}
+
+.popular-company-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f5ff;
+}
+
+.company-header{
+    width: 100%;
+    height: 450px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cover-image-wrapper{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.cover-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.company-logo-wrapper{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    top: 92%;
+    left: 20px;
+    box-shadow: 0 0 20px #b5b7b7;
+    border: 4px solid white;
+}
+
+.company-logo{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.company-name-wrapper{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.company-name{
+    font-weight: 700;
+    font-size: 2rem;
+    width: 100%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.company-info-wrapper{
+    width: 70%;
+    height: 100%;
+    margin-left: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-container{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.info-wrapper{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.follower-num{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.follower-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.button-wrapper{
+    width: 10%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.follow-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 2px solid #f4c015;
+    background-color: white;
+    color: #f4c015;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.followed-button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #f4c015;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.follow-icon{
+    color: #f4c015;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.followed-icon{
+    color: #fff;
+    margin-right: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.company-details-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.section-one{
+    width: 69%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
+
+.section-two{
+    width: 29%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.title-wrapper{
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-left: 15px;
+    color: #089dd8;
+}
+
+.blog-content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blog-content {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 5px 0px;
+    color: #757575;
+    padding: 0;
+    width: 96%;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+}
+
+.website-link{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 10px;
+    color: #089dd8;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.website-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.link-wrapper{
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.facebook-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #0866ff;
+    margin-left: 20px;
+}
+
+.youtube-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #ff0000;
+    margin-left: 20px;
+}
+
+.linkedin-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #0072b1;
+    margin-left: 20px;
+}
+
+.info-wrapper-two{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.info-wrapper-three{
+    display: flex;
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.location-num{
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: justify;
+}
+
+.location-icon{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.location-text{
+    margin-left: 5px;
+}
+
+.ggmap-wrapper{
+    width: 90%;
+    height: 300px;
+    overflow: hidden;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: aquamarine;
+    margin-bottom: 20px;
+}
+
+.urgent-jobs-container{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.urgent-jobs-wrapper{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.urgent-jobs-title{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+}
+
+.urgent-jobs-icon{
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+    margin: 0px 10px;
+}
