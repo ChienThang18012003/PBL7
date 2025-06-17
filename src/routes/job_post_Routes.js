@@ -1,0 +1,103 @@
+const job_post_Controller = require('../app/controllers/job_post_Controller')
+const { upload_image } = require("../middleware/multer");
+const parseFormJsonFields = require('../middleware/parseFormJsonFields');
+const express = require('express')
+const router = express.Router()
+
+router.post(
+    '/add-job-post', 
+    upload_image.none(),
+    job_post_Controller.add_Job_Post
+)
+router.post(
+    '/get-job-post-list', 
+    job_post_Controller.get_Job_Post_List
+)
+router.get(
+    '/get-job-post/:id', 
+    job_post_Controller.get_Job_Post
+)
+router.post(
+    '/get-job-post-by-email', 
+    job_post_Controller.get_Job_Post_By_Email
+)
+router.post(
+    '/get-job-post-by-ids', 
+    job_post_Controller.get_Job_Post_By_Ids
+)
+router.post(
+    '/get-job-post-by-company', 
+    job_post_Controller.get_Job_Post_By_Company
+)
+router.post(
+    '/get-job-post-name-by-email', 
+    job_post_Controller.get_Job_Post_Name_By_Email
+)
+router.post(
+    '/filter-job-post', 
+    job_post_Controller.filter_Job_Posts
+)
+router.post(
+    '/filter-job-post-list', 
+    job_post_Controller.filterJobPostList
+)
+router.post(
+    '/update-job-post-view/:id',
+    upload_image.none(),
+    job_post_Controller.update_Job_Post_View
+);
+router.post(
+    '/update-job-post-status/:id',
+    upload_image.none(),
+    job_post_Controller.update_Job_Post_Status
+);
+router.post(
+    '/update-job-post/:id',
+    upload_image.none(),
+    job_post_Controller.update_Job_Post
+);
+router.post(
+    '/count-job-post', 
+    job_post_Controller.count_Job_Post
+)
+router.post(
+    '/count-job-post-by-user', 
+    job_post_Controller.count_Job_Post_By_User
+)
+router.post(
+    '/statistic-job-post-by-status', 
+    job_post_Controller.statistic_Job_Post_By_Status
+)
+router.post(
+    '/statistic-job-post-by-academic-level-with-email', 
+    job_post_Controller.statistic_Job_Post_By_Academic_Level_With_Email
+)
+router.post(
+    '/statistic-top5-job-post-by-resume-applied', 
+    job_post_Controller.statistic_Top5_Job_Post_By_Resume_Applied
+)
+router.post(
+    '/soft-delete-job-post', 
+    job_post_Controller.soft_Delete_Job_Post
+)
+router.post(
+    '/delete-job-post/:id', 
+    job_post_Controller.delete_Job_Post
+)
+router.post(
+    '/restore-job-post', 
+    job_post_Controller.restore_Deleted_Job_Post
+)
+router.post(
+    '/soft-delete-job-post-by-company', 
+    job_post_Controller.soft_Delete_Job_Post_By_Company
+)
+router.post(
+    '/delete-job-post-by-company/:id', 
+    job_post_Controller.delete_Job_Post_By_Company
+)
+router.post(
+    '/restore-job-post-by-company', 
+    job_post_Controller.restore_Deleted_Job_Post_By_Company
+)
+module.exports = router

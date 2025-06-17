@@ -1,0 +1,95 @@
+const resume_applied_Controller = require('../app/controllers/resume_applied_Controller')
+
+const express = require('express')
+const router = express.Router()
+
+router.post(
+    '/get-resume-applied-list', 
+    resume_applied_Controller.get_All_Resume_Applied
+)
+router.post(
+    '/add-resume-applied', 
+    resume_applied_Controller.add_Resume_Applied
+)
+router.post(
+    '/update-resume-applied/:id', 
+    resume_applied_Controller.update_Resume_Applied
+)
+router.post(
+    '/soft-delete-resume-applied', 
+    resume_applied_Controller.soft_Delete_Resume_Applied
+)
+router.post(
+    '/delete-resume-applied', 
+    resume_applied_Controller.perma_Delete_Resume_Applied
+)
+router.post(
+    '/restore-resume-applied', 
+    resume_applied_Controller.restore_Deleted_Resume_Applied
+)
+router.post(
+    '/soft-delete-resume-applied-by-resume', 
+    resume_applied_Controller.soft_Delete_Resume_Applied_By_Resume
+)
+router.post(
+    '/delete-resume-applied-by-resume', 
+    resume_applied_Controller.perma_Delete_Resume_Applied_By_Resume
+)
+router.post(
+    '/restore-resume-applied-by-resume', 
+    resume_applied_Controller.restore_Deleted_Resume_Applied_By_Resume
+)
+router.post(
+    '/soft-delete-resume-applied-by-job-post', 
+    resume_applied_Controller.soft_Delete_Resume_Applied_By_Job_Post
+)
+router.post(
+    '/delete-resume-applied-by-job-post', 
+    resume_applied_Controller.perma_Delete_Resume_Applied_By_Job_Post
+)
+router.post(
+    '/restore-resume-applied-by-job-post', 
+    resume_applied_Controller.restore_Deleted_Resume_Applied_By_Job_Post
+)
+router.post(
+    '/get-resume-applied/:id', 
+    resume_applied_Controller.get_Resume_Applied
+)
+router.post(
+    '/get-all-resume-applied-by-user', 
+    resume_applied_Controller.get_all_Resume_Applied_By_User
+)
+router.post(
+    '/get-all-resume-applied-by-job-post', 
+    resume_applied_Controller.get_all_Resume_Applied_By_Job_Post
+)
+router.post(
+    '/get-specific-resume-applied', 
+    resume_applied_Controller.get_Specific_Resume_Applied
+)
+router.post(
+    '/statistic-resume-applied-by-status', 
+    resume_applied_Controller.statistic_Resume_Applied_By_Status
+)
+router.post(
+    '/statistic-resume-applied-by-status-with-email', 
+    resume_applied_Controller.statistic_Resume_Applied_By_Status_With_Email
+)
+router.post(
+    '/statistic-resume-applied-by-date', 
+    resume_applied_Controller.statistic_Resume_Applied_By_Date
+)
+router.post(
+    '/count-resume-applied', 
+    resume_applied_Controller.count_Resume_Applied
+)
+router.post(
+    '/get-distict-resume-applied', 
+    resume_applied_Controller.getDistinctResumeApplications
+)
+router.post(
+    '/count-resume-applied-by-user', 
+    resume_applied_Controller.count_Resume_Applied_By_User
+)
+
+module.exports = router

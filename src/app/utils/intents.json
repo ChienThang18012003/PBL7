@@ -1,0 +1,26 @@
+{
+  "find_job": {
+    "description": "Tìm việc làm theo các tiêu chí",
+    "params": ["city", "career", "experience", "job_type", "salary", "quantity"]
+  },
+  "find_company": {
+    "description": "Tìm công ty theo ngành nghề, địa điểm",
+    "params": ["city", "career", "quantity"]
+  },
+  "find_resume": {
+    "description": "Tìm hồ sơ cá nhân của người dùng (có thể tìm theo email hoặc tên hồ sơ)",
+    "params": ["email", "resume_name", "quantity"]
+  },
+  "find_applications": {
+    "description": "Tìm công việc đã ứng tuyển (có thể tìm theo email, tên công việc hoặc tên hồ sơ đã dùng ứng tuyển)",
+    "params": ["email", "job_name", "resume_name", "quantity"]
+  },
+  "tutorial": {
+    "description": "Các câu hỏi liên quan LÀM SAO, NHƯ THẾ NÀO về cách hoạt động của trang web, bạn hãy trả về cho tôi intent tutorial với trường type là một trong các loại 'Cách tạo hồ sơ','Cách tạo phản hồi','Cách xem danh sách việc làm đã ứng tuyển','Cách xem danh sách việc làm đã lưu','Cách xem danh sách công ty đã theo dõi'",
+    "params": ["type"]
+  },
+  "other_question": {
+    "description": "Các câu hỏi khác ví dụ như chào hỏi hoặc các câu hỏi không liên quan, trả lời trong tầm hiểu biết của bạn bằng tiếng Việt",
+    "params": ["answer"]
+  }
+}

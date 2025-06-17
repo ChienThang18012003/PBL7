@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông báo từ công ty</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container{
+            width: 1000px;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        .company-mail-container{
+            width: 600px;
+            margin: auto;
+        }
+
+        .app-logo{
+            width: 100px;
+            height: 100px;
+            margin-left: 450px;
+            margin-bottom: 20px;
+        }
+
+        .company-logo{
+            width: 100px;
+            height: 100px;
+            margin-left: 20px;
+            margin-top: 20px;
+            border: 2px solid #f0f1f2;
+        }
+
+        .company-info-container{
+            width: 440px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .company-info-wrapper{
+            width: 600px;
+            background-color: #fff;
+            display: flex;
+            padding-bottom: 20px;
+        }
+
+        .company-name{
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            color: #34bbf0 !important;
+            width: 100%;
+        }
+
+        .company-info{
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            color: #000 !important;
+            width: 100%;
+        }
+
+        .mail-content-wrapper{
+            width: 600px;
+            border-top: 5px solid #34bbf0;
+            border-bottom: 5px solid #34bbf0;
+            background-color: #fff;
+        }
+
+        .mail-content-container{
+            width:90%;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Gửi từ công ty: <%= company_name %></h2>
+
+    <div class="container">
+        <img src="https://res.cloudinary.com/dlfec5q7y/image/upload/v1750147639/PhoneLogo_zip3c6.png"
+        alt="MediBooker Logo" class="app-logo">
+        <div class="company-mail-container">
+            <div class="company-info-wrapper">
+                <img src= "<%= company_logo %>"
+                alt="MediBooker Logo" class="company-logo">
+                <div class="company-info-container">
+                    <div class="company-name">
+                        <%= company_name %>
+                    </div>
+                    <div class="company-info">
+                        Số điện thoại: <%= company_phone %>
+                    </div>
+                    <div class="company-info">
+                        Email: <%= company_email %>
+                    </div>
+                    <div class="company-info">
+                        Website: <%= company_website %>
+                    </div>
+                    <div class="company-info">
+                        Địa chỉ: <%= company_address %>
+                    </div>
+                </div>
+            </div>
+            <div class="mail-content-wrapper">
+                <div class="mail-content-container">
+                    <%- content %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
