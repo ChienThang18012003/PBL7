@@ -91,7 +91,7 @@ function SignUp() {
 
     useEffect(()=>{
         const fetchDistrict = async() => {
-            if (selectedCity != "") {
+            if (selectedCity !== "") {
                 const allDistricts = await getAllDistrictsByCity(selectedCity);
                 if (allDistricts && Array.isArray(allDistricts)) setDisplayedDistricts(allDistricts);
             } 

@@ -215,7 +215,41 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Cấp bậc mong muốn</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                          <input className={cx('field-input')} type='text' placeholder='Nhập cấp bậc mong muốn' value={desired_job_level} onChange={(e)=>{setDesiredJobLevel(e.target.value)}}></input>
+                          <select className={cx('fiselect')} type='text' placeholder='Nhập cấp bậc mong muốn' value={desired_job_level} onChange={(e)=>{setDesiredJobLevel(e.target.value)}}>
+                            <option key='34' value=''>
+                              --Chọn cấp bậc mong muốn--
+                            </option>
+                            <option key='0' value='Sinh viên/Thực tập sinh'>
+                              Sinh viên/Thực tập sinh
+                            </option>
+                            <option key='1' value='Mới tốt nghiệp'>
+                              Mới tốt nghiệp
+                            </option>
+                            <option key='2' value='Nhân viên'>
+                              Nhân viên
+                            </option>
+                            <option key='3' value='Trưởng nhóm/Giám sát'>
+                              Trưởng nhóm/Giám sát
+                            </option>
+                            <option key='4' value='Quản lý'>
+                              Quản lý
+                            </option>
+                            <option key='5' value='Phó giám đốc'>
+                              Phó giám đốc
+                            </option>
+                            <option key='6' value='Giám đốc'>
+                              Giám đốc
+                            </option>
+                            <option key='7' value='Tổng giám đốc'>
+                              Tổng giám đốc
+                            </option>
+                            <option key='8' value='Chủ tịch'>
+                              Chủ tịch
+                            </option>
+                            <option key='9' value='Phó chủ tịch'>
+                              Phó chủ tịch
+                            </option>
+                          </select>
                         </div>
                     </div>
                     <div className={cx('field-container')}>
@@ -223,7 +257,29 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Trình độ học vấn</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                          <input className={cx('field-input')} type='text' placeholder='Nhập giới tính' value={academic_level}  onChange={(e)=>{setAcademicLevel(e.target.value)}}></input>
+                          <select className={cx('field-input')} type='text' placeholder='Nhập giới tính' value={academic_level}  onChange={(e)=>{setAcademicLevel(e.target.value)}}>
+                            <option key='36' value=''>
+                              --Chọn trình độ học vấn--
+                            </option>
+                            <option key='13' value='Trên đại học'>
+                              Trên đại học
+                            </option>
+                            <option key='14' value='Đại học'>
+                              Đại học
+                            </option>
+                            <option key='15' value='Cao đẳng'>
+                              Cao đẳng
+                            </option>
+                            <option key='16' value='Trung cấp'>
+                              Trung cấp
+                            </option>
+                            <option key='17' value='Trung học'>
+                              Trung học
+                            </option>
+                            <option key='18' value='Chứng chỉ nghề'>
+                              Chứng chỉ nghề
+                            </option>
+                          </select>
                         </div>
                     </div>
                     <div className={cx('field-container')}>
@@ -231,12 +287,40 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Kinh nghiệm</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                        <input 
+                        <select 
                             type="text" 
                             className={cx('field-input')} 
                             value={experience}
                             onChange={(e)=>{setExperience(e.target.value)}}
-                        />
+                        >
+                          <option key='37' value=''>
+                              --Chọn kinh nghiệm--
+                            </option>
+                            <option key='19' value='Chưa có kinh nghiệm'>
+                              Chưa có kinh nghiệm
+                            </option>
+                            <option key='20' value='Dưới 1 năm kinh nghiệm'>
+                              Dưới 1 năm kinh nghiệm
+                            </option>
+                            <option key='21' value='1 năm kinh nghiệm'>
+                              1 năm kinh nghiệm
+                            </option>
+                            <option key='22' value='2 năm kinh nghiệm'>
+                              2 năm kinh nghiệm
+                            </option>
+                            <option key='23' value='3 năm kinh nghiệm'>
+                              3 năm kinh nghiệm
+                            </option>
+                            <option key='24' value='4 năm kinh nghiệm'>
+                              4 năm kinh nghiệm
+                            </option>
+                            <option key='25' value='5 năm kinh nghiệm'>
+                              5 năm kinh nghiệm
+                            </option>
+                            <option key='26' value='Trên 5 năm kinh nghiệm'>
+                              Trên 5 năm kinh nghiệm
+                            </option>
+                        </select>
                         </div>
                     </div>
                     <div className={cx('field-container')}>
@@ -291,7 +375,20 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Nơi làm việc</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                          <input className={cx('field-input')} type='text' placeholder='Nhập nơi làm việc' value={type_of_workplace} onChange={(e)=>{setWorkPlace(e.target.value)}}></input>
+                          <select className={cx('field-input')} type='text' placeholder='Nhập nơi làm việc' value={type_of_workplace} onChange={(e)=>{setWorkPlace(e.target.value)}}>
+                            <option key='35' value=''>
+                              --Chọn nơi làm việc--
+                            </option>
+                            <option key='10' value='Làm việc tại văn phòng'>
+                              Làm việc tại văn phòng
+                            </option>
+                            <option key='11' value='Làm việc kết hợp'>
+                              Làm việc kết hợp
+                            </option>
+                            <option key='12' value='Làm việc tại nhà'>
+                              Làm việc tại nhà
+                            </option>
+                          </select>
                         </div>
                     </div>
                     <div className={cx('field-container')}>
@@ -299,7 +396,23 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Hình thức làm việc</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                          <input className={cx('field-input')} type='text' placeholder='Nhập hình thức làm việc' value={job_type} onChange={(e)=>{setJobType(e.target.value)}}></input>
+                          <select className={cx('field-input')} type='text' placeholder='Nhập hình thức làm việc' value={job_type} onChange={(e)=>{setJobType(e.target.value)}}>
+                            <option key='38' value=''>
+                              --Chọn hình thức làm việc--
+                            </option>
+                            <option key='27' value='Nhân viên chính thức'>
+                              Nhân viên chính thức
+                            </option>
+                            <option key='28' value='Bán thời gian'>
+                              Bán thời gian
+                            </option>
+                            <option key='29' value='Thời vụ - Nghề tự do'>
+                              Thời vụ - Nghề tự do
+                            </option>
+                            <option key='30' value='Thực tập'>
+                              Thực tập
+                            </option>
+                          </select>
                         </div>
                     </div>
                     <div className={cx('field-container')}>
