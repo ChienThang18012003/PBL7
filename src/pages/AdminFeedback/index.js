@@ -9,6 +9,7 @@ import Pagination from '../../components/Pagination';
 import useFeedback from '../../hook/useFeedback';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingAnimation from '../../components/LoadingAnimation';
 
 
 const cx = classNames.bind(styles);
@@ -122,6 +123,9 @@ function AdminFeedback() {
     const firstDoctorIndex = lastDoctorIndex - docPerPage;
     const currentDoctors = (displayedJobPost || []).slice(firstDoctorIndex, lastDoctorIndex);
 
+    if (feedbackLoading) {
+        return <LoadingAnimation></LoadingAnimation>
+    }
 
     return (
         <div className={cx('wrapper')}>
