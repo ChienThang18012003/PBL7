@@ -83,7 +83,7 @@ function NavigationBarTwo() {
                         {
                             isLoggedin ? (
                               <div className={cx('profile-wrapper')}>
-                                <div className={cx('user-wrapper')} onClick={()=>{navigate('/account')}}>
+                                <div className={cx('user-wrapper')} onClick={()=>{navigate('/employer-account')}}>
                                     <Image className={cx('profile-image')} src={userInfo?.profile_image} fallback={assets.UserImage}></Image>
                                     <div className={cx('user-name')}>
                                         <span>
