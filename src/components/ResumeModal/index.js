@@ -215,7 +215,7 @@ export default function ResumeModal({children , data, onSubmitModal, type="confi
                             <span>Cấp bậc mong muốn</span>
                         </div>
                         <div className = {cx('field-input-container')}>
-                          <select className={cx('fiselect')} type='text' placeholder='Nhập cấp bậc mong muốn' value={desired_job_level} onChange={(e)=>{setDesiredJobLevel(e.target.value)}}>
+                          <select className={cx('field-input')} type='text' placeholder='Nhập cấp bậc mong muốn' value={desired_job_level} onChange={(e)=>{setDesiredJobLevel(e.target.value)}}>
                             <option key='34' value=''>
                               --Chọn cấp bậc mong muốn--
                             </option>
