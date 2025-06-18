@@ -34,7 +34,7 @@ function SignIn() {
                     toast.warning("Không thể đăng nhập bằng tài khoản admin!");
                 } else {
                     localStorage.setItem('isLoginSuccess', JSON.stringify(isLoginSuccess));
-                    if (isLoginSuccess?.role==='user') navigate('/'); else if (isLoginSuccess?.role==='employer') navigate('/employer-dashboard');
+                    if (isLoginSuccess?.role==='user') navigate('/'); else if (isLoginSuccess?.role==='employer') navigate('/');
                 }
             }
             else if (isLoginSuccess && typeof isLoginSuccess !== 'object') {
