@@ -374,9 +374,6 @@ function AdminJobPost() {
                             </div>
                         </div>
                     </div>
-                    <div className={cx('add-button-wrapper')}>
-                        <JobPostModal type="add" onSubmitModal={handleAddJobPost}></JobPostModal>
-                    </div>
                     <div className={cx('table-title')}>
                         <div className={cx('job-name')}>
                             <span>
