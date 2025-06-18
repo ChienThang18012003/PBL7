@@ -158,7 +158,7 @@ function EmployerChat() {
                     <div className={cx('logo-container')}>
                         <Image className={cx('logo')} src={assets.PhoneLogo}></Image>
                     </div>
-                    <div className={cx('nav-button')} onClick={()=>{navigate('/employer-dashboard')}}>
+                    <div className={cx('nav-button')} onClick={()=>{navigate('/')}}>
                         <FontAwesomeIcon icon={faArrowLeft} className={cx('nav-button-icon')}></FontAwesomeIcon>
                         <div className={cx('nav-button-text')}>
                             <span>
