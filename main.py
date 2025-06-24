@@ -5,9 +5,14 @@ import numpy as np
 import faiss
 from pymongo import MongoClient
 from bson import ObjectId
+from functools import lru_cache
+
+@lru_cache()
+def get_model():
+    return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 app = FastAPI()
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+model = get_model()
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://nhimdeptraihaha:nhim1234@pbl7.pnlfg.mongodb.net/?retryWrites=true&w=majority&appName=PBL7")
