@@ -252,7 +252,7 @@ function EmployerDashboard() {
                 {
                     isVisibleFour && (
                         <div className={cx('drop-down-list')}>
-                            <div className={cx('manager-button')} onClick={()=>{navigate('/employer-dashboard')}}>
+                            <div className={cx('manager-button')} onClick={()=>{navigate('/')}}>
                                 <FontAwesomeIcon className={cx('button-icon')} icon={faChartSimple}></FontAwesomeIcon>
                                 <div className={cx('button-title')}>
                                     <span>

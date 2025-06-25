@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './Chatbot.module.scss';
+import styles from './EmployerChatbot.module.scss';
 import Image from '../Image';
 import { assets } from '../../assets/assets_fe/assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,7 @@ import { useAppContext } from '../../context/AppContext';
 
 const cx = classNames.bind(styles);
 
-function Chatbot() {
+function EmployerChatbot() {
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const [role, setRole] = useState('');
@@ -60,47 +60,16 @@ function Chatbot() {
     const renderResults = (message) => {
 
         switch (message?.intent) {
-        case "find_job":
-            return (
-            <>
-                <p>{message?.reply}</p>
-                <ul>
-                {(message?.results||[]).map((job) => (
-                    <li key={job?._id} style={{marginLeft: "20px"}}>
-                    <a onClick={() => navigate(`/job-info/${job?._id}`)} style={{ cursor: "pointer", color: "blue" }}>
-                        {job?.job_name}
-                    </a>
-                    </li>
-                ))}
-                </ul>
-            </>
-            );
 
-        case "find_jobs_by_resume":
+        case "find_resumes_by_job":
             return (
             <>
                 <p>{message?.reply}</p>
                 <ul>
-                {(message?.results||[]).map((job) => (
-                    <li key={job?._id} style={{marginLeft: "20px"}}>
-                    <a onClick={() => navigate(`/job-info/${job?._id}`)} style={{ cursor: "pointer", color: "blue" }}>
-                        {job?.job_name}
-                    </a>
-                    </li>
-                ))}
-                </ul>
-            </>
-            );
-
-        case "find_company":
-            return (
-            <>
-                <p>{message?.reply}</p>
-                <ul>
-                {(message?.results||[]).map((company) => (
-                    <li key={company?._id} style={{marginLeft: "20px"}}>
-                    <a onClick={() => navigate(`/company-info/${company?._id}`)} style={{ cursor: "pointer", color: "blue" }}>
-                        {company?.company_name}
+                {(message?.results||[]).map((resume) => (
+                    <li key={resume?._id} style={{marginLeft: "20px"}}>
+                    <a onClick={() => navigate(`/resume-info/${resume?._id}`)} style={{ cursor: "pointer", color: "blue" }}>
+                        {resume?.desired_position}
                     </a>
                     </li>
                 ))}
@@ -264,4 +233,4 @@ function Chatbot() {
     );
 }
 
-export default Chatbot;
+export default EmployerChatbot;

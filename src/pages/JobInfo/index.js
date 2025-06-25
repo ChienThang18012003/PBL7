@@ -157,7 +157,12 @@ function JobInfo() {
         const fetchJobPosts = async () => {
             if (isNotEmptyObject(jobByID)) {
                 const JobPost = await filterJobPostList(jobByID?.location_id?.city_id?._id, jobByID?.career_id?._id);
-                if (JobPost) setDisplayedJobPost(JobPost);
+                if (JobPost) {
+                    const filteredJobPosts = JobPost.filter(
+                        (job) => job?._id !== jobByID?._id
+                    );
+                    setDisplayedJobPost(filteredJobPosts);
+                }
             }
         };
 

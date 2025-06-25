@@ -32,6 +32,7 @@ import EmployerDashboard from "./pages/EmployerDashboard";
 import EmployerChat from "./pages/EmployerChat";
 import CandidateChat from "./pages/CandidateChat";
 import Chatbot from "./components/Chatbot";
+import EmployerChatbot from "./components/EmployerChatbot";
 
 
 
@@ -237,6 +238,7 @@ function App() {
                 <Route path="*" element={userRole === 'employer' ? <Navigate to="/employer-dashboard"  /> : <Navigate to="/"  />} />
             </Routes>
             {!isLoginPage && <Chatbot/>}
+            {isEmployerPage && <EmployerChatbot/>}
             {!isLoginPage && <Footer/>}
             {
                 isMainPage && userRole !== 'employer' && (

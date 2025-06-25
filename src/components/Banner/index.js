@@ -42,6 +42,7 @@ function Banner({ data, type }) {
                             src={item.banner_image}
                             fallback={assets.DefaultBanner}
                             alt={`Banner ${index + 1}`}
+                            className={cx('banner-image')}
                         />
                     ))}
                 </div>
