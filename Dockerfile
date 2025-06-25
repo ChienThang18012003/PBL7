@@ -1,26 +1,22 @@
-# Base image nhẹ hơn so với python:3.10
 FROM python:3.10-slim
 
-# Cài đặt thư mục làm việc
+# Tạo thư mục làm việc
 WORKDIR /app
 
-# Copy file requirements vào trước để tận dụng cache
-COPY requirements.txt .
-
-# Tối ưu pip
+# Cài các gói hệ thống cần thiết
 RUN apt-get update && apt-get install -y \
     build-essential \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Cài dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Copy requirements trước để tối ưu cache
+COPY requirements.txt .
 
-# Copy toàn bộ project vào container
+# Cài các thư viện Python
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+# Copy source code vào container
 COPY . .
 
-# Expose port (quan trọng với Railway/Render)
-EXPOSE 8000
-
-# Lệnh chạy app FastAPI bằng Uvicorn
+# Chạy ứng dụng
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
