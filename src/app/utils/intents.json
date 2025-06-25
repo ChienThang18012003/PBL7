@@ -15,6 +15,14 @@
     "description": "Tìm công việc đã ứng tuyển (có thể tìm theo email, tên công việc hoặc tên hồ sơ đã dùng ứng tuyển)",
     "params": ["email", "job_name", "resume_name", "quantity"]
   },
+  "find_jobs_by_resume": {
+    "description": "Trả về các việc làm phù hợp với tên một hồ sơ cụ thể của người dùng. Nếu người dùng KHÔNG nhắc đến tên hồ sơ (ví dụ: 'Hồ sơ kỹ sư AI'), thì KHÔNG được trả về params.resume_name. TUYỆT ĐỐI KHÔNG tạo placeholder như 'tên hồ sơ của người dùng', 'cv của tôi', 'hồ sơ ứng tuyển'... nếu không có tên cụ thể.",
+    "params": ["resume_name", "quantity"]
+  },
+  "find_resumes_by_job": {
+    "description": "Trả về các hồ sơ phù hợp với tên một công việc cụ thể. Nếu người dùng KHÔNG nhắc rõ tên công việc (ví dụ: 'Nhân viên kinh doanh Hà Nội'), thì KHÔNG được trả về params.job_post_name. KHÔNG tự tạo tên placeholder như 'tên công việc của người dùng'.",
+    "params": ["job_post_name", "quantity"]
+  },
   "tutorial": {
     "description": "Các câu hỏi liên quan LÀM SAO, NHƯ THẾ NÀO về cách hoạt động của trang web, bạn hãy trả về cho tôi intent tutorial với trường type là một trong các loại 'Cách tạo hồ sơ','Cách tạo phản hồi','Cách xem danh sách việc làm đã ứng tuyển','Cách xem danh sách việc làm đã lưu','Cách xem danh sách công ty đã theo dõi'",
     "params": ["type"]

@@ -34,19 +34,17 @@ class job_Suggestion_Controller {
             const user = await User1.findOne({ email });
             if (!user) return res.status(404).json({ message: 'User not found' });
 
-            // 1. Lấy 5 lịch sử gần nhất
             const histories = await User_Search_Preference.find({ user_id: user._id })
                 .sort({ created_at: -1 })
                 .limit(5)
                 .populate('city_id career_id');
 
-            console.log(histories)
 
             if (!histories.length) {
                 return res.status(200).json({ suggestions: [] });
             }
 
-            // 2. Truy vấn jobs theo city_id và career_id từ lịch sử
+
             const cityIds = histories.map(h => h.city_id?._id?.toString()).filter(Boolean);
             const careerIds = histories.map(h => h.career_id?._id?.toString()).filter(Boolean);
 
@@ -79,20 +77,18 @@ class job_Suggestion_Controller {
                 return res.json({ suggestions: [] });
             }
 
-            // 3. Tạo prompt cho mô hình
             const prompt = createSimpleJobSuggestionPrompt(histories, filteredJobs);
 
-            // 4. Gọi OpenRouter API
             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
                     'Content-Type': 'application/json',
-                    'HTTP-Referer': 'http://localhost:3000', // hoặc domain của bạn
-                    'X-Title': 'your-app-title', // tự chọn
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'your-app-title', 
                 },
                 body: JSON.stringify({
-                    model: 'mistralai/mistral-7b-instruct', // Sử dụng ID mô hình hợp lệ
+                    model: 'mistralai/mistral-7b-instruct', 
                     messages: [{ role: 'user', content: prompt }],
                     temperature: 0.2,
                 }),
@@ -114,7 +110,7 @@ class job_Suggestion_Controller {
                 console.error('Lỗi phân tích JSON từ phản hồi OpenRouter:', parseError);
                 return res.status(500).json({ message: 'Lỗi phân tích phản hồi từ OpenRouter' });
             }
-            // 5. Lấy các job tương ứng với index được gợi ý
+            
             const suggestedJobs = suggestions.map(index => jobs[index]).filter(Boolean);
 
             return res.json({ suggestions: suggestedJobs });
@@ -372,8 +368,127 @@ class job_Suggestion_Controller {
                 intent: intent
             };
         }
+        case "find_jobs_by_resume": {
+            if (!params.resume_name) {
+                return {
+                    reply: "Vui lòng cung cấp tên hồ sơ (resume_name) để tìm kiếm.",
+                    results: [],
+                    intent
+                };
+            }
 
-    
+            const resume = await Resume.findOne({
+                desired_position: { $regex: params.resume_name, $options: "i" },
+                is_deleted: false
+            }).populate("career_id").populate("city_id");
+
+            if (!resume) {
+                return {
+                    reply: `Không tìm thấy hồ sơ với tên gần đúng ${params.resume_name}.`,
+                    results: [],
+                    intent
+                };
+            }
+
+            let jobs = await Job_Post.find({
+                is_deleted: false,
+                status: "Đã duyệt",
+                deadline: { $gte: new Date() }
+            }).populate({
+                path: "location_id",
+                populate: { path: "city_id" }
+            });
+
+            const scoredJobs = jobs.map(job => {
+                let score = 0;
+
+                if (resume.career_id && String(job.career_id) === String(resume.career_id._id)) score += 10;
+                if (resume.city_id && String(job.location_id?.city_id?._id) === String(resume.city_id._id)) score += 8;
+                if (resume.job_type && job.job_type?.toLowerCase() === resume.job_type?.toLowerCase()) score += 6;
+
+                if (typeof resume.salary_min === "number" && typeof resume.salary_max === "number" &&
+                    job.salary_min <= resume.salary_max && job.salary_max >= resume.salary_min) score += 4;
+
+                if (resume.experience && job.experience?.toLowerCase() === resume.experience?.toLowerCase()) score += 3;
+                if (resume.academic_level && job.academic_level?.toLowerCase() === resume.academic_level?.toLowerCase()) score += 2;
+                if (resume.type_of_workplace && job.type_of_workplace?.toLowerCase() === resume.type_of_workplace?.toLowerCase()) score += 1;
+
+                return { job, score };
+            });
+
+            const topJobs = scoredJobs
+                .sort((a, b) => b.score - a.score)
+                .slice(0, parseInt(params.quantity) || 5)
+                .map(({ job }) => ({ _id: job._id, job_name: job.job_name }));
+
+            return {
+                reply: `Tìm thấy ${topJobs.length} việc làm phù hợp với hồ sơ.`,
+                results: topJobs,
+                intent
+            };
+        }
+
+        case "find_resumes_by_job": {
+            if (!params.job_post_name) {
+                return {
+                    reply: "Vui lòng cung cấp tên công việc (job_post_name) để tìm kiếm.",
+                    results: [],
+                    intent
+                };
+            }
+
+            const job = await Job_Post.findOne({
+                job_name: { $regex: params.job_post_name, $options: "i" },
+                is_deleted: false,
+                status: "Đã duyệt",
+                deadline: { $gte: new Date() }
+            }).populate({
+                path: "location_id",
+                populate: { path: "city_id" }
+            });
+
+            if (!job) {
+                return {
+                    reply: `Không tìm thấy công việc phù hợp với tên gần đúng ${params.job_post_name}.`,
+                    results: [],
+                    intent
+                };
+            }
+
+            let resumes = await Resume.find({ is_deleted: false })
+                .populate("career_id")
+                .populate("city_id");
+
+            const scoredResumes = resumes.map(resume => {
+                let score = 0;
+
+                if (job.career_id && String(resume.career_id?._id) === String(job.career_id)) score += 10;
+                if (job.location_id?.city_id && String(resume.city_id?._id) === String(job.location_id.city_id._id)) score += 8;
+                if (job.job_type && resume.job_type?.toLowerCase() === job.job_type?.toLowerCase()) score += 6;
+
+                if (typeof resume.salary_min === "number" && typeof resume.salary_max === "number" &&
+                    resume.salary_min <= job.salary_max && resume.salary_max >= job.salary_min) score += 4;
+
+                if (job.experience && resume.experience?.toLowerCase() === job.experience?.toLowerCase()) score += 3;
+                if (job.academic_level && resume.academic_level?.toLowerCase() === job.academic_level?.toLowerCase()) score += 2;
+                if (job.type_of_workplace && resume.type_of_workplace?.toLowerCase() === job.type_of_workplace?.toLowerCase()) score += 1;
+
+                return { resume, score };
+            });
+
+            const topResumes = scoredResumes
+                .sort((a, b) => b.score - a.score)
+                .slice(0, parseInt(params.quantity) || 5)
+                .map(({ resume }) => ({ _id: resume._id, desired_position: resume.desired_position }));
+
+            return {
+                reply: `Tìm thấy ${topResumes.length} hồ sơ phù hợp với công việc.`,
+                results: topResumes,
+                intent
+            };
+        }
+
+        
           case "tutorial": {
             const type = params.type;
             if (this.tutorialGuide[type]) {
@@ -403,17 +518,16 @@ class job_Suggestion_Controller {
             const {question} = req.body
             const prompt = buildPrompt(question);
     
-            // 4. Gọi OpenRouter API
             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
                     'Content-Type': 'application/json',
-                    'HTTP-Referer': 'http://localhost:3000', // hoặc domain của bạn
-                    'X-Title': 'your-app-title', // tự chọn
+                    'HTTP-Referer': 'http://localhost:3000', 
+                    'X-Title': 'your-app-title', 
                 },
                 body: JSON.stringify({
-                    model: 'mistralai/mistral-7b-instruct', // Sử dụng ID mô hình hợp lệ
+                    model: 'mistralai/mistral-7b-instruct',
                     messages: [{ role: 'user', content: prompt }],
                     temperature: 0.2,
                 }),
@@ -424,7 +538,6 @@ class job_Suggestion_Controller {
             if (!content) throw new Error("Phản hồi từ mô hình trống");
 
             content = content.trim();
-            console.log(content);
 
             // Nếu có định dạng ```json ... ``` thì loại bỏ
             if (content.startsWith("```json")) {
