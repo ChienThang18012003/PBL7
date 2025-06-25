@@ -25,7 +25,7 @@ resume_id_list = []
 # ========= Lazy load model =========
 @lru_cache()
 def get_model():
-    return SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    return SentenceTransformer('paraphrase-MiniLM-L3-v2')
 
 # ========= Utility =========
 def encode_text(text: str):
